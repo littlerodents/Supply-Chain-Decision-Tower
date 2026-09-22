@@ -40,36 +40,37 @@ def duration_of(path: str) -> float:
         raise SystemExit(f"[intake] 无法探测时长（装 ffmpeg 或检查文件）: {e}")
 
 
-def analyze(path: str, duration: float) -> dict:
-    """调主脑。视频 API 形态由 spike 定案；此处先按 variants 逐个尝试。
+def analyze(path: str, duration: float):
+    """调主脑理解录屏。视频形态已由 D1 spike 实测定案：video_url + base64 data URI。
 
     openai_compat 惰性导入：--validate 等纯本地路径不依赖网络客户端。
+    返回 (card, usage, latency_sec)。模型散文输出重试一次，再失败即报错（SKILL.md 禁令）。
     """
     tools_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "tools"))
     if not os.path.isdir(tools_dir):  # 被单独安装时，找同仓 tools/；找不到再试 PYTHONPATH
         tools_dir = "tools"
     sys.path.insert(0, tools_dir)
-    from openai_compat import chat, text_part, video_part_variants  # noqa: E402
+    from openai_compat import chat, text_part, data_uri  # noqa: E402
 
-    variants = [("", None)] + video_part_variants(path)  # 先试文档定案形态（spike 后回填）
+    content = [text_part(ANALYZE_PROMPT),
+               {"type": "video_url", "video_url": {"url": data_uri(path)}}]
     last_err = None
-    for name, part in variants:
-        content = [text_part(ANALYZE_PROMPT)]
-        if part:
-            content.append(part)
+    for attempt in range(2):
+        raw, usage, lat = chat([{"role": "user", "content": content}])
         try:
-            raw, _usage, _lat = chat([{"role": "user", "content": content}])
             m = re.search(r"\{.*\}", raw, re.S)
             if not m:
-                raise ValueError("模型未返回 JSON（自由文本视为失败，SKILL.md 禁令）")
+                raise ValueError("模型未返回 JSON")
             card = json.loads(m.group(0))
-            card.setdefault("source", {"recording": os.path.basename(path), "duration_sec": duration})
-            card["source"]["duration_sec"] = duration
+            card.setdefault("source", {})
+            card["source"].update({"recording": os.path.basename(path),
+                                    "duration_sec": duration,
+                                    "model": os.environ.get("REPRO_MODEL", "")})
             card.setdefault("schema_version", "1.0")
-            return card
-        except Exception as e:  # noqa: BLE001
-            last_err = f"variant={name or 'doc-shape'}: {str(e)[:160]}"
-    raise SystemExit(f"[analyze] 全部形态失败——先跑 tools/spike_plan.md。最后错误: {last_err}")
+            return card, usage, lat
+        except (ValueError, json.JSONDecodeError) as e:
+            last_err = f"attempt{attempt + 1}: {e}; raw前100字: {raw[:100]!r}"
+    raise SystemExit(f"[analyze] 模型两次未返回结构化 JSON——禁令：下游是 agent 不是人。最后错误: {last_err}")
 
 
 def validate(card: dict) -> None:
@@ -82,11 +83,15 @@ def validate(card: dict) -> None:
     assert card["schema_version"] == "1.0", "schema_version 必须是 1.0"
     assert isinstance(card["has_bug"], bool), "has_bug 必须是 bool"
     assert isinstance(card["confidence"], (int, float)) and 0 <= card["confidence"] <= 1
-    bug = card["bug"]
-    breq = schema["properties"]["bug"]["required"]
+    bug = card.get("bug")
+    if not card["has_bug"]:
+        return  # 负例：行为闸门在 run()（不产包/NO_BUG_FOUND）；bug 内容不约束（实测模型回全空对象）
+    assert isinstance(bug, dict), "has_bug=true 时 bug 必须是对象"
+    obj = schema["definitions"]["bugObject"]
+    breq = obj["required"]
     missing = [k for k in breq if k not in bug]
     assert not missing, f"bug 缺必填字段: {missing}"
-    p = schema["properties"]["bug"]["properties"]
+    p = obj["properties"]
     for enum_field in ("type", "severity"):
         assert bug[enum_field] in p[enum_field]["enum"], f"{enum_field} 不在枚举内: {bug[enum_field]}"
     assert isinstance(bug["timestamps"], list) and len(bug["timestamps"]) >= 1 and all(
@@ -142,7 +147,7 @@ def run(recording: str, out: str, no_issue: bool, repo: str):
     dur = duration_of(recording)
     if dur > MAX_SEC:
         raise SystemExit(f"[intake] 录屏 {dur:.0f}s 超过 {MAX_SEC}s 上限")
-    card = analyze(recording, dur)
+    card, _usage, _lat = analyze(recording, dur)
     validate(card)
     if not card["has_bug"]:
         print("[negative] 录屏未发现 bug——不产包、不开 issue")

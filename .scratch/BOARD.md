@@ -4,9 +4,9 @@
 
 | # | 负责人 | 状态 | 依赖 | 票面与验收 |
 |---|---|---|---|---|
-| T1 | O | todo | key | **Spike 双模型对照**：按 `tools/spike_plan.md` 探针梯子 text→image→video；产出 `evidence/spike/dual-model.md`（三维对照+主备脑定案）；失败走抽帧 fallback |
+| T1 | O | **done** | key | Spike 完成：梯子全绿（视频=video_url+base64 data URI）；主脑 provisional step-3.7-flash；质量维度挂 D4；结论文档 evidence/spike/dual-model.md |
 | T2 | T | todo | — | **任务集**：录 8–12 段 30–90s 正例 + 2–3 段负例；每段写 gold answer（bug 类型/位置/严重度）；落 `assets/samples/` + `evals/evals.json` |
-| T3 | O | todo | T1 | **主链路**：`repro_pack.py` 录屏→主脑→bugcard，正例产包（ISC-1/2） |
+| T3 | O | **doing** | T1 | 主链路：合成片 E2E 已通（ISC-1/2 已关）；待 T2 真实录屏复跑后关闭 |
 | T4 | O | todo | T3 | **包装配+出口**：frames 抽取、repro.md 渲染、gh issue、输出契约（`PACK:` 末行；负例 `NO_BUG_FOUND`）（ISC-4） |
 | T5 | O | todo | T3 | **SKILL.md 触发工程**：frontmatter 触发词+负触发、正文<5K token、references 下沉；`npx skills` 本地安装验证（ISC-5） |
 | T6 | T | todo | T2,T4 | **evals runner**：一键跑全量任务集，输出字段召回/误触/成本 JSON（ISC-7/8） |
