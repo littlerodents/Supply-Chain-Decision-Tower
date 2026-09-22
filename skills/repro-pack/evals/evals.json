@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "note": "任务集。status=pending-recording 表示录屏待 T2 补齐；runner 只跑 ready 的任务。",
+  "scoring": {
+    "positive": "gold 三字段（type/location/timestamp±3s）全中算召回",
+    "negative": "必须 NO_BUG_FOUND 且零产包，任何负例产包即 P0 失败",
+    "cost": "usage tokens 平均值"
+  },
+  "tasks": [
+    {
+      "id": "pos-001",
+      "status": "pending-recording",
+      "kind": "positive",
+      "recording": "assets/samples/pos-001.mp4",
+      "scenario": "前端 UI 错乱：按钮点击后布局塌陷",
+      "gold": {"type": "ui-rendering", "severity": "major", "location": "TODO", "timestamp": 0}
+    },
+    {
+      "id": "pos-002",
+      "status": "pending-recording",
+      "kind": "positive",
+      "recording": "assets/samples/pos-002.mp4",
+      "scenario": "控制台报 runtime error 弹窗",
+      "gold": {"type": "runtime-error", "severity": "critical", "location": "TODO", "timestamp": 0}
+    },
+    {
+      "id": "neg-001",
+      "status": "pending-recording",
+      "kind": "negative",
+      "recording": "assets/samples/neg-001.mp4",
+      "scenario": "正常流畅操作，无任何 bug",
+      "gold": {"expected": "NO_BUG_FOUND"}
+    }
+  ]
+}

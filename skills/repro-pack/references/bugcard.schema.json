@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "repro-pack bugcard",
+  "type": "object",
+  "required": ["schema_version", "has_bug", "bug", "confidence"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "has_bug": { "type": "boolean" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "source": {
+      "type": "object",
+      "required": ["recording", "duration_sec"],
+      "properties": {
+        "recording": { "type": "string", "description": "录屏文件名" },
+        "duration_sec": { "type": "number", "minimum": 0 },
+        "model": { "type": "string", "description": "主脑 model id" }
+      }
+    },
+    "bug": {
+      "type": "object",
+      "required": ["type", "severity", "location", "error_text", "timestamps", "repro_steps"],
+      "properties": {
+        "type": { "enum": ["ui-rendering", "runtime-error", "network", "data-display", "interaction", "crash", "other"] },
+        "severity": { "enum": ["blocker", "critical", "major", "minor", "trivial"] },
+        "location": { "type": "string", "description": "出错界面/组件/文件，一句话" },
+        "error_text": { "type": "string", "description": "画面中抽到的错误原文，无则空字符串" },
+        "timestamps": {
+          "type": "array", "minItems": 1,
+          "items": { "type": "number", "minimum": 0 },
+          "description": "出错画面在录屏中的秒数，至少一处"
+        },
+        "repro_steps": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "affected_area": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
