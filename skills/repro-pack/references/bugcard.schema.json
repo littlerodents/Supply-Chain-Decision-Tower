@@ -16,7 +16,12 @@
         "model": { "type": "string", "description": "主脑 model id" }
       }
     },
-    "bug": {
+    "bug": { "description": "has_bug=false 时内容不约束（模型常回 null 或全空对象）；true 时必须过 bugObject" }
+  },
+  "if": { "properties": { "has_bug": { "const": true } }, "required": ["has_bug"] },
+  "then": { "properties": { "bug": { "$ref": "#/definitions/bugObject" } } },
+  "definitions": {
+    "bugObject": {
       "type": "object",
       "required": ["type", "severity", "location", "error_text", "timestamps", "repro_steps"],
       "properties": {

@@ -1,0 +1,28 @@
+{
+  "has_bug": true,
+  "confidence": 0.95,
+  "bug": {
+    "type": "network",
+    "severity": "critical",
+    "location": "MyApp Dashboard 设置保存功能",
+    "error_text": "Error 500: Internal Server Error\nFailed to save settings. Retry?",
+    "timestamps": [
+      2.37,
+      3.16,
+      3.95
+    ],
+    "repro_steps": [
+      "打开 MyApp Dashboard",
+      "点击 Save 按钮",
+      "系统返回 500 错误提示"
+    ],
+    "affected_area": "设置保存功能",
+    "notes": "点击 Save 按钮后触发服务器内部错误，导致设置保存失败"
+  },
+  "source": {
+    "recording": "clip.mp4",
+    "duration_sec": 6.0,
+    "model": ""
+  },
+  "schema_version": "1.0"
+}

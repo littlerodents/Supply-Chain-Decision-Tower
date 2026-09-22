@@ -2,9 +2,9 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 0/11
+progress: 3/11
 started: 2026-09-22T15:30:00Z
-updated: 2026-09-22T15:30:00Z
+updated: 2026-09-22T19:04:48Z
 iteration: 1
 ---
 
@@ -68,10 +68,10 @@ iteration: 1
 ### F1 · 复现包主链路
 Why: 没有「录屏进、包出」，一切叙事归零。
 
-- [ ] ISC-1: 对 `assets/samples/` 任意 ≤90s 正例录屏，`scripts/repro_pack.py` 退出码 0，产出含 `bugcard.json`、`frames/`、`repro.md` 的包目录
-- [ ] ISC-2: `repro_pack.py --validate <bugcard.json>` 对所有产出包 exit 0（按 `references/bugcard.schema.json`）
+- [x] ISC-1: 对 `assets/samples/` 任意 ≤90s 正例录屏，`scripts/repro_pack.py` 退出码 0，产出含 `bugcard.json`、`frames/`、`repro.md` 的包目录
+- [x] ISC-2: `repro_pack.py --validate <bugcard.json>` 对所有产出包 exit 0（按 `references/bugcard.schema.json`）
 - [ ] ISC-3: `evidence/spike/dual-model.md` 含 3.7 Flash 与 step-5-preview 对同一录屏的真实输出对照（质量/延迟/成本三维），主备脑由此定案
-- [ ] ISC-4: 对每段负例录屏：不产包、不开 issue、stdout 末行 `NO_BUG_FOUND`
+- [x] ISC-4: 对每段负例录屏：不产包、不开 issue、stdout 末行 `NO_BUG_FOUND`（当前证据：合成负例 neg-001.mp4；T2 真实负例入 evals 后复跑）
 
 ### F2 · Skill 化与部署
 Why: 交付单元是 skill，不是脚本；本地算力是赛题必答题。
@@ -102,7 +102,7 @@ Why: 表单不交，前面全白干。
 ## Decisions
 
 - **D1 选题**：repro-pack（①′重框架）。背景：原①「录屏→人读报告」被 owner 证伪——AI 时代报障从「描述」转向「接入」，但接入是特权不是默认；黑盒 SaaS/瞬态 bug/安全边界/审计四个场景仍需证据，且消费者已变成修复 agent。决定：产出物从「人读报告」改为「agent 可消费复现包」。否决的替代：screen2bug 原框架（前提失效）、作业拍照②（evals 客观化难、教育红线）、mini-SkillEvaluator 单做（演示弱）、TAO 串联④（撞车）。影响：SPEC/CONTEXT/演示脚本全以此为轴。
-- **D2 主脑**：StepFun 双模型 D1 对照定主备（step-5-preview 已确认在 Coding Plan 额度内）。
+- **D2 主脑**：StepFun 双模型 D1 对照定主备（step-5-preview 已确认在 Coding Plan 额度内）。**D1 实测定案（provisional）：主脑 = step-3.7-flash**（中位延迟 10.18s vs 15.87s，成本略省，输出更稳，非 preview 无下线风险）；备脑/换脑演示 = step-5-preview。质量维度在合成片上无区分度，D4 真实任务集复确认。机制定案：视频走 video_url + base64 data URI，本地文件直进端点，无需上传。证据：evidence/spike/dual-model.md。
 - **D3 运行面**：DGX Spark + OpenClaw（赛规「本地算力部署」为必答题）；Hermes 仅在 `npx skills` 原生支持时进 README，不投入开发。
 - **D4 出口**：bugcard.json 必产出 + GitHub Issues 默认出口。
 - **D5 工程流**：遵循 mattpocock/skills；仓库用本地 markdown tracker（`.scratch/BOARD.md`），因公开 remote 尚未创建且赛期仅 7 天；spec 置于仓库根 `SPEC.md`（偏离 to-spec 的 .scratch 惯例，为评委可见性）。
@@ -114,6 +114,15 @@ Why: 表单不交，前面全白干。
 
 （ISC 关闭后回填，只记真实跑过的命令与结果）
 
+D1 夜班全套（2026-09-22T19:04Z，均真跑）：
+- ISC-1: `python3 repro_pack.py assets/samples/clip.mp4 --out packs/d1-pos --no-issue` → exit 0，末行 `PACK:.../packs/d1-pos`，包内 bugcard.json + frames/(3 帧) + repro.md（evidence/spike/e2e.txt）
+- ISC-2: `repro_pack.py --validate packs/d1-pos/bugcard.json` → `VALID`；红队坏卡×2 仍以「缺必填字段/枚举越界」被拒
+- ISC-4: `repro_pack.py assets/samples/neg-001.mp4 --out packs/d1-neg --no-issue` → exit 0，末行 `NO_BUG_FOUND`，`packs/d1-neg` 不存在
+- 机制: 探针梯子 text(1.16s)/image(2.88s)/video(5.0s) 全过；双模型 3+3 轮真实输出 → dual-raw.json
+
 ## Remaining Work
 
-全部。当前状态见 `STATUS.md`。
+- ISC-3 质量维度：待 T2 真实任务集在 D4 定案（合成片上两模型 1/3 平，无区分度；教训：gold 关键词要双语、type 口径要写死）
+- ISC-1/4 目前证据基于合成片，T2 真实录屏到位后复跑确认（不重开 ISC，追加验证）
+- SSH 未到手（阻塞 ISC-6/D3）；.env 由 owner 手写（闸门拦截了 agent 写入，设计行为）
+- 队友档期未回执
