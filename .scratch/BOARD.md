@@ -7,7 +7,7 @@
 | T1 | O | **done** | key | Spike 完成：梯子全绿（视频=video_url+base64 data URI）；主脑 provisional step-3.7-flash；质量维度挂 D4；结论文档 evidence/spike/dual-model.md |
 | T2 | T | todo | — | **任务集**：录 8–12 段 30–90s 正例 + 2–3 段负例；每段写 gold answer（bug 类型/位置/严重度）；落 `assets/samples/` + `evals/evals.json` |
 | T3 | O | **doing** | T1 | 主链路：合成片 E2E 已通（ISC-1/2 已关）；待 T2 真实录屏复跑后关闭 |
-| T4 | O | todo | T3 | **包装配+出口**：frames 抽取、repro.md 渲染、gh issue、输出契约（`PACK:` 末行；负例 `NO_BUG_FOUND`）（ISC-4） |
+| T4 | O | **done** | T3 | **包装配+出口**：✓ 全链含 gh issue 实测（私仓 issue #1），输出契约 100% 验证 |
 | T5 | O | **done** | T3 | SKILL.md 触发工程完成：OpenClaw metadata(bins 门) + run.sh 入口 + 自包含副本 + YAML 引号修复；npx skills 本地实装，ISC-5 已关 |
 | T6 | T | todo | T2,T4 | **evals runner**：一键跑全量任务集，输出字段召回/误触/成本 JSON（ISC-7/8） |
 | T7 | O | todo | T4,T5,SSH | **上 Spark**：OpenClaw 安装、skill 入 workspace、`skills list --eligible` 截图证据（ISC-6） |
