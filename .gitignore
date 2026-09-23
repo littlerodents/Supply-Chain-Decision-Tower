@@ -13,3 +13,5 @@ __pycache__/
 # 杂物
 .DS_Store
 node_modules/
+.agents/
+.claude/

@@ -47,9 +47,8 @@ def analyze(path: str, duration: float):
     返回 (card, usage, latency_sec)。模型散文输出重试一次，再失败即报错（SKILL.md 禁令）。
     """
     tools_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "tools"))
-    if not os.path.isdir(tools_dir):  # 被单独安装时，找同仓 tools/；找不到再试 PYTHONPATH
-        tools_dir = "tools"
-    sys.path.insert(0, tools_dir)
+    if os.path.isdir(tools_dir):  # 开发态：优先用仓里 tools/ 的上游版；安装态用同目录自包含副本
+        sys.path.insert(0, tools_dir)
     from openai_compat import chat, text_part, data_uri  # noqa: E402
 
     content = [text_part(ANALYZE_PROMPT),
