@@ -11,9 +11,10 @@
 
 1. **Spark SSH 访问方式**（机主 = 第三位队友，私购机器；今晚动员会当面收）
 2. **合影人数待确认**：机主是否正式参赛成员（报名表里有没有他）→ 双人还是三人（D10 挂起）
-3. **NIM key**（可选，P1 弹药）：build.nvidia.com 登录 → Get API Key，页面已给 owner 打开
 
 ## 已办结
+
+- ✅ NIM key 到手并验活（82 模型；视觉候选 llama-3.2-11b/90b-vision、phi-3-vision，证据 evidence/d2/nim-check.txt）；凭据行由 owner 手动落配置；P1「第二脑对照」弹药就位，对照走抽帧模式
 
 - ✅ 动员会材料：`docs/MEETING-20260923.md`（照念版 25 分钟议程 + 会开不成的三条转发文案）
 
