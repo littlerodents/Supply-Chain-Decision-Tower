@@ -123,6 +123,7 @@ D1 夜班全套（2026-09-22T19:04Z，均真跑）：
 - ISC-2: `repro_pack.py --validate packs/d1-pos/bugcard.json` → `VALID`；红队坏卡×2 仍以「缺必填字段/枚举越界」被拒
 - ISC-4: `repro_pack.py assets/samples/neg-001.mp4 --out packs/d1-neg --no-issue` → exit 0，末行 `NO_BUG_FOUND`，`packs/d1-neg` 不存在
 - 机制: 探针梯子 text(1.16s)/image(2.88s)/video(5.0s) 全过；双模型 3+3 轮真实输出 → dual-raw.json
+- gh 出口（2026-09-23）: `run.sh assets/samples/clip.mp4 --out packs/d2-issue-test`（无 --no-issue）→ issue https://github.com/littlerodents/repro-pack/issues/1 真实创建（标题 agent 消费格式），已关闭留证；输出契约全环节闭环
 
 D2（2026-09-23，均真跑）：
 - ISC-5: `npx skills@latest add ./skills/repro-pack --yes` → 安装至 `.agents/skills/repro-pack`（universal: Codex/Copilot/OpenCode/Warp 等；symlink: Claude Code），`npx skills list` 显示 repro-pack（evidence/d2/skill-standalone.txt + 安装器输出）
