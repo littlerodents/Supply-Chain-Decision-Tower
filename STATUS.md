@@ -5,7 +5,9 @@
 - **阶段**：D1 完成（机制+主脑定案）；今日 D2：O 线 T5 skill 触发工程，T 线 T2 任务集
 - **进度**：ISC 3/11（1 正例产包 / 2 validate 契约 / 4 负例零误触）
 - **仓库**：`github.com/littlerodents/repro-pack`（PRIVATE，已推 main）
-- **更新**：2026-09-23（iteration 1）
+- **更新**：2026-09-23 深夜（iteration 1）
+- **D3 基建已上租机**（选题无关部分全绿）：OpenClaw 2026.9.5 / ffmpeg 6.1.1 / onboard+gateway config(3030,lan) / sudo 可用 / 机器=GB10·119Gi·2.8T 余·CUDA13·Docker28（zhujihezi 租机，租期约 24–29，key 不落盘策略生效）
+- ⚠️ **会议纪要冲突待 owner 裁决**：①选题（纪要同时出现 repro-pack 方向与「文案→Galgame」字样，关键决策区无选题改判）②人员（纪要称「AB 无法承担核心开发，兜底」「可补找前端」——若 AB=abloom25，T 线任务全部重排）③合影 P 图方案（诚信红线，已警告）
 
 ## 卡在 owner 手里的
 
