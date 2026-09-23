@@ -2,9 +2,9 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 3/11
+progress: 4/11
 started: 2026-09-22T15:30:00Z
-updated: 2026-09-22T19:04:48Z
+updated: 2026-09-23T01:30:00Z
 iteration: 1
 ---
 
@@ -76,7 +76,7 @@ Why: 没有「录屏进、包出」，一切叙事归零。
 ### F2 · Skill 化与部署
 Why: 交付单元是 skill，不是脚本；本地算力是赛题必答题。
 
-- [ ] ISC-5: 通过 `npx skills add`（本地路径或仓库）安装后，agent 的 skills list 可见 `repro-pack` 且触发描述完整
+- [x] ISC-5: 通过 `npx skills add`（本地路径）安装成功，`npx skills list` 可见 repro-pack（Claude Code/Codex/Copilot/OpenCode/Warp 多客户端可见，实测见 Verification）
 - [ ] ISC-6: DGX Spark 上 OpenClaw `skills list --eligible` 显示 repro-pack ready（证据：终端输出+日期）
 
 ### F3 · 评测层
@@ -122,9 +122,15 @@ D1 夜班全套（2026-09-22T19:04Z，均真跑）：
 - ISC-4: `repro_pack.py assets/samples/neg-001.mp4 --out packs/d1-neg --no-issue` → exit 0，末行 `NO_BUG_FOUND`，`packs/d1-neg` 不存在
 - 机制: 探针梯子 text(1.16s)/image(2.88s)/video(5.0s) 全过；双模型 3+3 轮真实输出 → dual-raw.json
 
+D2（2026-09-23，均真跑）：
+- ISC-5: `npx skills@latest add ./skills/repro-pack --yes` → 安装至 `.agents/skills/repro-pack`（universal: Codex/Copilot/OpenCode/Warp 等；symlink: Claude Code），`npx skills list` 显示 repro-pack（evidence/d2/skill-standalone.txt + 安装器输出）
+- 红队（安装器自己抓的）：SKILL.md description 含裸冒号→YAML 解析失败，加双引号后过——D3 当天必踩的雷提前爆了
+- 自包含验证：skill 整目录拷至陌生路径 `/tmp/dgx/standalone` → `run.sh --validate` VALID；正例 `PACK:/tmp/dgx/pack-e2e2`；负例 `NO_BUG_FOUND`（不依赖仓内 tools/）
+
 ## Remaining Work
 
 - ISC-3 质量维度：待 T2 真实任务集在 D4 定案（合成片上两模型 1/3 平，无区分度；教训：gold 关键词要双语、type 口径要写死）
 - ISC-1/4 目前证据基于合成片，T2 真实录屏到位后复跑确认（不重开 ISC，追加验证）
-- SSH 未到手（阻塞 ISC-6/D3）；.env 由 owner 手写（闸门拦截了 agent 写入，设计行为）
-- 队友档期未回执
+- SSH 未到手（阻塞 ISC-6/D3）；剧本已备：docs/SPARK-DEPLOY.md（官方安装器路线，无需训练营 bundle）
+- OpenClaw gateway 走本地 Qwen，skill 走 StepFun——两叙事都占，key 注入方式待机器属性（私有/共享）定
+- 队友 GitHub 用户名（开私有仓权限）
