@@ -112,6 +112,8 @@ Why: 表单不交，前面全白干。
 - **D7 排期**：baseline 2.0（D1 spike → D2 四件套 → D3 上 Spark → D4 冻结 → D5 材料 → D6 发布 → D7 提交），变更需 owner 明说。
 - **D8 台账**：本项目满足 ISA 条件（交付物≥3、跨会话、第三方复核），用 ISA.md 替代 STATUS+DECISIONS 两件套；STATUS.md 仅作仪表盘。
 
+- **D11 演示面与模型叙事口径（2026-09-23 owner 问询后维持）**：主面 = OpenClaw（配方已验证 + 评委同款栈）；Hermes 仅作可移植性证据位（npx 五客户端实装在手，能一行装才进 README）。叙事分工：skill 主脑 = StepFun 3.7 Flash（赞助商轴，核心功能所在）；本地算力轴 = gateway 本地 Qwen（闭源 API 无本地权重，本地叙事只能开源模型扛；72B 可选档入 SPARK-DEPLOY 剧本——仅 README/征文素材，主演示用 35B-A3B 快档，dense 大模型在 GB10 生成速度慢一个量级）。评分同时点名「开源模型+StepFun」，双覆盖。
+
 ## Verification
 
 （ISC 关闭后回填，只记真实跑过的命令与结果）
