@@ -9,10 +9,11 @@
 
 ## 卡在 owner 手里的
 
-1. **Spark SSH 访问方式**（owner 去群里问了；顺带问：机器可用时段/是否独占、能否装 Docker 与 OpenClaw）
-2. **队友 GitHub 用户名**（开私有仓权限，或 owner 自己 Settings→Collaborators 加）
+1. **Spark SSH 访问方式**（owner 去群里问了；顺带问：机器可用时段/是否独占、能否装 Docker 与 OpenClaw、机器私有还是共享）
 
 ## 已办结
+
+- ✅ 队友 GitHub 权限：abloom25 已加为私仓协作者（write，邀请待他接受）
 
 - ✅ API key 入 .env（owner 授权后写入，gitignore 确认）
 - ✅ 主脑定案 3.7-flash（owner 拍板，D4 检验「更强假设」，反转触发器在 ISA D2）
