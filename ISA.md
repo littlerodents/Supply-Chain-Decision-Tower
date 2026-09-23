@@ -102,7 +102,9 @@ Why: 表单不交，前面全白干。
 ## Decisions
 
 - **D1 选题**：repro-pack（①′重框架）。背景：原①「录屏→人读报告」被 owner 证伪——AI 时代报障从「描述」转向「接入」，但接入是特权不是默认；黑盒 SaaS/瞬态 bug/安全边界/审计四个场景仍需证据，且消费者已变成修复 agent。决定：产出物从「人读报告」改为「agent 可消费复现包」。否决的替代：screen2bug 原框架（前提失效）、作业拍照②（evals 客观化难、教育红线）、mini-SkillEvaluator 单做（演示弱）、TAO 串联④（撞车）。影响：SPEC/CONTEXT/演示脚本全以此为轴。
-- **D2 主脑**：StepFun 双模型 D1 对照定主备（step-5-preview 已确认在 Coding Plan 额度内）。**D1 实测定案（provisional）：主脑 = step-3.7-flash**（中位延迟 10.18s vs 15.87s，成本略省，输出更稳，非 preview 无下线风险）；备脑/换脑演示 = step-5-preview。质量维度在合成片上无区分度，D4 真实任务集复确认。机制定案：视频走 video_url + base64 data URI，本地文件直进端点，无需上传。证据：evidence/spike/dual-model.md。
+- **D2 主脑**：StepFun 双模型 D1 对照定主备（step-5-preview 已确认在 Coding Plan 额度内）。**D1 实测定案（provisional）：主脑 = step-3.7-flash**（中位延迟 10.18s vs 15.87s，成本略省，输出更稳，非 preview 无下线风险）；备脑/换脑演示 = step-5-preview。质量维度在合成片上无区分度，D4 真实任务集复确认。机制定案：视频走 video_url + base64 data URI，本地文件直进端点，无需上传。证据：evidence/spike/dual-model.md。**Owner 拍板（2026-09-22T19:4xZ）：选 A——主脑 3.7-flash 定案，D4 升级为「更强假设」检验实验；反转触发器写死：真实任务集上 5-preview 质量命中差 >2 倍，或 3.7 出现任一负例误触 → 主脑换 5-preview（.env 一行改）。**
+- **D9 账号与发布归属（2026-09-23 owner 拍板）**：GitHub 私有仓 + 公开仓均挂 owner 账号（littlerodents/repro-pack，私有仓已建已推）；B 站演示视频传队友账号（33official）；公开 push 仍需 owner 点头（D6）；给队友开私有仓权限（待他 GitHub 用户名）。
+- **D10 合影口径（2026-09-23）**：赛规原文「团队资料：提交团队合影」= 两位队员合影，无规格要求；D6 前拍。
 - **D3 运行面**：DGX Spark + OpenClaw（赛规「本地算力部署」为必答题）；Hermes 仅在 `npx skills` 原生支持时进 README，不投入开发。
 - **D4 出口**：bugcard.json 必产出 + GitHub Issues 默认出口。
 - **D5 工程流**：遵循 mattpocock/skills；仓库用本地 markdown tracker（`.scratch/BOARD.md`），因公开 remote 尚未创建且赛期仅 7 天；spec 置于仓库根 `SPEC.md`（偏离 to-spec 的 .scratch 惯例，为评委可见性）。
