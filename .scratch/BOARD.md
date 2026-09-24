@@ -1,20 +1,23 @@
-# BOARD · repro-pack 工单板
+# BOARD · repro-pack 工单板（v2 · 新题工单 · 2026-09-24 重排）
 
-> 一行一票。负责人 O=Evander，T=队友。状态：todo/doing/done/blocked。
+> 旧 repro-pack 工单已随 D12 改道归档（其 skill/脚本保留在仓，作为过程资产与征文素材）。
+> 负责人：O=Evander，T=abloom25，机主=alingalingling。状态：todo/doing/done/blocked。
+
+## 主线（锁题①后立即生效）
 
 | # | 负责人 | 状态 | 依赖 | 票面与验收 |
 |---|---|---|---|---|
-| T1 | O | **done** | key | Spike 完成：梯子全绿（视频=video_url+base64 data URI）；主脑 provisional step-3.7-flash；质量维度挂 D4；结论文档 evidence/spike/dual-model.md |
-| T2 | T | todo | — | **任务集**：录 8–12 段 30–90s 正例 + 2–3 段负例；每段写 gold answer（bug 类型/位置/严重度）；落 `assets/samples/` + `evals/evals.json` |
-| T3 | O | **doing** | T1 | 主链路：合成片 E2E 已通（ISC-1/2 已关）；待 T2 真实录屏复跑后关闭 |
-| T4 | O | **done** | T3 | **包装配+出口**：✓ 全链含 gh issue 实测（私仓 issue #1），输出契约 100% 验证 |
-| T5 | O | **done** | T3 | SKILL.md 触发工程完成：OpenClaw metadata(bins 门) + run.sh 入口 + 自包含副本 + YAML 引号修复；npx skills 本地实装，ISC-5 已关 |
-| T6 | T | todo | T2,T4 | **evals runner**：一键跑全量任务集，输出字段召回/误触/成本 JSON（ISC-7/8） |
-| T7 | O | todo | T4,T5,SSH | **上 Spark**：OpenClaw 安装、skill 入 workspace、`skills list --eligible` 截图证据（ISC-6） |
-| T8 | O | todo(P1) | T7 | **换脑素材**：本地 Qwen 图片模式跑通同链路；NIM 第二脑对照（buffer 才吃） |
-| T9 | T | todo | T6,冻结 | **BENCHMARK.md**：A/B 全量实测两栏数据（ISC-9）；冻结 9/26 晚后跑 |
-| T10 | T | todo | T9 | **README**：≥500 字、部署说明、技术栈说明、skill 结构、评测方法（ISC-10 前半） |
-| T11 | T | todo | T7,T9 | **演示视频**：≤3min，脚本：痛点(接入优先)→装skill→跑→换脑→BENCHMARK；传 B 站 |
-| T12 | T | todo | — | **十日谈征文**：CSDN/知乎，开发历程随手记，9/28 发，标注 AI 生成 |
+| N1 | O | todo | 锁题 | **克隆 control_center_llm + processors 覆盖面实测**（UNPROVEN 风险一票否决位）：能跑通几个处理器？数据流完整吗？翻车→②接棒（条件见 topic-deepdive/02） |
+| N2 | O | todo | N1 | **SPEC v2**：控制塔 skill 的完整规格（输入/输出契约/负例/换脑/evals 设计），ISA 重锚 |
+| N3 | O | todo | N2 | **skill 主链**：processors→skill scripts、SKILL.md（渐进披露+触发词+负触发）、输出契约（PACK 式复用）、3.7-flash 主脑接入 |
+| N4 | T | todo | N3 | **evals + runner**：gold 数学底座（补货量/服务水平唯一解）、负例集、裸 agent vs 带 skill A/B |
+| N5 | O | todo | N3 | **Spark 部署**：skill 入 OpenClaw workspace（eligible 验证）、Streamlit 塔台跑通、换脑演示素材（3.7-flash↔本地 120B） |
+| N6 | T | todo | N4 | **BENCHMARK.md + README**（≥500字、部署/技术栈说明、skill 结构展示） |
+| N7 | 罗登思 | todo | N5,N6 | **B 站演示视频**（≤3min：MIT 95% 开场→装 skill→问一句出决策→塔台 UI→换脑→BENCHMARK；传 33official） |
+| N8 | T | todo | — | **十日谈征文**（CSDN/知乎，开发历程随手记，9/28 发，标注 AI 生成） |
 
-里程碑：9/26 晚冻结 v0.1.0 → 9/28 发布（push 公开需 owner 点头+合影）→ 9/29 12:00 前表单提交（ISC-11）。
+## 里程碑：9/26 晚冻结 v0.1.0 → 9/28 发布（公开 push 需 O 点头 + 合影）→ 9/29 12:00 前表单提交。
+
+## P1 池（buffer 才吃）：① 一键重跑 runner → ② cuDF 数据层加速（万行级扩容后）→ ③ NIM 第二脑（key 服务组修复后）→ ④ Hermes 可移植性演示
+
+## 已归档（repro-pack 旧线）：T1-T12 见 git 历史；其战果（4/11 ISC、负例契约、gh 出口、双模型对比）全部继承到新线
