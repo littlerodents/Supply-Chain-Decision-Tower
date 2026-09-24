@@ -18,6 +18,17 @@
 
 ## 里程碑：9/26 晚冻结 v0.1.0 → 9/28 发布（公开 push 需 O 点头 + 合影）→ 9/29 12:00 前表单提交。
 
+
+## Bug 队列（队友接手位 · needs-triage → ready-for-agent；修复判据=tests/test_tools.py 对应 xfail 变绿）
+
+| # | 标签 | 票面 | 修哪里 | 判据 |
+|---|---|---|---|---|
+| BUG-1 | needs-triage | `gap` 无法区分「该仓无库存记录」与「库存 0」——11001@Portland 场景会静默按 0 库存给出必补货结论 | `tools.py stock_demand_difference` 加 `record_found` 字段 + SKILL.md SOP 第 1 步同步 | `test_gap_no_record_flag` 绿 |
+| BUG-2 | needs-triage | 坏 SQL 裸 traceback——agent 无法结构化自纠 | `tools.py` inventory/suppliers 子命令 try/except 包 JSON `{"error": ...}` | `test_sql_error_json_output` 绿 |
+| BUG-3 | needs-triage | `chart --weeks 0/负数` 产出空图无提示 | argparse 校验或入口守卫 | `test_chart_zero_weeks_guard` 绿 |
+
+> 运行：`python3 -m pytest tests/test_tools.py -v`（本机 7 绿 + 3 xfail 即当前基线）
+
 ## P1 池（buffer 才吃）：① 一键重跑 runner → ② cuDF 数据层加速（万行级扩容后）→ ③ NIM 第二脑（key 服务组修复后）→ ④ Hermes 可移植性演示
 
 ## 已归档（repro-pack 旧线）：T1-T12 见 git 历史；其战果（4/11 ISC、负例契约、gh 出口、双模型对比）全部继承到新线
