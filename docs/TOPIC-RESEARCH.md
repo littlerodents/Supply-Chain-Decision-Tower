@@ -37,7 +37,16 @@
 | 定位 | 现任主脑，基线已立 | MoE 120B 总参/12B 激活——会上指定对比对象 |
 | 本地可行性 | —（闭源 API） | Ollama Q4 ≈60–70GB，租机 119Gi **放得下**（若 API 对比赢→演示本地部署=平台适配 15% 满配） |
 
-**阻塞**：owner 在 NGC（setup/api-key）重生成 Personal Key，**勾选 NIM 相关服务组** → 403 即解。
+**对比结果（2026-09-24 实测，租机本地 head-to-head，同一 FDE 结构化任务 ×3 runs）**：
+
+| | step-3.7-flash（云端） | nemotron-3-super-120b-a12b（**GB10 本地**） |
+|---|---|---|
+| 质量（五维判分） | **5.0/5 × 3**（满贯零漂移） | 4/5 · 3/5 · 4/5（均值 3.7） |
+| 延迟 | 4.8–12.1s（中位 ~6.4s） | 30.6–33.3s（含 thinking 生成） |
+| 结论 | **主脑留任**（更强+更稳，owner 判据） | 备脑/本地叙事（见下） |
+
+**本地部署遗产**：nemotron 87GB 已在租机 Ollama 上线（加载 1m13s，serve 正常）——「DGX Spark 本地跑 NVIDIA 开源 120B」= 平台适配 15% 的实物证据 + BENCHMARK 真实 A/B 数据源。NGC key 重生成不再紧急（API 路线已被本地路线替代）。
+注：任务为结构化 JSON 输出；nemotron 开 thinking 模式（深度换速度），README 记录时注明口径。
 
 ## 待 owner 裁决
 
