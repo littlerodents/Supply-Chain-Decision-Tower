@@ -4,11 +4,14 @@ slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
 progress: 4/11
 started: 2026-09-22T15:30:00Z
-updated: 2026-09-23T01:30:00Z
-iteration: 1
+updated: 2026-09-23T16:30:00Z
+iteration: 2
 ---
 
 # ISA · repro-pack（第三届 NVIDIA DGX Spark 黑客松预赛）
+
+> ⚠️ **REOPENED 2026-09-23 深夜**：owner 会后拍板选题改道（详见 D12）。未关闭 ISC 冻结待重锚；已关闭 ISC-1/2/4/5 的验证证据保留（过程资产 + 征文素材）。基建（OpenClaw/ffmpeg/租机/工程流/主脑选型）全继承。
+
 
 ## Problem
 
@@ -113,6 +116,8 @@ Why: 表单不交，前面全白干。
 - **D8 台账**：本项目满足 ISA 条件（交付物≥3、跨会话、第三方复核），用 ISA.md 替代 STATUS+DECISIONS 两件套；STATUS.md 仅作仪表盘。
 
 - **D11 演示面与模型叙事口径（2026-09-23 owner 问询后维持）**：主面 = OpenClaw（配方已验证 + 评委同款栈）；Hermes 仅作可移植性证据位（npx 五客户端实装在手，能一行装才进 README）。叙事分工：skill 主脑 = StepFun 3.7 Flash（赞助商轴，核心功能所在）；本地算力轴 = gateway 本地 Qwen（闭源 API 无本地权重，本地叙事只能开源模型扛；72B 可选档入 SPARK-DEPLOY 剧本——仅 README/征文素材，主演示用 35B-A3B 快档，dense 大模型在 GB10 生成速度慢一个量级）。评分同时点名「开源模型+StepFun」，双覆盖。
+
+- **D12 选题重开（2026-09-23 深夜，owner 会后拍板）**：方向改为「参考 GitHub 上已有 FDE 行业案例 → 把其工作/内容转化为 Agent Skill」，锚「项目落地实用性」等核心评分轴。repro-pack skill 本体搁置（其基建、evals 方法论、负例零误触思想、双模型主脑定案全继承）。grilling 重开，SPEC.md 待重写；期限不重排（9/26 冻结 / 9/28 完成 / 9/29 提交）。T 线默认 abloom25 有时间（owner 指示，后续按事实调整）。合影按 owner 决定走合成路线（诚信风险已警示两次，留痕即止）。
 
 ## Verification
 
