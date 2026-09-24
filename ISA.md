@@ -2,7 +2,7 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 2/14
+progress: 4/14
 started: 2026-09-22T15:30:00Z
 updated: 2026-09-24T15:30:00Z
 iteration: 2
@@ -82,9 +82,9 @@ Why: 一切叙事的实体。
 
 ### F2' · evals 层
 Why: 技术深度 25% 的踩分点；Tier-3 哲学的社区化实践。
-- [ ] ISC-16: 任务集 ≥8 正 + ≥3 负，金答案由工具直算落盘
+- [x] ISC-16: 任务集 ≥8 正 + ≥3 负，金答案由工具直算落盘
 - [ ] ISC-17: 四象限 runner（{bare,+skill}×{3.7,nemotron}）一键跑完
-- [ ] ISC-18: 3.7+skill 正例命中 ≥70%，负例误触=0
+- [x] ISC-18: 3.7+skill 正例命中 ≥70%，负例误触=0
 - [ ] ISC-19: BENCHMARK.md 四象限实测数据齐
 
 ### F3' · 部署与演示
@@ -146,6 +146,10 @@ N3（2026-09-24 晚，均真跑）：
 - ISC-12: `tools.py gap --sku 13001 --location "San Francisco" --weeks 12` 两个独立进程 diff 一致（DETERMINISM PASS）；shipping 双进程一致；7 工具全冒烟（gap/inventory/suppliers/forecast/shipping/chart/kb）；**修复上游三 bug**：hash 不稳定×2（crc32）、solver f-string 致库存恒 0（参数化查询）；domain 发现：第 1 周需求恒 200 → 负例=短周期问句（evidence/n3-smoke.txt）
 - ISC-13: `npx skills add ./skills/supply-chain-control-tower --yes` → Done；`npx skills list` 可见（evidence/n3-smoke.txt）
 - 测试基线（D13）: `python3 -m pytest tests/test_tools.py` → **7 passed, 3 xfailed**（修理位 BUG-1/2/3 挂牌，基线锁）
+- code-review（D13-③，偏差关闭）: 两轴执行——Standards 抓出 cmd_inventory/suppliers 重复(已提取 _sql_query)、kb 文件句柄、测试计数脏表达式(已修)；Spec 轴 8 项全对齐(7 工具/契约/任务集/负例)，已知缺口=BUG-2 与 api.md 声明一致（队友位）
+- ISC-16: `gold_gen.py` → 12 条金答案直算落盘（pos-dec-002 正确选低价供应商，比价逻辑验证）
+- ISC-18: `run_evals.py` 实测——**stepfun/skill 12/12（100%）**，负例 3/3 零误触，无关问句零工具；**stepfun/bare 2/12（16.7%）**——带/无 skill 差距 83pp，Tier-3 叙事实证（evidence/evals/results-*.json）
+- nemotron 双象限：租机本地后台执行中（隧道大载荷断连的规避；此腿零凭证暴露）
 
 ## Remaining Work
 
