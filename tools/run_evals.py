@@ -29,7 +29,7 @@ from openai_compat import chat  # noqa: E402
 BRAINS = {
     "stepfun": (os.environ.get("REPRO_BASE_URL", "https://api.stepfun.com/v1"),
                 "step-3.7-flash", os.environ.get("REPRO_API_KEY", "")),
-    "nemotron": ("http://127.0.0.1:11434/v1", "nemotron-3-super-120b-a12b", "ollama"),
+    "nemotron": ("http://127.0.0.1:11434/v1", "nemotron-3-super:120b-a12b", "ollama"),
 }
 MAX_ROUNDS = 5
 DANGEROUS = ("rm ", "sudo", "curl", "wget", ">>", "&&", "||", ";", "|", "`", "$(")

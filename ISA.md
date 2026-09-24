@@ -2,7 +2,7 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 4/14
+progress: 7/14
 started: 2026-09-22T15:30:00Z
 updated: 2026-09-24T15:30:00Z
 iteration: 2
@@ -83,9 +83,9 @@ Why: 一切叙事的实体。
 ### F2' · evals 层
 Why: 技术深度 25% 的踩分点；Tier-3 哲学的社区化实践。
 - [x] ISC-16: 任务集 ≥8 正 + ≥3 负，金答案由工具直算落盘
-- [ ] ISC-17: 四象限 runner（{bare,+skill}×{3.7,nemotron}）一键跑完
+- [x] ISC-17: 四象限 runner（{bare,+skill}×{3.7,nemotron}）一键跑完
 - [x] ISC-18: 3.7+skill 正例命中 ≥70%，负例误触=0
-- [ ] ISC-19: BENCHMARK.md 四象限实测数据齐
+- [x] ISC-19: BENCHMARK.md 四象限实测数据齐
 
 ### F3' · 部署与演示
 Why: 平台适配 15%（R1 承重墙）+ 演示 10%。
@@ -150,6 +150,7 @@ N3（2026-09-24 晚，均真跑）：
 - ISC-16: `gold_gen.py` → 12 条金答案直算落盘（pos-dec-002 正确选低价供应商，比价逻辑验证）
 - ISC-18: `run_evals.py` 实测——**stepfun/skill 12/12（100%）**，负例 3/3 零误触，无关问句零工具；**stepfun/bare 2/12（16.7%）**——带/无 skill 差距 83pp，Tier-3 叙事实证（evidence/evals/results-*.json）
 - nemotron 双象限：租机本地后台执行中（隧道大载荷断连的规避；此腿零凭证暴露）
+- 四象限收割（2026-09-25）：bare 2/12 ×2，skill 12/12 ×2（nemotron 延迟中位 97s vs 3.7 6.6s）；负例零误触全线；**触发≠遵守的修复**：无硬规则版 3.7+skill 波动 10-11/12（裸答模式）→ SKILL.md 硬规则版 12/12；BENCHMARK.md 成文（evidence/evals/summary.json + results-*.json）；nemotron 硬规则版确认轮后台中（eval2.flag）
 
 ## Remaining Work
 
