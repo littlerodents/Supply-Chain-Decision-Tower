@@ -7,8 +7,8 @@
 
 | # | 负责人 | 状态 | 依赖 | 票面与验收 |
 |---|---|---|---|---|
-| N1 | O | todo | 锁题 | **克隆 control_center_llm + processors 覆盖面实测**（UNPROVEN 风险一票否决位）：能跑通几个处理器？数据流完整吗？翻车→②接棒（条件见 topic-deepdive/02） |
-| N2 | O | todo | N1 | **SPEC v2**：控制塔 skill 的完整规格（输入/输出契约/负例/换脑/evals 设计），ISA 重锚 |
+| N1 | O | **done** | 锁题 | ✓ 判决 GO（docs/N1-VERDICT.md）：PAL 五段+7 工具+411 行提示词，依赖面 pandas/numpy/sqlite3；②备胎解除 |
+| N2 | O | **done** | N1 | ✓ SPEC v2 锁定（架构反转）+ ISA 重锚（ISC-12~25，0/14） |
 | N3 | O | todo | N2 | **skill 主链**：processors→skill scripts、SKILL.md（渐进披露+触发词+负触发）、输出契约（PACK 式复用）、3.7-flash 主脑接入 |
 | N4 | T | todo | N3 | **evals + runner**：gold 数学底座（补货量/服务水平唯一解）、负例集、裸 agent vs 带 skill A/B |
 | N5 | O | todo | N3 | **Spark 部署**：skill 入 OpenClaw workspace（eligible 验证）、Streamlit 塔台跑通、换脑演示素材（3.7-flash↔本地 120B） |
