@@ -2,9 +2,9 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 0/14
+progress: 2/14
 started: 2026-09-22T15:30:00Z
-updated: 2026-09-24T14:00:00Z
+updated: 2026-09-24T15:30:00Z
 iteration: 2
 ---
 
@@ -76,7 +76,7 @@ iteration: 2
 ### F1' · skill 本体（转化）
 Why: 一切叙事的实体。
 - [ ] ISC-12: 7 工具移植完毕，crc32 稳定化冒烟通过（同 SKU 跨进程预测一致）
-- [ ] ISC-13: SKILL.md 渐进披露合规 + npx skills add 安装可见
+- [x] ISC-13: SKILL.md 渐进披露合规 + npx skills add 安装可见
 - [ ] ISC-14: 正例问句产出八字段决策 JSON（含 tool_trace）
 - [ ] ISC-15: 负例问句 NO_REORDER+余量，零误触
 
@@ -137,6 +137,12 @@ D2（2026-09-23，均真跑）：
 - ISC-5: `npx skills@latest add ./skills/repro-pack --yes` → 安装至 `.agents/skills/repro-pack`（universal: Codex/Copilot/OpenCode/Warp 等；symlink: Claude Code），`npx skills list` 显示 repro-pack（evidence/d2/skill-standalone.txt + 安装器输出）
 - 红队（安装器自己抓的）：SKILL.md description 含裸冒号→YAML 解析失败，加双引号后过——D3 当天必踩的雷提前爆了
 - 自包含验证：skill 整目录拷至陌生路径 `/tmp/dgx/standalone` → `run.sh --validate` VALID；正例 `PACK:/tmp/dgx/pack-e2e2`；负例 `NO_BUG_FOUND`（不依赖仓内 tools/）
+
+## Verification（v2）
+
+N3（2026-09-24 晚，均真跑）：
+- ISC-12: `tools.py gap --sku 13001 --location "San Francisco" --weeks 12` 两个独立进程 diff 一致（DETERMINISM PASS）；shipping 双进程一致；7 工具全冒烟（gap/inventory/suppliers/forecast/shipping/chart/kb）；**修复上游三 bug**：hash 不稳定×2（crc32）、solver f-string 致库存恒 0（参数化查询）；domain 发现：第 1 周需求恒 200 → 负例=短周期问句（evidence/n3-smoke.txt）
+- ISC-13: `npx skills add ./skills/supply-chain-control-tower --yes` → Done；`npx skills list` 可见（evidence/n3-smoke.txt）
 
 ## Remaining Work
 
