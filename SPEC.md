@@ -1,68 +1,65 @@
-# SPEC · repro-pack
+# SPEC v2 · 供应链控制塔 Agent Skill（FDE 案例转化）
 
-> 由 2026-09-22 grilling 共识卡固化（baseline 2.0）。变更需明说，改这里。
+> 2026-09-24 锁定（owner 确认① + R1-R5 修正案生效）。取代 SPEC v1（repro-pack，见 ISA D12）。
+> 上游案例：ikatsov/tensor-house · supply-chain/control_center_llm（Apache-2.0，原样快照在 `case/`）。
 
 ## Problem Statement
 
-报 bug 的传统形态——录屏/截图 + 人写的描述——同时服务两个对象：给人看（他要脑补现场），给流程看（分诊、留档）。在 agent 时代这个形态正在失效：能接入的场景里，对方 agent 直接远程接手，不再需要描述；不能接入的场景里（黑盒 SaaS、瞬态 bug、安全边界、审计要求），仍然只能交证据，但消费证据的不再是人类工程师，而是修复 agent——而一段裸录屏对 agent 是低效的：它得自己重新发现错误文本、定位时间点、推断复现路径。
+区域零售/小型制造的供应链管理者，日常问的是这类问题：「Portland 的 Italian Roast 还够卖几周？该不该补？找哪个供应商、补多少、总共花多少钱？」答案散在库存表、供应商表、需求预测里。AI 时代这类问句本该一句话得到答案——但 MIT《GenAI Divide》：企业 AI 项目 95% 烧钱无价值，缺的不是模型，是把模型塞进真实业务的**可复用能力包**。范冰《前线部署工程师》开篇的同一判断：FDE 岗位一年涨 7 倍，说明「落地最后一公里」是稀缺能力——而 Skill 正是这一能力可分发、可验证、可安装的形态。
 
-两类场景之间缺一座桥：**一份 agent 可直接消费的证据包**。
+上游案例（FDE 式交付物：program-aided 控制塔）验证了业务形态，但它是一个绑死 Gemini/LangChain/Streamlit 的单体应用。转化命题：把它变成**任何 agent 都能装的技能**。
 
 ## Solution
 
-`repro-pack` 是一个 Agent Skill：给 agent 一段操作录屏（30–90s），它调用多模态大模型理解录屏，产出一个**复现包**——
+**supply-chain-control-tower skill**——架构反转式转化：
 
-- 结构化 bug 卡（JSON：类型/位置/严重度/错误原文/复现步骤骨架）
-- 带时间戳的关键帧（圈出出错画面）
-- 从画面中抽取的 console/报错文本
-- 按 agent 消费格式写好的 GitHub issue
+- 原项目：应用内跑 PAL 循环（Gemini 写代码→修→exec）
+- 我们：**宿主 agent（OpenClaw@DGX Spark / Claude Code / Codex…）就是 planner/coder/critic**；skill 提供三样东西——**工具 API**（7 个移植函数）、**领域知识与决策规程**（蒸馏自上游 411 行提示词工程）、**输出契约**（结构化补货决策）
 
-配套一个评测层：同一批录屏任务，对比「拿到包的修复 agent」与「只拿裸录屏的修复 agent」，用实测数据（BENCHMARK.md）证明包的价值——NVIDIA Tier-3 评测哲学往下游再推一层。
+装了 skill 的 agent 收到运营问句后：按决策规程调工具链（缺口计算→供应商比价→运费→决策），产出结构化决策 JSON；库存充足时明确 NO_REORDER 并给余量依据。**skill 本体零 LLM 调用**——纯确定性、全可测，智力全部来自宿主 agent 的主脑（3.7-flash；换脑=本地 Nemotron 120B，平台适配承重墙 R1）。
 
-无 bug 的录屏是负例：不产包，只回一句「未发现问题」，不触发下游。
+配套 evals 层：{裸 agent, 带 skill} × {3.7-flash, 本地 Nemotron} 四象限任务集实测 → BENCHMARK.md——NVIDIA Tier-3 哲学的社区化实践。
 
 ## User Stories
 
-1. 作为报障者，我丢一段录屏给 agent，就能拿到一份我不需要自己动笔组织的 bug 证据包，所以我把「报 bug」从写作任务变成拖拽任务。
-2. 作为报障者，当我的录屏里没有 bug 时，agent 不会小题大做地编造一个问题单，所以我能信任它的输出。
-3. 作为接单的修复 agent，我拿到的 issue 里复现步骤、错误原文、出错时间戳齐全，所以我不需要在别人机器上盲目摸索现场。
-4. 作为被黑盒 SaaS bug 困扰的用户，我给不了 SSH 也给不了远程控制，所以我需要把录屏变成对方支持工单能直接消化的结构化证据。
-5. 作为开源维护者，我收到的 issue 是机器生成的标准格式，所以我的分诊成本下降。
-6. 作为评测者，我用同一批任务对比带/不带 skill 的表现，所以 skill 的价值有实测数字而不是自述。
-7. 作为 DGX Spark 的使用者，我把 skill 装进本地 OpenClaw workspace，所以整个链路在我的本地算力上可复现。
-8. 作为想换模型的用户，我只改三个环境变量（base_url/model/api_key）就能切换主脑，所以我不被任何厂商绑定。
-9. 作为演示评委，我 clone 仓库后用自己的录屏亲手跑通，所以我相信作品是真的能跑。
-10. 作为安全审查者，我在仓库里找不到任何密钥，所以这个 skill 可以被放心审计。
-11. 作为队友，我在 6:30–9:30 的晚间时段领取独立工单（任务集/runner/README/视频），所以两个人的并行不需要互相等待。
-12. 作为赛事读者，我在 README 里读到部署说明、技术栈与评测方法，所以我能对照评分表逐项核验。
+1. 作为供应链经理，我问「Portland 的 Italian Roast 够卖几周」，agent 调 `stock_demand_difference` 给出缺口与周数，所以我不用翻表。
+2. 作为供应链经理，我问「该补多少找谁补、总成本多少」，skill 规程引导 agent 走完 缺口→`query_suppliers` 比价（含 `get_shipping_cost`）→结构化建议单，所以我拿到的是决策不是数据。
+3. 作为供应链经理，库存充足时我问「要不要补货」，agent 明确说不需要并给余量数字，**绝不编造补货建议**（负例零误触）。
+4. 作为评委，我 clone 仓库 `npx skills add` 后用自己的问句在 OpenClaw 里复现，所以我相信它真的能跑。
+5. 作为观众，我在演示视频看到同一问句由云端 3.7-flash 与本地 120B 各答一遍、BENCHMARK 四象限对照，所以我看到「换脑三值」与本地算力的价值。
+6. 作为评测者，我一键跑 runner，正例命中金答案（工具直算）、负例零误触、延迟成本全统计，所以 skill 的价值有数字。
+7. 作为开源社区开发者，我在 README 看到透明的案例引用（Apache-2.0 + 署名）与转化说明，所以我认可这是转化不是搬运。
+8. 作为经理，我要图表，agent 用 `show_line_chart` 输出 52 周预测线图。
+9. 作为 agent，我写错 SQL 时工具报错信息可读可自纠（上游 critic 环节精神的延续）。
+10. 作为演示者，Streamlit 塔台可作人看证据面板（R2：可牺牲项，超 4h 降级）。
 
 ## Implementation Decisions
 
-- **主脑**：StepFun 多模态端点（OpenAI 兼容）。`step-3.7-flash` 与 `step-5-preview` 在 D1 用同一段录屏做双模型对照（质量/延迟/成本三维），赢家做主脑，输家做换脑演示素材。Coding Plan 已确认含 step-5-preview。
-- **可移植性**：端点三值（base_url / model / api_key）全部走环境变量，代码零改动换脑。
-- **运行面**：DGX Spark 上装 OpenClaw，skill 装进 workspace（复用 9/20 训练营配方），`skills list --eligible` 作为安装验证口。本地 Qwen（图片模式）为备脑/换脑素材。
-- **出口**：结构化 bug 卡（`bugcard.json`）为必产出物；GitHub Issues 为默认出口（`gh issue create`），issue body 按 agent 消费格式渲染。
-- **输出契约**：包目录结构固定（bugcard.json + frames/ + repro.md），负例末行输出 `NO_BUG_FOUND`。
-- **skill 结构**：遵循 agentskills.io 渐进披露——frontmatter（name/description/触发词/negative triggers）常驻 ~100 token，正文 <5K token，细节下沉 references/，可执行物在 scripts/。
-- **评测三层**：①包质量（gold 字段召回 + 负例零误触 + 成本）为 P0；②修复 agent 带包 vs 裸录屏 A/B 为 P1；③安全接入端点为 P2（只写 Future work，不实现）。
+- **架构反转**：无内嵌 LLM（砍 `langchain_google_genai`/LangChain 全链）；skill = 工具+知识+契约；智能在宿主 agent（MCP 管连接、skill 管知识、harness 管调度）
+- **7 工具移植**（`scripts/tools/`）：`query_inventory/query_suppliers`（CSV→内存 SQLite，pandas+sqlite3）、`get_forecast`（**hash→zlib.crc32 稳定化**，修复上游不可复现 bug）、`stock_demand_difference`、`get_shipping_cost`、知识检索改为 `references/supply-chain-knowledge.md` 供 agent 直读（替代上游 LLM Searcher）、输出三件套（print_answer/print_table/show_line_chart）
+- **SKILL.md 渐进披露**：frontmatter（触发词+负触发+OpenClaw metadata bins）；正文=问句分类+补货决策 SOP；references=api 文档（上游 docstring 直接复用）+知识文档
+- **输出契约**：正例=`{"decision","order_qty","supplier","unit_cost","shipping_cost","total_cost","rationale","tool_trace"}`；负例=末行 `NO_REORDER:<余量周数>`
+- **主脑**：OpenClaw gateway 配 3.7-flash（OpenAI 兼容 provider，key 运行时注入不落盘）；换脑素材=本地 `nemotron-3-super-120b`（R1 必选、演示最后一幕）
+- **evals runner**：headless harness（问句+±SKILL.md 上下文→LLM→判定），四象限一次跑完；OpenClaw 现场演示为人工证据层
+- **Streamlit 塔台**（R2）：原样适配优先，超 4 小时降级为 demo 录屏
+- **数据**：上游咖啡数据集原样（4 SKU×2 仓+供应商表）；万行级扩容= P1
+- **透明引用**（R4）：README 署名上游 + 修改点清单
 
 ## Testing Decisions
 
-- 只测外部行为：入口脚本对录屏的产出物（目录结构、schema 合法性、负例行为），不测模型内部。
-- 最高接缝：`scripts/repro_pack.py` 的 CLI 入口（`--validate` 本地可全测，不依赖 API）。
-- 评测用 `evals/evals.json` 任务集（≥8 正例 + ≥2 负例，含 gold answer），runner 一键跑出 JSON 结果，禁止手工挑好结果。
-- 阈值写死：负例误触必须为 0；正例 gold 三字段召回 ≥70% 才算 P0 达标。
+- 只测外部行为（问句→最终答案），不测 skill 内部实现
+- **金答案由工具函数直算**（不经 LLM）——决策数值数学唯一
+- 负例判定：充足库存问句 → 必须含 `NO_REORDER` 且不得含补货建议
+- 工具选择判定：`tool_trace` 缺正确工具链即错（如补货决策未调 `stock_demand_difference`）
+- 阈值：正例命中 ≥70%（3.7-flash 带 skill）才算达标；负例误触 = 0（P0）
+- 四象限跑 3 轮取中位，记录质量/延迟/token
 
 ## Out of Scope
 
-- 飞书/企微等需要个人凭证的出口
-- 实时屏幕捕获（只吃已有录屏文件）
-- P2 安全接入端点（限时最小权限 SSH/远程通道）
-- 前端界面（OpenClaw Web UI 即交互面）
-- 五维全量评测、沙箱隔离、双 agent 集群
-- 移动端
+真实预测模型（保留确定性合成预测）· 多级库存网络 · 真实供应商数据 · cuDF 加速（P1）· Streamlit 重设计 · 移动端 · 多语言 · 安全接入端点（P2 立碑）
 
 ## Further Notes
 
-- 提交物按赛事规则：公开仓 URL + 500 字以上 README（含部署/技术栈说明、skill markdown 展示）+ B 站演示视频 + 十日谈征文（CSDN/知乎，标注 AI 生成）+ 团队合影 + 表单。
-- 冻结点：9/26 晚 v0.1.0；9/29 中午前交表单。
+- R1-R5 修正案全文：`docs/topic-deepdive/00-plan-verdict.md`
+- 发布排雷清单（R5）：征文/B站视频标注 AI 生成 · Apache-2.0+署名 · key 零提交（已验证）· 合影（owner 决定留痕）· 500 字 README 结构对赛规
+- 冻结 9/26 晚 v0.1.0 · 发布 9/28（push 需 owner 点头）· 提交 9/29 12:00 前
