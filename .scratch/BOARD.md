@@ -9,7 +9,7 @@
 |---|---|---|---|---|
 | N1 | O | **done** | 锁题 | ✓ 判决 GO（docs/N1-VERDICT.md）：PAL 五段+7 工具+411 行提示词，依赖面 pandas/numpy/sqlite3；②备胎解除 |
 | N2 | O | **done** | N1 | ✓ SPEC v2 锁定（架构反转）+ ISA 重锚（ISC-12~25，0/14） |
-| N3 | O | **doing** | N2 | skill 主链：**工具层+SKILL.md+references+evals 任务集 v1 已落地**（ISC-12/13 已关，2/14）；剩：N4 gold 生成器与四象限 runner 联调 |
+| N3 | O | **doing** | N2 | **done**（ISC-12/13/16/18 关，4/14）：工具层+SKILL.md+references+任务集+gold 直算+四象限 runner；3.7 双象限实测 16.7%→100%；nemotron 双象限租机后台跑中 |
 | N4 | T | todo | N3 | **evals + runner**：gold 数学底座（补货量/服务水平唯一解）、负例集、裸 agent vs 带 skill A/B |
 | N5 | O | todo | N3 | **Spark 部署**：skill 入 OpenClaw workspace（eligible 验证）、Streamlit 塔台跑通、换脑演示素材（3.7-flash↔本地 120B） |
 | N6 | T | todo | N4 | **BENCHMARK.md + README**（≥500字、部署/技术栈说明、skill 结构展示） |
