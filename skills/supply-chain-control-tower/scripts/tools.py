@@ -43,16 +43,21 @@ def _db() -> sqlite3.Connection:
     return con
 
 
-def cmd_inventory(args):
+def _sql_query(args, table: str):
     con = _db()
-    df = pd.read_sql(args.sql, con)
+    try:
+        df = pd.read_sql(args.sql, con)
+    finally:
+        con.close()
     print(df.to_json(orient="records", force_ascii=False))
+
+
+def cmd_inventory(args):
+    _sql_query(args, "inventory")
 
 
 def cmd_suppliers(args):
-    con = _db()
-    df = pd.read_sql(args.sql, con)
-    print(df.to_json(orient="records", force_ascii=False))
+    _sql_query(args, "suppliers")
 
 
 def _crc(s: str) -> int:
@@ -135,7 +140,8 @@ def cmd_chart(args):
 
 def cmd_kb(args):
     """供应链知识直读（替代上游 LLM Searcher —— 上下文工程）。"""
-    products = json.load(open(os.path.join(DATA, "products.json")))["products"]
+    with open(os.path.join(DATA, "products.json")) as f:
+        products = json.load(f)["products"]
     suppliers = pd.read_csv(os.path.join(DATA, "suppliers.csv")).to_dict(orient="records")
     inventory = pd.read_csv(os.path.join(DATA, "inventory.csv")).to_dict(orient="records")
     print(json.dumps({"products": products, "locations_inventory": inventory,

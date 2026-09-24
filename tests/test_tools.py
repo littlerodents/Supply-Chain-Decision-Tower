@@ -105,20 +105,5 @@ def test_chart_zero_weeks_guard():
 
 
 if __name__ == "__main__":
-    failures = []
-    xfails = []
-    for name, fn in sorted(globals().items()):
-        if name.startswith("test_") and callable(fn):
-            try:
-                fn()
-                print(f"PASS  {name}")
-            except AssertionError:
-                if name in ("test_gap_no_record_flag", "test_sql_error_json_output", "test_chart_zero_weeks_guard"):
-                    xfails.append(name)
-                    print(f"XFAIL {name}  （队友修理位）")
-                else:
-                    failures.append(name)
-                    print(f"FAIL  {name}")
-    print(f"\n绿 {len([1]) and sum(1 for n in globals() if n.startswith('test_')) - len(failures) - len(xfails)}"
-          f" / xfail {len(xfails)} / fail {len(failures)}")
-    sys.exit(1 if failures else 0)
+    import pytest
+    sys.exit(pytest.main([__file__, "-v"]))
