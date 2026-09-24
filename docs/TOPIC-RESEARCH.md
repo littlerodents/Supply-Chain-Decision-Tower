@@ -52,3 +52,14 @@
 
 1. NGC key 重生成（2 分钟）
 2. 池子挑选：建议我 DFS 下钻 `tensor-house`（四个行业域 notebook 清单 → 给你 3 个具体案例供三选一），或你直接点名
+
+## DFS 二层 · tensor-house 下钻（2026-09-24，notebook 级菜单）
+
+| # | 候选案例 | 源 | 痛点一句话 | 自带数据 | 评分锚定 | 风险 |
+|---|---|---|---|---|---|---|
+| **①** | **供应链控制塔**（推荐） | `supply-chain/control_center_llm` | 库存-供应商-补货协同，管理层要「问一句出决策」 | ✓ inventory/products/suppliers | 实用性25 + 平台适配15（数据层可走 cuDF on Spark）+ 演示10（Streamlit UI 现成） | 原项目挂 OpenAI 接口 → 换 3.7-flash（换脑三值，主脑已定案） |
+| ② | 需求预测→补货决策 | demand-forecasting × sQ-RS | 补货拍脑袋 | 部分（多自合成） | 实用性25 + evals 确定性（MAPE/服务水平） | 串链工作量略大 |
+| ③ | 营销组合预算优化 | mediamix-bayesian | 广告预算拍脑袋 | ✓ | 实用性25（呼应 MIT 95% 叙事） | evals 客观性一般；GPU 角度弱 |
+| ④ | 动态定价 | pricing Thompson | 定价拍脑袋 | 模拟器 | 技术深度25（RL） | 演示偏模拟；行业具体性弱 |
+
+**推荐 ①**：数据自带（3 天工期最稳）· UI 现成（演示分白送）· 它本来就是 FDE 式交付物——「案例→Skill」转化最原汁原味（skill 化 + NVIDIA 栈适配 + evals，正是会上定的方向本身）。
