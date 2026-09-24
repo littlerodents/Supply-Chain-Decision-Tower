@@ -2,9 +2,9 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 4/11
+progress: 0/14
 started: 2026-09-22T15:30:00Z
-updated: 2026-09-23T16:30:00Z
+updated: 2026-09-24T14:00:00Z
 iteration: 2
 ---
 
@@ -41,7 +41,7 @@ iteration: 2
 
 ## Goal
 
-9/29 中午前，预赛表单全字段提交完成，且每一项提交物都有本仓可复核的证据。
+9/29 中午前，预赛表单全字段提交完成（控制塔 skill + 四象限 BENCHMARK + 演示材料），每项提交物有本仓可复核证据。
 
 ## Not yet specified
 
@@ -50,50 +50,53 @@ iteration: 2
 - 公开仓挂谁的 GitHub 账号（发布日 owner 拍板）
 - 正例召回阈值在真实任务集上的可达性（D4 校准）
 
+
+> **v2 重锚（2026-09-24）**：旧 F1-F4（repro-pack）随 D12 改道归档——已关闭的 ISC-1/2/4/5 证据保留在 Verification 作历史与征文素材；未关闭旧 ISC 作废。以下为控制塔 skill 的当前验收集（ISC-12 起）。
 ## Test Strategy
 
 | isc | type | check | threshold | tool | anchors_to | severity |
 |---|---|---|---|---|---|---|
-| ISC-1 | bash | 样例录屏跑入口脚本，产出包目录 | exit 0 且三件套齐 | bash | derived | blocker |
-| ISC-2 | bash | bugcard 过 schema 校验 | --validate exit 0 | bash | literal | blocker |
-| ISC-3 | bash | 双模型对照报告存在且同输入 | 两模型各≥1条真实输出 | bash+eval | derived | blocker |
-| ISC-4 | bash | 负例不产包 | 末行 NO_BUG_FOUND 且无 issue | bash | literal | blocker |
-| ISC-5 | bash | npx skills 本地安装成功 | skills list 可见 repro-pack | bash | literal | blocker |
-| ISC-6 | manual | Spark 上 OpenClaw eligible | 截图/日志日期+证据 | ssh | derived | blocker |
-| ISC-7 | bash | evals.json 规模 | ≥8 正 ≥2 负 | python | literal | blocker |
-| ISC-8 | eval | 字段召回/误触 | 召回≥70%，误触=0 | runner | derived | blocker |
-| ISC-9 | bash | BENCHMARK.md 含 A/B 两栏实测 | 两栏非空有数 | bash | derived | blocker |
-| ISC-10 | bash | README≥500字+无密钥扫描 | 字数≥500；grep sk-型命中=0 | bash | literal | blocker |
-| ISC-11 | manual | 表单全字段提交 | 提交回执/截图日期 | manual | literal | blocker |
+| ISC-12 | bash | 7 工具移植冒烟+crc32 跨进程稳定 | 两次进程同 SKU 同预测 | python | literal | blocker |
+| ISC-13 | bash | npx skills 可装+SKILL.md 合规 | skills list 可见 | bash | literal | blocker |
+| ISC-14 | bash | 正例输出契约 JSON 八字段齐 | 字段全存在 | runner | literal | blocker |
+| ISC-15 | bash | 负例 NO_REORDER 零误触 | 误触=0 | runner | literal | blocker |
+| ISC-16 | bash | 任务集 ≥8 正 ≥3 负，金答案工具直算 | 数量达标+金答案落盘 | python | literal | blocker |
+| ISC-17 | bash | 四象限 runner 一键跑完 | 输出 JSON 结果 | bash | literal | blocker |
+| ISC-18 | eval | 正例命中/负例误触 | 命中≥70% 误触=0 | runner | derived | blocker |
+| ISC-19 | bash | BENCHMARK.md 四象限有数 | 2×2 非空 | bash | derived | blocker |
+| ISC-20 | manual | OpenClaw@Spark eligible+真问句演示 | 输出+日期证据 | ssh | derived | blocker |
+| ISC-21 | bash | 换脑素材：同问句双脑输出存证 | 两份输出落盘 | bash | literal | blocker |
+| ISC-22 | manual | 塔台跑通 或 R2 降级记录 | 二选一 | manual | literal | normal |
+| ISC-23 | bash | README≥500字+透明引用+排雷清单 | 字数/引用/清单齐 | bash | literal | blocker |
+| ISC-24 | manual | 表单全字段提交 | 9/29 12:00 前回执 | manual | literal | blocker |
+| ISC-25 | manual | B站视频+征文 URL 就绪 | 两 URL 可访 | manual | literal | blocker |
 
-## Features
+## Features（v2 · 控制塔 skill）
 
-### F1 · 复现包主链路
-Why: 没有「录屏进、包出」，一切叙事归零。
+### F1' · skill 本体（转化）
+Why: 一切叙事的实体。
+- [ ] ISC-12: 7 工具移植完毕，crc32 稳定化冒烟通过（同 SKU 跨进程预测一致）
+- [ ] ISC-13: SKILL.md 渐进披露合规 + npx skills add 安装可见
+- [ ] ISC-14: 正例问句产出八字段决策 JSON（含 tool_trace）
+- [ ] ISC-15: 负例问句 NO_REORDER+余量，零误触
 
-- [x] ISC-1: 对 `assets/samples/` 任意 ≤90s 正例录屏，`scripts/repro_pack.py` 退出码 0，产出含 `bugcard.json`、`frames/`、`repro.md` 的包目录
-- [x] ISC-2: `repro_pack.py --validate <bugcard.json>` 对所有产出包 exit 0（按 `references/bugcard.schema.json`）
-- [ ] ISC-3: `evidence/spike/dual-model.md` 含 3.7 Flash 与 step-5-preview 对同一录屏的真实输出对照（质量/延迟/成本三维），主备脑由此定案
-- [x] ISC-4: 对每段负例录屏：不产包、不开 issue、stdout 末行 `NO_BUG_FOUND`（当前证据：合成负例 neg-001.mp4；T2 真实负例入 evals 后复跑）
+### F2' · evals 层
+Why: 技术深度 25% 的踩分点；Tier-3 哲学的社区化实践。
+- [ ] ISC-16: 任务集 ≥8 正 + ≥3 负，金答案由工具直算落盘
+- [ ] ISC-17: 四象限 runner（{bare,+skill}×{3.7,nemotron}）一键跑完
+- [ ] ISC-18: 3.7+skill 正例命中 ≥70%，负例误触=0
+- [ ] ISC-19: BENCHMARK.md 四象限实测数据齐
 
-### F2 · Skill 化与部署
-Why: 交付单元是 skill，不是脚本；本地算力是赛题必答题。
+### F3' · 部署与演示
+Why: 平台适配 15%（R1 承重墙）+ 演示 10%。
+- [ ] ISC-20: OpenClaw@Spark skills list eligible + 真实问句演示证据
+- [ ] ISC-21: 换脑素材：同一问句 3.7-flash 与本地 120B 各一次输出存证
+- [ ] ISC-22: Streamlit 塔台跑通 或 R2 降级触发记录（二选一关闭）
 
-- [x] ISC-5: 通过 `npx skills add`（本地路径）安装成功，`npx skills list` 可见 repro-pack（Claude Code/Codex/Copilot/OpenCode/Warp 多客户端可见，实测见 Verification）
-- [ ] ISC-6: DGX Spark 上 OpenClaw `skills list --eligible` 显示 repro-pack ready（证据：终端输出+日期）
-
-### F3 · 评测层
-Why: 25% 技术深度分靠它；「带/不带」的实测是评委叙事核心。
-
-- [ ] ISC-7: `evals/evals.json` ≥8 正例 + ≥2 负例，每例含 gold 字段与录屏文件引用
-- [ ] ISC-8: runner 一键跑全量：正例 gold 三字段召回 ≥70%，负例误触 = 0（结果 JSON 落盘）
-- [ ] ISC-9: `benchmark/BENCHMARK.md` 含「带包 vs 裸录屏（P1，若 buffer 不足则降级为带 skill vs 不带 skill 的 agent 表现对比）」两栏实测数据
-
-### F4 · 赛事交付物
-Why: 表单不交，前面全白干。
-
-- [ ] ISC-10: README ≥500 字，含部署说明、技术栈说明、skill 结构说明；`grep -rE '(sk-|api[_-]?key.*=)'` 类密钥扫描 0 命中
-- [ ] ISC-11: 表单全字段提交（仓库 URL / B 站 URL / 征文 URL / 合影），9/29 12:00 前完成
+### F4' · 赛事交付（继承）
+- [ ] ISC-23: README ≥500 字（部署/技术栈/转化说明/透明引用/排雷清单）
+- [ ] ISC-24: 表单全字段 9/29 12:00 前提交
+- [ ] ISC-25: B 站视频 + 征文 URL 就绪
 
 ## Anti-claims
 
