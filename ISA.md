@@ -138,11 +138,14 @@ D2（2026-09-23，均真跑）：
 - 红队（安装器自己抓的）：SKILL.md description 含裸冒号→YAML 解析失败，加双引号后过——D3 当天必踩的雷提前爆了
 - 自包含验证：skill 整目录拷至陌生路径 `/tmp/dgx/standalone` → `run.sh --validate` VALID；正例 `PACK:/tmp/dgx/pack-e2e2`；负例 `NO_BUG_FOUND`（不依赖仓内 tools/）
 
+- **D13 SDD 对齐补课（2026-09-24 深夜）**：owner 要求对照 mattpocock 流程盘点并留队友修理余量。诚实结论：to-spec/to-tickets 已合规，**TDD 红绿循环未按规范先行**（工具层是测试后补）。补偿决策：①tests/test_tools.py 建立（7 回归锁含上游 bug 修复回归）②三个已知缺陷以 xfail 挂为「修理位」+ BOARD Bug 队列（BUG-1/2/3，判据=测试变绿）——测试即工单，队友零上下文接手 ③code-review 定档 9/26 冻结前必跑（两轴）④CONTEXT.md 升 v2。判断留痕理由：TDD 偏差是真实发生的过程事实，记录比粉饰有价值（征文素材）。
+
 ## Verification（v2）
 
 N3（2026-09-24 晚，均真跑）：
 - ISC-12: `tools.py gap --sku 13001 --location "San Francisco" --weeks 12` 两个独立进程 diff 一致（DETERMINISM PASS）；shipping 双进程一致；7 工具全冒烟（gap/inventory/suppliers/forecast/shipping/chart/kb）；**修复上游三 bug**：hash 不稳定×2（crc32）、solver f-string 致库存恒 0（参数化查询）；domain 发现：第 1 周需求恒 200 → 负例=短周期问句（evidence/n3-smoke.txt）
 - ISC-13: `npx skills add ./skills/supply-chain-control-tower --yes` → Done；`npx skills list` 可见（evidence/n3-smoke.txt）
+- 测试基线（D13）: `python3 -m pytest tests/test_tools.py` → **7 passed, 3 xfailed**（修理位 BUG-1/2/3 挂牌，基线锁）
 
 ## Remaining Work
 

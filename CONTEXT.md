@@ -1,16 +1,21 @@
-# CONTEXT · repro-pack 领域语言
+# CONTEXT · repro-pack 领域语言（v2 · 控制塔时期）
 
-> 让 agent 和人用同一套词。新术语进 ISA 的 Language 节。
+> 让 agent 和人用同一套词。v1（repro-pack 时期）术语已归档到文末。
 
 | 术语 | 含义 | 排除 |
 |---|---|---|
-| **复现包（repro pack）** | 录屏经主脑理解后装配出的 agent 可消费证据包：bugcard + 关键帧 + repro 骨架 | 不是给人读的报告；不是裸录屏转发 |
-| **bug 卡（bugcard）** | 包内的结构化 JSON：类型/位置/严重度/错误原文/复现步骤 | 不是自由文本描述 |
-| **接入优先** | owner 的第一性判断：能给人（agent）机器访问就别让人看描述 | 不等于「录屏已死」 |
-| **证物层** | 给不了接入时，录屏/截图作为唯一目击证据的角色 | 不承担修复职责 |
-| **换脑三值** | base_url / model / api_key——切主脑只改这三个环境变量 | 不含改代码 |
-| **负例** | 无 bug 录屏：正确行为是不产包、末行 `NO_BUG_FOUND` | 不是「包质量低」的任务 |
-| **零误触** | 全部负例都不产包的硬性指标，P0 阈值 = 0 | 不接受「误触率低」 |
-| **冻结点** | 9/26 晚 v0.1.0：之后只修 bug 不加功能 | 不是停止工作 |
-| **接单 agent** | 消费复现包进行修复的下游 agent（演示中的修复闭环） | 不需要真人介入 |
-| **双模型对照** | 同一段录屏分别喂 3.7 Flash 与 step-5-preview，三维（质量/延迟/成本）定主备 | 不是跑分排行榜 |
+| **架构反转** | 上游让 LLM 在应用内写代码（PAL）；我们让宿主 agent 当 planner/coder/critic，skill 只给工具+知识+契约，**skill 本体零 LLM** | 不是把上游代码包一层 |
+| **控制塔 skill** | supply-chain-control-tower：自然语言运营问句 → 工具链查证 → 结构化补货决策 | 不是聊天机器人 |
+| **缺口（gap）** | `stock = 库存 - N 周预测需求`；负=短缺需补，正=充足不补 | 不是增长率 |
+| **决策 JSON** | 正例输出契约八字段（decision/order_qty/supplier/unit_cost/shipping_cost/total_cost/rationale/tool_trace） | 自由文本散文=违约 |
+| **NO_REORDER** | 负例末行契约：`NO_REORDER:<正gap>`，禁止任何补货建议 | 「建议少量备货」也算误触 |
+| **金答案直算** | evals 的 gold 由 tools.py 绕过 LLM 直接计算——数学唯一，不许手填 | 人工标注数字 |
+| **四象限** | {裸 agent, +skill} × {3.7-flash, 本地 Nemotron} 的 BENCHMARK 矩阵 | 不是排行榜 |
+| **修理位（xfail）** | tests/ 里挂 xfail 的已知缺陷测试——修好自动变绿，测试即工单 | 不是失败 |
+| **换脑三值** | base_url/model/api_key——切主脑只改三个环境变量（继承 v1） | 不含改代码 |
+| **负例零误触** | 负例必须 NO_REORDER，误触一次即 P0 失败（继承 v1） | 不接受「误触率低」 |
+| **冻结点** | 9/26 晚 v0.1.0：之后只修不加（继承 v1） | 不是停止工作 |
+
+## 归档（v1 · repro-pack 时期，释文见 git 历史）
+
+复现包 / bug 卡 / bugcard / 接入优先 / 证物层 / PACK 契约 / 双模型对照
