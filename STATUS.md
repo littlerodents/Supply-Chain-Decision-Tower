@@ -2,7 +2,7 @@
 
 > 台账主体是 ISA.md（决策/验证都在那）。这里只回答：现在在哪、卡在谁身上。
 
-- **阶段**：D1 完成（机制+主脑定案）；今日 D2：O 线 T5 skill 触发工程，T 线 T2 任务集
+- **阶段**：Round 2 grilling 结案——四候选档案已入册，推荐①（控制塔），待团队对齐锁题；对齐材料=docs/PROJECT-BRIEF.md
 - **进度**：ISC 3/11（1 正例产包 / 2 validate 契约 / 4 负例零误触）
 - **仓库**：`github.com/littlerodents/repro-pack`（PRIVATE，已推 main）
 - **更新**：2026-09-23 深夜（iteration 1）
