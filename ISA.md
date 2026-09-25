@@ -2,7 +2,7 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 7/14
+progress: 10/14
 started: 2026-09-22T15:30:00Z
 updated: 2026-09-24T15:30:00Z
 iteration: 2
@@ -89,9 +89,9 @@ Why: 技术深度 25% 的踩分点；Tier-3 哲学的社区化实践。
 
 ### F3' · 部署与演示
 Why: 平台适配 15%（R1 承重墙）+ 演示 10%。
-- [ ] ISC-20: OpenClaw@Spark skills list eligible + 真实问句演示证据
-- [ ] ISC-21: 换脑素材：同一问句 3.7-flash 与本地 120B 各一次输出存证
-- [ ] ISC-22: Streamlit 塔台跑通 或 R2 降级触发记录（二选一关闭）
+- [x] ISC-20: OpenClaw@Spark skills list eligible + 真实问句演示证据
+- [x] ISC-21: 换脑素材：同一问句 3.7-flash 与本地 120B 各一次输出存证
+- [x] ISC-22: 自建零 LLM 证据面板跑通（:8501 HTTP 200）；上游原版因 Gemini key 不可得按 R2 记录替代
 
 ### F4' · 赛事交付（继承）
 - [ ] ISC-23: README ≥500 字（部署/技术栈/转化说明/透明引用/排雷清单）
@@ -151,6 +151,12 @@ N3（2026-09-24 晚，均真跑）：
 - ISC-18: `run_evals.py` 实测——**stepfun/skill 12/12（100%）**，负例 3/3 零误触，无关问句零工具；**stepfun/bare 2/12（16.7%）**——带/无 skill 差距 83pp，Tier-3 叙事实证（evidence/evals/results-*.json）
 - nemotron 双象限：租机本地后台执行中（隧道大载荷断连的规避；此腿零凭证暴露）
 - 四象限收割（2026-09-25）：bare 2/12 ×2，skill 12/12 ×2（nemotron 延迟中位 97s vs 3.7 6.6s）；负例零误触全线；**触发≠遵守的修复**：无硬规则版 3.7+skill 波动 10-11/12（裸答模式）→ SKILL.md 硬规则版 12/12；BENCHMARK.md 成文（evidence/evals/summary.json + results-*.json）；nemotron 硬规则版确认轮后台中（eval2.flag）
+
+## Verification（N5 · 2026-09-25，均真跑，证据 evidence/d3/）
+
+- ISC-20: skills list ready + eligible=1；gateway 真问句三轮（发现→取证 3268×Nature Source→八字段 JSON，agent-out3.json）；gateway 环境变量排障记录在案
+- ISC-21: brainswap-stepfun.md（19.2s/3 工具）+ brainswap-nemotron.md（201.9s/6 工具）——同题同对，速度差 10 倍
+- ISC-22: panel :8501 HTTP 200（45 分钟建成，未触止损）；nemotron run3 R8=11/12 入 evidence
 
 ## Remaining Work
 
