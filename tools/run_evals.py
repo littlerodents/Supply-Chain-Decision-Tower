@@ -31,7 +31,7 @@ BRAINS = {
                 "step-3.7-flash", os.environ.get("REPRO_API_KEY", "")),
     "nemotron": ("http://127.0.0.1:11434/v1", "nemotron-3-super:120b-a12b", "ollama"),
 }
-MAX_ROUNDS = 5
+MAX_ROUNDS = 8
 DANGEROUS = ("rm ", "sudo", "curl", "wget", ">>", "&&", "||", ";", "|", "`", "$(")
 
 BARE_SYS = "你是供应链运营助手。用中文直接回答用户问题。"
