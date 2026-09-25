@@ -2,7 +2,7 @@
 task: "repro-pack 赛题交付"
 slug: 20260922-dgx-hackathon-repro-pack
 phase: in-progress
-progress: 10/14
+progress: 11/14
 started: 2026-09-22T15:30:00Z
 updated: 2026-09-24T15:30:00Z
 iteration: 2
@@ -94,7 +94,7 @@ Why: 平台适配 15%（R1 承重墙）+ 演示 10%。
 - [x] ISC-22: 自建零 LLM 证据面板跑通（:8501 HTTP 200）；上游原版因 Gemini key 不可得按 R2 记录替代
 
 ### F4' · 赛事交付（继承）
-- [ ] ISC-23: README ≥500 字（部署/技术栈/转化说明/透明引用/排雷清单）
+- [x] ISC-23: README ≥500 字（部署/技术栈/转化说明/透明引用/排雷清单）
 - [ ] ISC-24: 表单全字段 9/29 12:00 前提交
 - [ ] ISC-25: B 站视频 + 征文 URL 就绪
 
@@ -157,6 +157,10 @@ N3（2026-09-24 晚，均真跑）：
 - ISC-20: skills list ready + eligible=1；gateway 真问句三轮（发现→取证 3268×Nature Source→八字段 JSON，agent-out3.json）；gateway 环境变量排障记录在案
 - ISC-21: brainswap-stepfun.md（19.2s/3 工具）+ brainswap-nemotron.md（201.9s/6 工具）——同题同对，速度差 10 倍
 - ISC-22: panel :8501 HTTP 200（45 分钟建成，未触止损）；nemotron run3 R8=11/12 入 evidence
+
+## Verification（材料日 · 2026-09-25）
+
+- ISC-23: README 全文成稿——汉字 1211 字（>500），四节结构/透明引用/排雷清单/skill md 链接/本地算力/NVIDIA+StepFun/BENCHMARK 数字 八项自检全过；同批产出 VIDEO-SCRIPT.md（7 分镜含素材指针与 B站发布要素）+ ESSAY-SKELETON.md（D0-D7 八节每节带仓内素材指针）
 
 ## Remaining Work
 
