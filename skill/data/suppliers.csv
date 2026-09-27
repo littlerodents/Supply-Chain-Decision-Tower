@@ -1,0 +1,76 @@
+sku,supplier,location,unit_cost
+11001,Coffee Wholesale USA,San Francisco,21.90
+12001,Coffee Wholesale USA,Seattle,23.90
+12001,Nature Source Coffee,Seattle,31.90
+13001,Nature Source Coffee,Seattle,34.50
+14001,Budget Beans Co.,Los Angeles,15.50
+14001,Golden Gate Roasters,San Francisco,19.90
+16001,Pacific Roast Trading,Seattle,24.50
+16001,Rose City Coffee,Portland,25.90
+16001,Cascade Coffee Co.,Chicago,24.90
+21001,Kenya Blenders #1,Portland,31.68
+21002,Guatemala Roastery #2,Portland,26.13
+21003,Sumatra Coffee Co. #3,San Francisco,32.21
+21004,Costa Imports #4,San Francisco,13.63
+21004,Blue Roastery #5,Chicago,17.38
+21004,Mocha Imports #6,Portland,19.24
+21005,Espresso Coffee Co. #7,Los Angeles,31.09
+21005,Midnight Roastery #8,Chicago,34.00
+21005,Morning Roastery #9,San Francisco,34.33
+21006,Pacific Trading #10,Los Angeles,17.90
+21007,Sunrise Coffee Co. #11,San Francisco,28.62
+21008,Hazelnut Roastery #12,Portland,30.43
+21009,Vanilla Blenders #13,Los Angeles,38.19
+21009,Caramel Blenders #14,San Francisco,37.18
+21009,Cinnamon Blenders #15,Chicago,37.92
+21010,Peppermint Beans #16,Los Angeles,31.62
+21010,Pumpkin Coffee Co. #17,Chicago,29.48
+21011,Maple Blenders #18,Portland,29.06
+21012,Coconut Imports #19,Chicago,26.70
+21013,Alpine Trading #20,Los Angeles,32.45
+21014,Desert Imports #21,San Francisco,40.38
+21014,Harbor Blenders #22,Los Angeles,40.98
+21014,Golden Blenders #23,Portland,38.52
+21015,Emerald Trading #24,Los Angeles,18.19
+21015,Cascade Coffee Co. #25,Portland,15.43
+21016,Redwood Beans #26,Portland,17.08
+21017,Sierra Blenders #27,Portland,36.29
+21018,Coastal Imports #28,Los Angeles,24.51
+21019,Valley Coffee Co. #29,Los Angeles,29.04
+21019,Autumn Blenders #30,San Francisco,28.15
+21020,Winter Imports #31,San Francisco,18.71
+21020,Spring Imports #32,Los Angeles,21.21
+21020,Summer Coffee Co. #33,Chicago,22.98
+21021,Autumn Trading #34,San Francisco,29.82
+21022,Winter Blenders #35,San Francisco,30.16
+21023,Velvet Roastery #36,Los Angeles,33.21
+21024,Copper Roastery #37,Portland,19.19
+21024,Silver Imports #38,Chicago,22.46
+21024,Bronze Blenders #39,San Francisco,21.08
+21025,Ivory Roastery #40,Chicago,29.01
+21025,Jade Roastery #41,Portland,26.21
+21026,Amber Blenders #42,Chicago,20.85
+21027,Onyx Imports #43,San Francisco,27.90
+21028,Pearl Imports #44,Chicago,26.07
+21029,Coral Coffee Co. #45,Portland,30.98
+21029,Sapphire Imports #46,San Francisco,29.90
+21030,Titanium Trading #47,Los Angeles,31.33
+21030,Ethiopian Blenders #48,Portland,31.65
+21030,Kenya Beans #49,San Francisco,32.65
+21031,Guatemala Coffee Co. #50,San Francisco,15.76
+21032,Sumatra Coffee Co. #51,Portland,22.87
+21033,Costa Imports #52,San Francisco,30.03
+21034,Blue Coffee Co. #53,Los Angeles,38.32
+21034,Mocha Imports #54,San Francisco,36.44
+21035,Espresso Trading #55,Chicago,17.91
+21035,Midnight Trading #56,Portland,16.40
+21035,Morning Blenders #57,San Francisco,19.30
+21036,Pacific Roastery #58,Chicago,27.46
+21037,Sunrise Coffee Co. #59,Los Angeles,27.98
+21038,Hazelnut Roastery #60,Los Angeles,35.58
+21039,Vanilla Imports #61,Los Angeles,36.85
+21039,Caramel Coffee Co. #62,Chicago,38.22
+21040,Cinnamon Beans #63,Portland,33.63
+21040,Peppermint Blenders #64,Los Angeles,39.40
+21041,Pumpkin Roastery #65,San Francisco,23.18
+21042,Maple Coffee Co. #66,Chicago,22.39

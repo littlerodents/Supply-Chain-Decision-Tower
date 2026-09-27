@@ -1,0 +1,65 @@
+sku,brand,location,quantity
+11001,House Blend,San Francisco,250
+12001,Italian Roast,Portland,340
+12001,Italian Roast,Seattle,100
+13001,Colombian Coffee,Seattle,300
+13001,Colombian Coffee,San Francisco,30
+14001,Breakfast Blend,San Francisco,40
+15001,Decaf Espresso,Seattle,260
+16001,French Roast,Portland,85
+21001,Ethiopian Yirgacheffe,San Francisco,227
+21001,Ethiopian Yirgacheffe,Portland,75
+21002,Kenya AA,San Francisco,5868
+21002,Kenya AA,Portland,6128
+21003,Guatemala Antigua,San Francisco,5244
+21003,Guatemala Antigua,Portland,6466
+21004,Sumatra Mandheling,Portland,87
+21004,Sumatra Mandheling,San Francisco,67
+21005,Costa Rica Tarrazu,Portland,4520
+21006,Blue Mountain Blend,Portland,6465
+21007,Mocha Java,Portland,139
+21008,Espresso Forte,San Francisco,5776
+21008,Espresso Forte,Portland,5168
+21009,Midnight Roast,San Francisco,7698
+21010,Morning Fog,San Francisco,62
+21011,Pacific Bold,Portland,7889
+21011,Pacific Bold,San Francisco,8281
+21012,Sunrise citrus Roast,San Francisco,6092
+21013,Hazelnut Cream,San Francisco,197
+21014,Vanilla Velvet,Portland,4999
+21015,Caramel Crunch,San Francisco,6574
+21015,Caramel Crunch,Portland,5771
+21016,Cinnamon Spice,San Francisco,184
+21016,Cinnamon Spice,Portland,206
+21017,Peppermint Mocha,San Francisco,7776
+21017,Peppermint Mocha,Portland,8101
+21018,Pumpkin Harvest,San Francisco,5979
+21018,Pumpkin Harvest,Portland,6904
+21019,Maple Pecan,San Francisco,78
+21020,Coconut Breeze,San Francisco,3792
+21020,Coconut Breeze,Portland,3696
+21021,Alpine Frost,Portland,4489
+21022,Desert Bloom,Portland,106
+21023,Harbor Lights,San Francisco,5168
+21024,Golden Gate Roast,San Francisco,6296
+21025,Emerald City,San Francisco,259
+21025,Emerald City,Portland,237
+21026,Cascade Dawn,Portland,7517
+21027,Redwood Reserve,Portland,6266
+21027,Redwood Reserve,San Francisco,6378
+21028,Sierra High,Portland,16
+21029,Coastal Mist,San Francisco,6412
+21030,Valley Gold,San Francisco,6873
+21031,Autumn Ember,San Francisco,2
+21032,Winter Warmth,Portland,7539
+21032,Winter Warmth,San Francisco,7367
+21033,Spring Bloom,Portland,7100
+21034,Summer Solstice,San Francisco,280
+21035,Autumn Leaves,Portland,5904
+21036,Winter Spice,San Francisco,8583
+21037,Velvet Evening,San Francisco,142
+21038,Copper Kettle,San Francisco,5462
+21039,Silver Skillet,San Francisco,6118
+21040,Bronze Brew,San Francisco,171
+21041,Ivory Cream,Portland,5821
+21042,Jade Leaf,San Francisco,4230

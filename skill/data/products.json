@@ -1,0 +1,293 @@
+{
+    "_comment": "This document describes products and their properties.",
+    "products": [
+        {
+            "sku": 11001,
+            "brand": "House Blend",
+            "name": "Medium Roast Ground Coffee",
+            "description": "Crafted in the AllDay tradition, House Blend Medium Roast Coffee is rich and never-bitter\nComplex, medium-bodied ground coffee with caramel undertones and bright aromatic flavor\nMade with 100% Arabica coffee beans"
+        },
+        {
+            "sku": 12001,
+            "brand": "Italian Roast",
+            "name": "Espresso Italiano",
+            "description": "Our Italian Roast Espresso Coffee is a Delicious Dark Roast with Tangy Red Fruit Undertones. Made from 100% Arabica Coffee Beans.\nAvailable in Whole Bean or Pre-Ground as 16 oz, 2 lb and 5 lb bags. \nAn Exclusive Artisanal Blend of Our Single-Origin Coffees.\nIn Order to Reduce Our Carbon Footprint, All Our Coffees are roasted in our Environmentally Friendly Roaster.\nProudly Roasted, Blended, and Packaged in the USA."
+        },
+        {
+            "sku": 13001,
+            "brand": "Colombian Coffee",
+            "name": "Colombian Fresh Roasted",
+            "description": "Balanced, full-bodied medium roast with a smooth finish\n100% Arabica coffee grown in Colombia\nRoasted and packed in the U.S.A."
+        },
+        {
+            "sku": 14001,
+            "brand": "Breakfast Blend",
+            "name": "Light Roast Ground Coffee",
+            "description": "Bright and smooth morning blend with citrus notes\n100% Arabica coffee beans\nRoasted and packed in the U.S.A."
+        },
+        {
+            "sku": 15001,
+            "brand": "Decaf Espresso",
+            "name": "Swiss Water Decaf Espresso",
+            "description": "All the flavor, none of the caffeine\nSwiss Water Process decaffeinated espresso roast\n100% Arabica coffee beans"
+        },
+        {
+            "sku": 16001,
+            "brand": "French Roast",
+            "name": "Dark Roast Whole Bean Coffee",
+            "description": "Bold and smoky French roast with a heavy body\nSingle-origin dark roast, whole bean\nRoasted and packed in the U.S.A."
+        },
+        {
+            "sku": 21001,
+            "brand": "Ethiopian Yirgacheffe",
+            "name": "Ethiopian Yirgacheffe Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21002,
+            "brand": "Kenya AA",
+            "name": "Kenya AA Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21003,
+            "brand": "Guatemala Antigua",
+            "name": "Guatemala Antigua Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21004,
+            "brand": "Sumatra Mandheling",
+            "name": "Sumatra Mandheling Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21005,
+            "brand": "Costa Rica Tarrazu",
+            "name": "Costa Rica Tarrazu Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21006,
+            "brand": "Blue Mountain Blend",
+            "name": "Blue Mountain Blend Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21007,
+            "brand": "Mocha Java",
+            "name": "Mocha Java Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21008,
+            "brand": "Espresso Forte",
+            "name": "Espresso Forte Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21009,
+            "brand": "Midnight Roast",
+            "name": "Midnight Roast Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21010,
+            "brand": "Morning Fog",
+            "name": "Morning Fog Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21011,
+            "brand": "Pacific Bold",
+            "name": "Pacific Bold Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21012,
+            "brand": "Sunrise citrus Roast",
+            "name": "Sunrise citrus Roast Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21013,
+            "brand": "Hazelnut Cream",
+            "name": "Hazelnut Cream Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21014,
+            "brand": "Vanilla Velvet",
+            "name": "Vanilla Velvet Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21015,
+            "brand": "Caramel Crunch",
+            "name": "Caramel Crunch Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21016,
+            "brand": "Cinnamon Spice",
+            "name": "Cinnamon Spice Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21017,
+            "brand": "Peppermint Mocha",
+            "name": "Peppermint Mocha Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21018,
+            "brand": "Pumpkin Harvest",
+            "name": "Pumpkin Harvest Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21019,
+            "brand": "Maple Pecan",
+            "name": "Maple Pecan Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21020,
+            "brand": "Coconut Breeze",
+            "name": "Coconut Breeze Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21021,
+            "brand": "Alpine Frost",
+            "name": "Alpine Frost Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21022,
+            "brand": "Desert Bloom",
+            "name": "Desert Bloom Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21023,
+            "brand": "Harbor Lights",
+            "name": "Harbor Lights Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21024,
+            "brand": "Golden Gate Roast",
+            "name": "Golden Gate Roast Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21025,
+            "brand": "Emerald City",
+            "name": "Emerald City Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21026,
+            "brand": "Cascade Dawn",
+            "name": "Cascade Dawn Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21027,
+            "brand": "Redwood Reserve",
+            "name": "Redwood Reserve Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21028,
+            "brand": "Sierra High",
+            "name": "Sierra High Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21029,
+            "brand": "Coastal Mist",
+            "name": "Coastal Mist Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21030,
+            "brand": "Valley Gold",
+            "name": "Valley Gold Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21031,
+            "brand": "Autumn Ember",
+            "name": "Autumn Ember Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21032,
+            "brand": "Winter Warmth",
+            "name": "Winter Warmth Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21033,
+            "brand": "Spring Bloom",
+            "name": "Spring Bloom Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21034,
+            "brand": "Summer Solstice",
+            "name": "Summer Solstice Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21035,
+            "brand": "Autumn Leaves",
+            "name": "Autumn Leaves Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21036,
+            "brand": "Winter Spice",
+            "name": "Winter Spice Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21037,
+            "brand": "Velvet Evening",
+            "name": "Velvet Evening Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21038,
+            "brand": "Copper Kettle",
+            "name": "Copper Kettle Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21039,
+            "brand": "Silver Skillet",
+            "name": "Silver Skillet Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21040,
+            "brand": "Bronze Brew",
+            "name": "Bronze Brew Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21041,
+            "brand": "Ivory Cream",
+            "name": "Ivory Cream Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        },
+        {
+            "sku": 21042,
+            "brand": "Jade Leaf",
+            "name": "Jade Leaf Coffee",
+            "description": "Portfolio line for control-tower batch scan demo."
+        }
+    ]
+}

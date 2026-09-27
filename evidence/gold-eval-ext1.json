@@ -1,0 +1,296 @@
+{
+ "run_tag": "ext1",
+ "ts": "2026-09-27 15:11:47",
+ "pass": 16,
+ "total": 16,
+ "tasks": [
+  {
+   "id": "pos-dec-001",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "```json\n{\"decision\":\"REORDER\",\"sku\":13001,\"location\":\"San Francisco\",\"weeks\":12,\"order_qty\":3268,\"supplier\":\"Nature Source Coffee\",\"unit_cost\":34.5,\"shipping_cost\":2.0,\"total_cost\":119282.0,\"rationale\":\"未来12周预测需求3298，现库30，缺3268；唯一供应商 Seattle，单价34.5+运费2.0\",\"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 7,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 26.7,
+   "tokens": 300714,
+   "sid": "pi-dgx-eval27-pos-dec-001-ext1"
+  },
+  {
+   "id": "pos-dec-002",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "需要补货。Portland 仓 12001 现库 340，12 周预测需求 2927，缺口 2587。同 SKU 双供应商均在 Seattle，运费同为 1.0；总单价最低的是 Coffee Wholesale USA（23.9+1.0=24.9），建议按缺口 2587 下单。\n\n```json\n{\"decision\":\"REORDER\",\"sku\":12001,\"location\":\"Portland\",\"weeks\":12,\"order_qty\":2587,\"supplier\":\"Coffee Wholesale USA\",\"unit_cost\":23.9,\"shipping_cost\":1.0,\"total_cost\":64416.3,\"rationale\":\"未来12周预测需求2927，现库340，缺2587；Seattle->Portland运费1.0；Coffee Wholesale USA总单价24.9低于Nature Source Coffee的32.9\",\"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 8,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 22.2,
+   "tokens": 264565,
+   "sid": "pi-dgx-eval27-pos-dec-002-ext1"
+  },
+  {
+   "id": "pos-dec-003",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "```json\n{\"decision\":\"REORDER\",\"sku\":12001,\"location\":\"Seattle\",\"weeks\":8,\n \"order_qty\":1790,\"supplier\":\"Coffee Wholesale USA\",\"unit_cost\":23.9,\n \"shipping_cost\":2.0,\"total_cost\":46361.0,\n \"rationale\":\"未来8周预测需求1890，现库100，缺1790；Seattle本地双供应商中Coffee Wholesale USA总单价最低（23.9+2.0）\",\n \"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 6,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 18.4,
+   "tokens": 261276,
+   "sid": "pi-dgx-eval27-pos-dec-003-ext1"
+  },
+  {
+   "id": "pos-dec-004",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "```json\n{\"decision\":\"REORDER\",\"sku\":11001,\"location\":\"San Francisco\",\"weeks\":10,\n \"order_qty\":1941,\"supplier\":\"Coffee Wholesale USA\",\"unit_cost\":21.9,\n \"shipping_cost\":2.0,\"total_cost\":46389.9,\n \"rationale\":\"未来10周预测需求2191，现库250，缺1941；唯一供应商 San Francisco，单价21.9+运费2.0\",\n \"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 13,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 33.5,
+   "tokens": 455459,
+   "sid": "pi-dgx-eval27-pos-dec-004-ext1"
+  },
+  {
+   "id": "pos-qry-001",
+   "kind": "query",
+   "pass": true,
+   "reason": "金答案 6 个数字全部命中且零工具失败",
+   "reply": "Seattle 仓库当前库存如下：\n\n| SKU | 品牌 | 数量 |\n|-----|------|------|\n| 12001 | Italian Roast | 100 |\n| 13001 | Colombian Coffee | 300 |\n| 15001 | Decaf Espresso | 260 |\n\n需要我再帮你算某款未来几周的缺口，或者查其他仓库吗？",
+   "tools": {
+    "calls": 2,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 8.3,
+   "tokens": 108995,
+   "sid": "pi-dgx-eval27-pos-qry-001-ext1"
+  },
+  {
+   "id": "pos-qry-002",
+   "kind": "query",
+   "pass": true,
+   "reason": "金答案 3 个数字全部命中且零工具失败",
+   "reply": "SKU **12001** 可选供应商按单价从低到高：\n\n1. **Coffee Wholesale USA** — Seattle — 单价 **23.9**\n2. **Nature Source Coffee** — Seattle — 单价 **31.9**\n\n如果你还需要我基于某个仓库和周期，进一步帮你算缺口和补货方案，直接告诉我就行。",
+   "tools": {
+    "calls": 2,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 8.0,
+   "tokens": 108961,
+   "sid": "pi-dgx-eval27-pos-qry-002-ext1"
+  },
+  {
+   "id": "pos-qry-003",
+   "kind": "query",
+   "pass": true,
+   "reason": "金答案 8 个数字全部命中且零工具失败",
+   "reply": "House Blend（SKU 11001）未来 8 周周需求如下，来自 `forecast` 工具：\n\n| 周次 | 起始日期 | 需求 |\n|------|----------|------|\n| 1 | 2026-09-28 | 200 |\n| 2 | 2026-10-05 | 205 |\n| 3 | 2026-10-12 | 211 |\n| 4 | 2026-10-19 | 216 |\n| 5 | 2026-10-26 | 221 |\n| 6 | 2026-11-02 | 224 |\n| 7 | 2026-11-09 | 227 |\n| 8 | 2026-11-16 | 229 |\n\n注：预测按 SKU 固定公式生成，location 不影响结果。",
+   "tools": {
+    "calls": 3,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 12.8,
+   "tokens": 147764,
+   "sid": "pi-dgx-eval27-pos-qry-003-ext1"
+  },
+  {
+   "id": "pos-qry-004",
+   "kind": "query",
+   "pass": true,
+   "reason": "金答案 1 个数字全部命中且零工具失败",
+   "reply": "从 Seattle 发货到 San Francisco 的每件运费是 **2.0 美元**。",
+   "tools": {
+    "calls": 2,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 7.6,
+   "tokens": 108835,
+   "sid": "pi-dgx-eval27-pos-qry-004-ext1"
+  },
+  {
+   "id": "neg-stk-001",
+   "kind": "negative",
+   "pass": true,
+   "reason": "末行纯文本 NO_REORDER:100，无补货建议字段（元数据块：无）",
+   "reply": "NO_REORDER:100",
+   "tools": {
+    "calls": 3,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 10.0,
+   "tokens": 147322,
+   "sid": "pi-dgx-eval27-neg-stk-001-ext1"
+  },
+  {
+   "id": "neg-stk-002",
+   "kind": "negative",
+   "pass": true,
+   "reason": "末行纯文本 NO_REORDER:140，无补货建议字段（元数据块：无）",
+   "reply": "NO_REORDER:140",
+   "tools": {
+    "calls": 5,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 15.9,
+   "tokens": 223727,
+   "sid": "pi-dgx-eval27-neg-stk-002-ext1"
+  },
+  {
+   "id": "neg-stk-003",
+   "kind": "negative",
+   "pass": true,
+   "reason": "末行纯文本 NO_REORDER:50，无补货建议字段（元数据块：无）",
+   "reply": "NO_REORDER:50",
+   "tools": {
+    "calls": 3,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 13.1,
+   "tokens": 147764,
+   "sid": "pi-dgx-eval27-neg-stk-003-ext1"
+  },
+  {
+   "id": "neg-irr-001",
+   "kind": "irrelevant",
+   "pass": true,
+   "reason": "未触发供应链决策输出",
+   "reply": "根据刚才抓到的实时数据，旧金山现在是：\n\n- 天气：阴天，云量 100%\n- 当前温度：14°C，体感约 12°C\n- 湿度：86%\n- 风：西南偏西风，风速约 15 km/h\n- 能见度：10 km\n- 降水：0 mm\n- 气压：1013 hPa\n- UV 指数：0\n\n一句话：典型的旧金山凉夏早晨，阴、湿、风不大，出门建议带件外套。",
+   "tools": {
+    "calls": 2,
+    "tools": [
+     "read",
+     "web_fetch"
+    ],
+    "failures": 1
+   },
+   "latency": 16.7,
+   "tokens": 107772,
+   "sid": "pi-dgx-eval27-neg-irr-001-ext1"
+  },
+  {
+   "id": "pos-dec-005",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "```json\n{\"decision\":\"REORDER\",\"sku\":14001,\"location\":\"San Francisco\",\"weeks\":12,\n \"order_qty\":3518,\"supplier\":\"Golden Gate Roasters\",\"unit_cost\":19.9,\n \"shipping_cost\":2.0,\"total_cost\":77044.2,\n \"rationale\":\"未来12周预测需求3558，现库40，缺3518；Golden Gate Roasters 同城总单价 21.9，低于 Budget Beans Co. 的 22.5\",\n \"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 8,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 22.0,
+   "tokens": 263486,
+   "sid": "pi-dgx-eval27-pos-dec-005-ext1"
+  },
+  {
+   "id": "pos-dec-006",
+   "kind": "decision",
+   "pass": true,
+   "reason": "八字段与金答案一致",
+   "reply": "```json\n{\"decision\":\"REORDER\",\"sku\":16001,\"location\":\"Portland\",\"weeks\":8,\n \"order_qty\":1983,\"supplier\":\"Cascade Coffee Co.\",\"unit_cost\":24.9,\n \"shipping_cost\":0.0,\"total_cost\":49376.7,\n \"rationale\":\"未来8周预测需求2068，现库85，缺口1983；Cascade单价24.9+运费0=24.9最低\",\n \"tool_trace\":[\"gap\",\"suppliers\",\"shipping\"]}\n```",
+   "tools": {
+    "calls": 9,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 32.0,
+   "tokens": 377235,
+   "sid": "pi-dgx-eval27-pos-dec-006-ext1"
+  },
+  {
+   "id": "neg-stk-004",
+   "kind": "negative",
+   "pass": true,
+   "reason": "末行纯文本 NO_REORDER:60，无补货建议字段（元数据块：无）",
+   "reply": "NO_REORDER:60",
+   "tools": {
+    "calls": 3,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 9.9,
+   "tokens": 147166,
+   "sid": "pi-dgx-eval27-neg-stk-004-ext1"
+  },
+  {
+   "id": "pos-qry-005",
+   "kind": "query",
+   "pass": true,
+   "reason": "金答案 3 个数字全部命中且零工具失败",
+   "reply": "SKU **14001** 共 2 家可选供应商，按单价由低到高：\n\n| 供应商 | 所在城市 | 单价 |\n|--------|----------|------|\n| Budget Beans Co. | Los Angeles | **$15.50** |\n| Golden Gate Roasters | San Francisco | **$19.90** |\n\n如需把这 2 家供应商运到某个仓库的总价（单价 + 运费）再排序，告诉我要从哪座城市发到哪个仓库，我可以帮你比对。",
+   "tools": {
+    "calls": 2,
+    "tools": [
+     "read",
+     "exec"
+    ],
+    "failures": 0
+   },
+   "latency": 7.9,
+   "tokens": 108908,
+   "sid": "pi-dgx-eval27-pos-qry-005-ext1"
+  }
+ ]
+}
