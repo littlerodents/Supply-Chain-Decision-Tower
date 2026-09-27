@@ -1,0 +1,89 @@
+Generating SQLite file gap_profile.sqlite from gap_profile.nsys-rep
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/nvtx_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain NV Tools Extension (NVTX) data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/osrt_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain OS Runtime trace data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/cuda_api_sum.py]... 
+
+ ** CUDA API Summary (cuda_api_sum):
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)    Med (ns)   Min (ns)   Max (ns)     StdDev (ns)            Name         
+ --------  ---------------  ---------  ------------  ---------  --------  -----------  -------------  ----------------------
+     96.9      187,423,856          3  62,474,618.7  195,856.0   195,648  187,032,352  107,870,161.3  cudaMalloc            
+      3.0        5,887,488          3   1,962,496.0  103,632.0    77,632    5,706,224    3,242,189.6  cudaMemcpy            
+      0.1          120,896          1     120,896.0  120,896.0   120,896      120,896            0.0  cuLibraryLoadData     
+      0.0           64,352          1      64,352.0   64,352.0    64,352       64,352            0.0  cudaLaunchKernel      
+      0.0            1,632          1       1,632.0    1,632.0     1,632        1,632            0.0  cuKernelGetName       
+      0.0              608          1         608.0      608.0       608          608            0.0  cuModuleGetLoadingMode
+      0.0              224          1         224.0      224.0       224          224            0.0  cuLibraryGetKernel    
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/cuda_gpu_kern_sum.py]... 
+
+ ** CUDA GPU Kernel Summary (cuda_gpu_kern_sum):
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                        Name                      
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ------------------------------------------------
+    100.0           43,872          1  43,872.0  43,872.0    43,872    43,872          0.0  gap_kernel(const int *, const int *, int *, int)
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/cuda_gpu_mem_time_sum.py]... 
+
+ ** CUDA GPU MemOps Summary (by Time) (cuda_gpu_mem_time_sum):
+
+ Time (%)  Total Time (ns)  Count   Avg (ns)     Med (ns)    Min (ns)   Max (ns)   StdDev (ns)           Operation          
+ --------  ---------------  -----  -----------  -----------  ---------  ---------  -----------  ----------------------------
+     97.0        4,684,352      1  4,684,352.0  4,684,352.0  4,684,352  4,684,352          0.0  [CUDA memcpy Device-to-Host]
+      3.0          142,976      2     71,488.0     71,488.0     70,144     72,832      1,900.7  [CUDA memcpy Host-to-Device]
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/cuda_gpu_mem_size_sum.py]... 
+
+ ** CUDA GPU MemOps Summary (by Size) (cuda_gpu_mem_size_sum):
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)           Operation          
+ ----------  -----  --------  --------  --------  --------  -----------  ----------------------------
+      8.389      2     4.194     4.194     4.194     4.194        0.000  [CUDA memcpy Host-to-Device]
+      4.194      1     4.194     4.194     4.194     4.194        0.000  [CUDA memcpy Device-to-Host]
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/openmp_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain OpenMP event data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/opengl_khr_range_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain KHR Extension (KHR_DEBUG) data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/opengl_khr_gpu_range_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain GPU KHR Extension (KHR_DEBUG) data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/vulkan_marker_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain Vulkan Debug Extension (Vulkan Debug Util) data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/vulkan_gpu_marker_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain GPU Vulkan Debug Extension (GPU Vulkan Debug markers) data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/dx11_pix_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain DX11 CPU debug markers.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/dx12_gpu_marker_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain DX12 GPU debug markers.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/dx12_pix_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain DX12 CPU debug markers.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/wddm_queue_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain WDDM context data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/um_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/um_total_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/um_cpu_page_faults_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain CUDA Unified Memory CPU page faults data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/openacc_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain OpenACC event data.
+
+Processing [gap_profile.sqlite] with [/opt/nvidia/nsight-systems/2025.3.2/host-linux-armv8/reports/syscall_sum.py]... 
+SKIPPED: gap_profile.sqlite does not contain syscall data.
+
