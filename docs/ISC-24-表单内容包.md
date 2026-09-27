@@ -48,7 +48,7 @@
 
 ## 链接（占位，owner 补）
 
-- 代码仓：〔repo 链接，Mac repro-pack 打包后上传〕
+- 代码仓：https://github.com/littlerodents/repro-pack（main=98a3ccd：Skill 源码+面板+API+MCP+七轮评测证据+CUDA/Nsight 平台证据；**当前为私有仓库**——提交前在 Settings→Danger Zone→Change visibility 改 Public，或表单里邀请评委协作访问）
 - 演示视频：〔B站链接，ISC-25 完成后回填〕
 - 面板截图：〔从 :8501 截 1-2 张〕
 
