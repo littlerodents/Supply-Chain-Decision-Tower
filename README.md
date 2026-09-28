@@ -77,7 +77,7 @@ PASS / FAIL 判定 + 可下载决策单
 python3 skills/supply-chain-control-tower/scripts/daily_scan.py
 
 # MCP 演示（7 工具一键全通）
-python3 mcp_demo.py
+python3 evidence/mcp_demo.py
 
 # 经典算法（安全库存/ROP/EOQ/报童）
 python3 skills/supply-chain-control-tower/scripts/algorithms.py from-forecast --sku 13001 --location "San Francisco" --weeks 12
