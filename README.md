@@ -108,6 +108,12 @@ cd skills/supply-chain-control-tower/panel && python3 -m streamlit run app.py --
 
 > 失败不是浪费，是付费的学习。这份记录就是收据。
 
+## 团队
+
+![团队合照](docs/images/team.jpg)
+
+三个人，一台 DGX Spark，一个会说"不"的智能体。
+
 ## 许可与致谢
 
 Apache-2.0。数据与求解器衍生自 ikatsov/tensor-house `control_center_llm`（移植中修复上游 3 处 bug）。
