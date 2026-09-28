@@ -33,7 +33,7 @@
 - 硬件：NVIDIA DGX Spark（GB10 Grace Blackwell，119GB 统一内存，CUDA 13.0）
 - 智能体框架：OpenClaw（网关 + 会话 + Skill 机制，systemd 常驻）
 - 决策脑：StepFun step-3.7-flash（默认路由）
-- 本地模型：nemotron-3-super:120b-a12b（86GB）、qwen3:30b-a3b（18GB，ollama）
+- 本地模型：nemotron-3-super:120b-a12b（86GB，ollama）——推理由本地模型负责，契约合规由 Python 适配器与确定性审计保证
 - 工具层：Python CLI 工具 7 个（gap/inventory/suppliers/forecast/shipping/chart/kb），SQLite/CSV 数据，全部只读、JSON 输出
 - 前端：Streamlit 控制塔面板（:8501）
 - 上游：衍生自 ikatsov/tensor-house control_center_llm（Apache-2.0），移植中修复上游 3 处 bug
