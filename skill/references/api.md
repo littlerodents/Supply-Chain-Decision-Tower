@@ -8,8 +8,8 @@
 python3 scripts/tools.py gap --sku 13001 --location "San Francisco" --weeks 12
 ```
 
-返回：`current_stock`、`forecast_demand`（N 周合计）、`gap_stock_minus_demand`。
-**判读：gap < 0 = 短缺需补（订量 = -gap）；gap ≥ 0 = 充足不补。**
+返回：`current_stock`、`forecast_demand`（N 周合计）、`gap_stock_minus_demand`（旧参考字段）、`rop_gap`、`safety_stock`、`reorder_point`。
+**判读（ROP 驱动）：`rop_gap > 0` = 库存已跌破再订货点，需补货，订量 = rop_gap + safety_stock；`rop_gap ≤ 0` = 充足不补。`gap_stock_minus_demand` 仅供负例盈余展示（`NO_REORDER:<盈余>`），禁止用 -gap 作订量。**
 
 ## inventory / suppliers —— SQL 查询
 
