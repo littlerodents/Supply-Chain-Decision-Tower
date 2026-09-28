@@ -1,5 +1,7 @@
 # AGENTS.md · repro-pack
 
+> ⚠️ 历史工作区约定（旧 repro-pack 方向，已被 D12 改道废弃；现行约定见 [REBUILD.md](REBUILD.md)）。文内 REPRO_\* 环境变量等属旧架构残留记录。
+
 在本仓库工作的 agent 先读 `CONTEXT.md`（领域语言）与 `SPEC.md`（共识），台账与证据规矩见 `ISA.md`。
 
 ## Agent skills

@@ -274,7 +274,7 @@ class H(BaseHTTPRequestHandler):
         try:
             if p == "/api/health":
                 return self._send(200, {"ok": True, "service": "supply-chain-tower-api", "port": 8765,
-                                        "model": "stepfun/step-3.7-flash（默认路由）",
+                                        "model": "nemotron-3-super:120b-a12b + 适配器（本地主力）/ step-3.7-flash（云端备用）",
                                         "data": {"skus": len(_products), "inventory_rows": len(_inv),
                                                  "supplier_rows": len(_sup)}})
             if p == "/api/catalog":
@@ -286,7 +286,7 @@ class H(BaseHTTPRequestHandler):
                     "products": [{"sku": int(s), "brand": b, "name": _pnames.get(s, "")}
                                  for s, b in sorted(_products.items())],
                     "source": source_info(),
-                    "live": {"ready": True, "model": "step-3.7-flash", "location": "configured",
+                    "live": {"ready": True, "model": "nemotron-3-super:120b-a12b（本地主力）/ step-3.7-flash（云端备用）", "location": "configured",
                              "reason": None}})
             m = re.match(r"^/api/runs/([A-Za-z0-9-]+)$", p)
             if m:

@@ -52,7 +52,7 @@ st.markdown(
     "补货决策 · 工具直算 + 双智能体审计</span></h1>", unsafe_allow_html=True)
 st.markdown(
     f"<p class='muted'>数据读取 {time.strftime('%F %T')} · 8 条库存 / 9 条供应商 / 6 SKU · "
-    "本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）</p>",
+    "本地样本·非实时库存·合成预测 · 推理：本地 Nemotron-120B + 适配器为主 · 云端 StepFun 备用</p>",
     unsafe_allow_html=True)
 
 _spec = importlib.util.spec_from_file_location("tools", os.path.join(BASE, "scripts", "tools.py"))
