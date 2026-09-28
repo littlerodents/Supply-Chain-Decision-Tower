@@ -4,7 +4,7 @@ import json, os, random, re, subprocess, time, importlib.util
 from datetime import datetime, timezone, timedelta
 
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
-MODEL = "ollama/nemotron-3-super:120b-a12b"
+MODEL = "ollama/nemotron-3-super:120b-a12b-t0"  # temperature=0 烤入，与网关默认一致
 ENV = dict(os.environ, PATH=os.path.expanduser("~/node26/bin") + ":" + os.environ.get("PATH", ""))
 BASE = os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
 CST = timezone(timedelta(hours=8))
@@ -26,15 +26,20 @@ def tool_facts(sku, location, weeks):
     else:
         best = None
     gap = g["gap_stock_minus_demand"]
-    return {"gap": gap, "stock": g["current_stock"], "demand": g["forecast_demand"],
-            "order_qty": max(0, -gap), "supplier": best["supplier"] if best is not None else "",
+    rop_gap = g.get("rop_gap")
+    ss = g.get("safety_stock", 0) or 0
+    short = rop_gap is not None and rop_gap > 0
+    order_qty = round(rop_gap + ss, 1) if short else 0
+    return {"gap": gap, "rop_gap": rop_gap, "safety_stock": round(ss, 1), "rop": short,
+            "stock": g["current_stock"], "demand": g["forecast_demand"],
+            "order_qty": order_qty, "supplier": best["supplier"] if best is not None else "",
             "unit_cost": float(best["unit_cost"]) if best is not None else 0,
             "shipping_cost": float(best["ship"]) if best is not None else 0,
-            "total_cost": round(max(0, -gap) * float(best["total"]), 2) if best is not None else 0,
+            "total_cost": round(order_qty * float(best["total"]), 2) if (best is not None and short) else 0,
             "record_exists": g.get("record_exists", True)}
 
 def adapter_decision(tf, sku, loc, weeks, model_text=""):
-    short = tf["gap"] < 0
+    short = tf["rop"]
     return {"decision": "REORDER" if short else "NO_REORDER",
             "sku": sku, "location": loc, "weeks": weeks,
             "order_qty": tf["order_qty"] if short else 0,
@@ -42,7 +47,7 @@ def adapter_decision(tf, sku, loc, weeks, model_text=""):
             "unit_cost": tf["unit_cost"] if short else 0,
             "shipping_cost": tf["shipping_cost"] if short else 0,
             "total_cost": tf["total_cost"] if short else 0,
-            "rationale": model_text[:200] if model_text else "工具直算+适配器",
+            "rationale": model_text[:200] if model_text else "工具直算+适配器（ROP 口径：订量=rop_gap+safety_stock）",
             "tool_trace": ["gap", "suppliers", "shipping"]}
 
 def try_model(sid, msg, timeout=300):
@@ -84,9 +89,9 @@ for sku, loc in valid:
         try:
             tf = tool_facts(sku, loc, w)
             dj = adapter_decision(tf, sku, loc, w)
-            if tf["gap"] < 0:
+            if tf["rop"]:
                 assert dj["decision"] == "REORDER"
-                assert dj["order_qty"] == -tf["gap"]
+                assert dj["order_qty"] == tf["order_qty"]
                 assert abs(dj["total_cost"] - round(dj["order_qty"]*(dj["unit_cost"]+dj["shipping_cost"]),2)) <= 0.01
             else:
                 assert dj["decision"] == "NO_REORDER" and dj["order_qty"] == 0
@@ -106,10 +111,10 @@ for sku, loc, w, label in edges:
         dj = adapter_decision(tf, sku, loc, w)
         if not tf["record_exists"]:
             ok = True; d = "安全处理无记录"
-        elif tf["gap"] >= 0:
+        elif not tf["rop"]:
             ok = dj["decision"]=="NO_REORDER"; d = f"盈余{tf['gap']}→不补"
         else:
-            ok = dj["decision"]=="REORDER" and dj["order_qty"]>0; d = f"缺{-tf['gap']}→补{dj['order_qty']}"
+            ok = dj["decision"]=="REORDER" and dj["order_qty"]>0; d = f"ROP缺口{tf['rop_gap']}→补{dj['order_qty']}"
         check(f"1B:{label}", ok, d)
     except Exception as e:
         check(f"1B:{label}", False, str(e)[:50])
@@ -121,7 +126,7 @@ for sku in flip_skus:
     locs = _inv[_inv.sku==sku].location.unique()
     for loc in locs:
         tf = tool_facts(sku, loc, 12)
-        if tf["gap"] < 0 and tf["supplier"]:
+        if tf["rop"] and tf["supplier"]:
             # 验证选的是总单价最低（不是单价最低）
             rows = _sup[_sup.sku==sku].copy()
             rows["ship"] = [tools.get_shipping_cost(c, loc) for c in rows["location"]]
@@ -172,8 +177,8 @@ for _ in range(50):
         tf = tool_facts(sku, loc, w)
         dj = adapter_decision(tf, sku, loc, w)
         # 内部一致性
-        if tf["gap"] < 0:
-            ok = dj["order_qty"] == -tf["gap"]
+        if tf["rop"]:
+            ok = dj["order_qty"] == tf["order_qty"]
         else:
             ok = dj["decision"] == "NO_REORDER"
         rand_pass += ok
@@ -198,6 +203,7 @@ for i, (sku, loc) in enumerate(rand_combos):
     else:
         tool_used = r["tools"].get("calls", 0) > 0
         correct_reasoning = (str(tf["gap"] if tf["gap"]>=0 else -tf["gap"]) in r["text"]) or \
+                          (str(tf.get("rop_gap")) in r["text"]) or \
                           (str(tf["stock"]) in r["text"]) or \
                           ("不需要" in r["text"] or "补" in r["text"])
         ok = tool_used or correct_reasoning
@@ -223,8 +229,8 @@ r = try_model(f"e2e-{int(time.time())}", Q, timeout=240)
 if r:
     dj["rationale"] = r["text"][:200]
     print(f"  模型: {r['tools'].get('calls')}调/{r['tools'].get('failures')}败")
-check("3A:决策数值", dj["order_qty"]==3268 and abs(dj["total_cost"]-119282.0)<0.01,
-      f"qty={dj['order_qty']} total=${dj['total_cost']:,.2f}")
+check("3A:决策数值", dj["order_qty"]==359.4 and abs(dj["total_cost"]-13118.1)<0.01,
+      f"qty={dj['order_qty']} total=${dj['total_cost']:,.2f}（ROP 口径：rop_gap+safety_stock）")
 
 # 3B: 审计（确定性对比）
 print("\n--- 3B: 审计 ---")
@@ -255,8 +261,8 @@ try:
                     "location":"San Francisco","weeks":12}).encode(),
         {"Content-Type":"application/json"})
     resp = json.loads(urllib.request.urlopen(req, timeout=10).read())
-    api_ok = resp["status"]=="SUCCEEDED" and resp["result"]["decision"]["order_qty"]==3268
-    check("3D:API工具模式", api_ok, f"秒回 qty=3268")
+    api_ok = resp["status"]=="SUCCEEDED" and abs(resp["result"]["decision"]["order_qty"]-359.4)<0.5
+    check("3D:API工具模式", api_ok, f"秒回 qty={resp['result']['decision']['order_qty']}（ROP）")
 except Exception as e:
     check("3D:API工具模式", False, str(e)[:50])
 
@@ -266,9 +272,9 @@ now = datetime.now(CST).strftime("%F %T")
 slip = f"""补货决策单 · {now}
 {'='*40}
 品类：13001 @ San Francisco · 12 周
-决策：REORDER · 订量 3268
-供应商：Nature Source Coffee（$34.50 + $2.00）
-总成本：$119,282.00
+决策：REORDER · 订量 {dj['order_qty']}（rop_gap {tf['rop_gap']} + 安全库存 {tf['safety_stock']}）
+供应商：{dj['supplier']}（${dj['unit_cost']:.2f} + ${dj['shipping_cost']:.2f}）
+总成本：${dj['total_cost']:,.2f}
 {'-'*40}
 独立核算（确定性工具复算）：{'PASS' if audit_pass else 'FAIL'}
 推理来源：Nemotron-120B（本地）+ Python 适配器
