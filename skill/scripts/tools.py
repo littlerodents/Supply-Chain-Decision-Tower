@@ -88,24 +88,56 @@ def cmd_forecast(args):
 
 
 def stock_demand_difference(sku: int, location: str, weeks: int):
-    """库存-需求缺口（修复 #2：上游 SQL 永远查空 → 库存恒 0）。返回 dict。
+    """库存-需求缺口 + ROP 安全库存决策（v2：从"裸缺口"升级为"ROP 驱动"）。
 
-    record_exists=False 表示该 SKU×仓库无库存记录：此时 gap 无意义，
-    上游（skill SOP/面板/MCP）必须如实告知无记录，禁止当作零库存出决策。
+    v2 逻辑：gap = ROP - stock（不再是 demand - stock）
+    ROP = μ_weekly × L + z_α × σ_weekly × √L（安全库存驱动）
+    这意味着：库存还没跌破需求，但已经跌破"安全水位"时就触发补货——
+    从"被动救火"升级为"预防性补货"。
+
+    record_exists=False 表示无库存记录，上游必须如实告知。
     """
+    import statistics as _st
     con = _db()
     row = pd.read_sql(
         "SELECT quantity FROM inventory WHERE sku=? AND location=?",
         con, params=(int(sku), location))
     exists = not row.empty
     stock = int(row["quantity"].iloc[0]) if exists else 0
-    demand = int(get_forecast(str(sku), location).head(weeks)["demand"].sum())
-    gap = stock - demand
+
+    fc = get_forecast(str(sku), location).head(weeks)
+    demand = int(fc["demand"].sum())
+    weekly = [float(x) for x in fc["demand"].tolist()]
+    mu_w = _st.mean(weekly)
+    sigma_w = _st.pstdev(weekly) if len(weekly) > 1 else 0.0
+
+    # 安全库存 + 再订货点（经典公式，z=1.645 对应 95% 服务水平）
+    from statistics import NormalDist as _ND
+    z = _ND().inv_cdf(0.95)
+    lead_time_w = 1.0  # 默认 1 周提前期（可参数化）
+    safety_stock = round(z * sigma_w * (lead_time_w ** 0.5), 1)
+    reorder_point = round(mu_w * lead_time_w + safety_stock, 1)
+
+    # v2 决策原语：gap = ROP - stock（ROP 驱动）
+    gap_v1 = stock - demand          # 旧逻辑：裸缺口
+    gap = int(round(reorder_point - stock))  # 新逻辑：ROP 驱动
+    # gap > 0 = 库存已跌破 ROP → 应补货；gap <= 0 = 高于 ROP → 不补
+
     return {"sku": int(sku), "location": location, "weeks": weeks,
             "record_exists": exists,
-            "current_stock": stock, "forecast_demand": demand, "gap_stock_minus_demand": gap,
-            "note": ("该仓无此品库存记录——gap 无意义，如实回复无记录，禁止出决策单或 NO_REORDER"
-                     if not exists else "gap<0=短缺需补货；gap>=0=充足无需补货")}
+            "current_stock": stock, "forecast_demand": demand,
+            "gap_stock_minus_demand": gap_v1,  # 旧语义保留：stock-demand，负=短缺
+            "rop_gap": gap,  # 新语义：ROP-stock，正=应补货
+            "safety_stock": safety_stock, "reorder_point": reorder_point,
+            "mu_weekly": round(mu_w, 2), "sigma_weekly": round(sigma_w, 2),
+            "service_level": 0.95, "lead_time_weeks": lead_time_w,
+            "decision_mode": "rop",  # 标记当前决策模式
+            "note": ("该仓无此品库存记录——如实回复无记录"
+                     if not exists else
+                     f"ROP驱动决策：ROP={reorder_point}，库存={stock}，"
+                     f"rop_gap={gap}（>0=低于ROP需补货）。"
+                     f"安全库存={safety_stock}(σ={round(sigma_w,2)},95%SL)。"
+                     f"旧gap={gap_v1}（stock-demand，供参考）")}
 
 
 def cmd_gap(args):

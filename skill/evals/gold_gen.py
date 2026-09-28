@@ -38,19 +38,24 @@ def main():
         p, k = t["params"], t["kind"]
         if k == "decision":
             g = tools.stock_demand_difference(p["sku"], p["location"], p["weeks"])
-            if g["gap_stock_minus_demand"] < 0:
+            rop_gap = g.get("rop_gap", -g["gap_stock_minus_demand"])
+            if rop_gap > 0:  # ROP 驱动：低于 ROP 需补货
                 b = best_supplier(p["sku"], p["location"])
-                qty = -g["gap_stock_minus_demand"]
+                qty = int(rop_gap + g.get("safety_stock", 0))  # ROP 缺口+安全库存
                 gold[t["id"]] = {
                     "decision": "REORDER", "order_qty": qty, "supplier": b["supplier"],
                     "unit_cost": b["unit_cost"], "shipping_cost": b["shipping_cost"],
                     "total_cost": round(qty * (b["unit_cost"] + b["shipping_cost"]), 2),
-                    "gap": g["gap_stock_minus_demand"]}
+                    "gap": g["gap_stock_minus_demand"],
+                    "rop_gap": rop_gap, "reorder_point": g.get("reorder_point"),
+                    "safety_stock": g.get("safety_stock")}
             else:
-                gold[t["id"]] = {"decision": "NO_REORDER", "gap": g["gap_stock_minus_demand"]}
+                gold[t["id"]] = {"decision": "NO_REORDER", "gap": g["gap_stock_minus_demand"],
+                                 "rop_gap": rop_gap}
         elif k == "negative":
             g = tools.stock_demand_difference(p["sku"], p["location"], p["weeks"])
-            gold[t["id"]] = {"decision": "NO_REORDER", "gap": g["gap_stock_minus_demand"]}
+            gold[t["id"]] = {"decision": "NO_REORDER", "gap": g["gap_stock_minus_demand"],
+                             "rop_gap": g.get("rop_gap")}
         elif k == "query":
             if "sql" in p:
                 con = tools._db()

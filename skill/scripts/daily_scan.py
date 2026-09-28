@@ -43,14 +43,18 @@ def scan(weeks: int = 12) -> dict:
             no_record_sup += 1
             continue
         g = tools.stock_demand_difference(sku, loc, weeks)
-        gap = g["gap_stock_minus_demand"]
-        if gap < 0:
+        gap = g["gap_stock_minus_demand"]  # 旧 gap
+        rop_gap = g.get("rop_gap", -gap)   # ROP gap
+        if rop_gap > 0:  # ROP 驱动：低于 ROP = 需补货
+            gap = -rop_gap  # 统一为负数表示"需补"（兼容下游 -gap 取订量）
             best = b.iloc[0]
             flip = bool(b.sort_values("unit_cost").iloc[0]["supplier"] != best["supplier"])
             shortages.append({
                 "sku": sku, "brand": _products.get(sku, "?"), "location": loc,
                 "stock": int(g["current_stock"]), "demand": int(g["forecast_demand"]),
                 "gap": int(gap), "order_qty": int(-gap),
+                "rop_gap": int(rop_gap), "reorder_point": g.get("reorder_point", 0),
+                "safety_stock": g.get("safety_stock", 0),
                 "supplier": best["supplier"], "supplier_city": best["location"],
                 "unit_cost": float(best["unit_cost"]), "shipping": float(best["ship"]),
                 "total_unit": float(best["total"]), "total_cost": round(int(-gap) * float(best["total"]), 2),

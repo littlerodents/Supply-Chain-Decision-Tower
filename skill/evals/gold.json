@@ -1,39 +1,37 @@
 {
   "pos-dec-001": {
     "decision": "REORDER",
-    "order_qty": 3268,
+    "order_qty": 359,
     "supplier": "Nature Source Coffee",
     "unit_cost": 34.5,
     "shipping_cost": 2.0,
-    "total_cost": 119282.0,
-    "gap": -3268
+    "total_cost": 13103.5,
+    "gap": -3268,
+    "rop_gap": 302,
+    "reorder_point": 332.2,
+    "safety_stock": 57.4
   },
   "pos-dec-002": {
-    "decision": "REORDER",
-    "order_qty": 2587,
-    "supplier": "Coffee Wholesale USA",
-    "unit_cost": 23.9,
-    "shipping_cost": 1.0,
-    "total_cost": 64416.3,
-    "gap": -2587
+    "decision": "NO_REORDER",
+    "gap": -2587,
+    "rop_gap": -62
   },
   "pos-dec-003": {
     "decision": "REORDER",
-    "order_qty": 1790,
+    "order_qty": 205,
     "supplier": "Coffee Wholesale USA",
     "unit_cost": 23.9,
     "shipping_cost": 2.0,
-    "total_cost": 46361.0,
-    "gap": -1790
+    "total_cost": 5309.5,
+    "gap": -1790,
+    "rop_gap": 171,
+    "reorder_point": 271.1,
+    "safety_stock": 34.9
   },
   "pos-dec-004": {
-    "decision": "REORDER",
-    "order_qty": 1941,
-    "supplier": "Coffee Wholesale USA",
-    "unit_cost": 21.9,
-    "shipping_cost": 2.0,
-    "total_cost": 46389.9,
-    "gap": -1941
+    "decision": "NO_REORDER",
+    "gap": -1941,
+    "rop_gap": -14
   },
   "pos-qry-001": {
     "type": "table",
@@ -94,40 +92,50 @@
   },
   "neg-stk-001": {
     "decision": "NO_REORDER",
-    "gap": 100
+    "gap": 100,
+    "rop_gap": -100
   },
   "neg-stk-002": {
     "decision": "NO_REORDER",
-    "gap": 140
+    "gap": 140,
+    "rop_gap": -140
   },
   "neg-stk-003": {
     "decision": "NO_REORDER",
-    "gap": 50
+    "gap": 50,
+    "rop_gap": -50
   },
   "neg-irr-001": {
     "no_tool": true
   },
   "pos-dec-005": {
     "decision": "REORDER",
-    "order_qty": 3518,
+    "order_qty": 405,
     "supplier": "Golden Gate Roasters",
     "unit_cost": 19.9,
     "shipping_cost": 2.0,
-    "total_cost": 77044.2,
-    "gap": -3518
+    "total_cost": 8869.5,
+    "gap": -3518,
+    "rop_gap": 331,
+    "reorder_point": 370.6,
+    "safety_stock": 74.1
   },
   "pos-dec-006": {
     "decision": "REORDER",
-    "order_qty": 1983,
+    "order_qty": 284,
     "supplier": "Cascade Coffee Co.",
     "unit_cost": 24.9,
     "shipping_cost": 0.0,
-    "total_cost": 49376.7,
-    "gap": -1983
+    "total_cost": 7071.6,
+    "gap": -1983,
+    "rop_gap": 229,
+    "reorder_point": 314.4,
+    "safety_stock": 55.9
   },
   "neg-stk-004": {
     "decision": "NO_REORDER",
-    "gap": 60
+    "gap": 60,
+    "rop_gap": -60
   },
   "pos-qry-005": {
     "type": "table",
