@@ -30,7 +30,7 @@ import uuid
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
-AGENT_TIMEOUT = 120
+AGENT_TIMEOUT = 600  # 本地 120B 单环实测可达 390-600s
 
 _spec = importlib.util.spec_from_file_location("tools", os.path.join(BASE, "scripts", "tools.py"))
 tools = importlib.util.module_from_spec(_spec)
