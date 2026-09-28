@@ -1,0 +1,26 @@
+{
+  "has_bug": true,
+  "confidence": 1.0,
+  "bug": {
+    "type": "network",
+    "severity": "critical",
+    "location": "Save 按钮触发的保存操作",
+    "error_text": "Error 500: Internal Server Error\nFailed to save settings. Retry?",
+    "timestamps": [
+      2.37
+    ],
+    "repro_steps": [
+      "打开 MyApp Dashboard",
+      "点击 Save 按钮",
+      "系统显示服务器错误提示"
+    ],
+    "affected_area": "设置保存功能",
+    "notes": "服务器返回 500 内部服务器错误，导致保存设置功能完全失效"
+  },
+  "source": {
+    "recording": "clip.mp4",
+    "duration_sec": 6.0,
+    "model": ""
+  },
+  "schema_version": "1.0"
+}
