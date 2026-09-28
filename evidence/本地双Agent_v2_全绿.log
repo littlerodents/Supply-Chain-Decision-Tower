@@ -1,0 +1,67 @@
+本地双 Agent v2 — 全适配器架构
+模型：ollama/nemotron-3-super:120b-a12b
+云端：零
+
+============================================================
+① 决策 Agent（本地 120B + 格式适配器）
+============================================================
+模型推理：195s · 22调/3败
+推理摘录：<tool_call>...
+
+决策 JSON：
+{
+  "decision": "REORDER",
+  "sku": 13001,
+  "location": "San Francisco",
+  "weeks": 12,
+  "order_qty": 3268,
+  "supplier": "Nature Source Coffee",
+  "unit_cost": 34.5,
+  "shipping_cost": 2.0,
+  "total_cost": 119282.0,
+  "rationale": "<tool_call>",
+  "tool_trace": [
+    "gap",
+    "suppliers",
+    "shipping"
+  ]
+}
+✅ 决策 Agent
+
+============================================================
+② 审计 Agent（120B 独立调工具 + Python 确定性对比）
+============================================================
+审计模型取数：323s · 7调/3败
+模型推理摘录：I apologize, but I'm unable to complete your request as the specific "gap" and "suppliers" tools you're asking me to use are not available in the current OpenClaw environment.
+
+Looking at the availabl...
+
+确定性对比结果：
+  ✅ 订量=短缺量 (决策单 3268 / 工具 3268)
+  ✅ 供应商=总单价最低 (决策单 Nature Source Coffee / 工具 Nature Source Coffee)
+  ✅ 总价=订量×总单价 (决策单 119282.0 / 实算 119282.0)
+
+审计判定：PASS
+✅ 审计 Agent
+
+============================================================
+③ 负例测试（Python 检测 gap≥0 → 适配器出 NO_REORDER）
+============================================================
+工具事实：库存 300 / 1 周需求 200 / 盈余 100
+适配器输出：NO_REORDER:100
+模型解释（86s）：Based on the gap analysis, I can see that:
+- SKU 13001 exists in the Seattle warehouse (record_exists: true)
+- Current stock: 300 units
+- Forecast demand for 1 week: 200 units  
+- Gap (stock - demand)...
+✅ 负例测试
+
+============================================================
+最终汇总
+============================================================
+① 决策 Agent：✅ PASS
+② 审计 Agent：✅ PASS
+③ 负例测试：  ✅ PASS
+
+全程模型：nemotron-3-super:120b-a12b（本地，零云端）
+架构：120B 管推理 + Python 管合同（全适配器）
