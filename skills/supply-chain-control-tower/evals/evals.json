@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "note": "v2 任务集（控制塔）。gold 由 tools.py 直算生成（runner 内置 gold 生成器，不手工填数）。正例=长周期短缺决策；负例=短周期充足（第1周需求恒200，库存≥200 即余量）+ 无关问句。",
+  "scoring": {
+    "positive_decision": "REORDER + 订量/-gap 相符 + 供应商为总单价最低者（unit_cost+shipping）",
+    "positive_query": "数字与工具直算一致",
+    "negative": "末行 NO_REORDER:<正gap> 且无任何补货建议字段；无关问句不触发工具",
+    "cost": "usage tokens / 延迟，3 轮中位"
+  },
+  "tasks": [
+    {"id": "pos-dec-001", "kind": "decision", "query": "San Francisco 的 Colombian Coffee 未来 12 周够卖吗？不够的话补多少、找谁、总成本多少？",
+     "params": {"sku": 13001, "location": "San Francisco", "weeks": 12}},
+    {"id": "pos-dec-002", "kind": "decision", "query": "Portland 的 Italian Roast 接下来 12 周要不要补货？要的话给出完整建议单。",
+     "params": {"sku": 12001, "location": "Portland", "weeks": 12}},
+    {"id": "pos-dec-003", "kind": "decision", "query": "帮我评估 Seattle 的 Italian Roast 8 周内的缺货风险，需要就出补货方案。",
+     "params": {"sku": 12001, "location": "Seattle", "weeks": 8}},
+    {"id": "pos-dec-004", "kind": "decision", "query": "San Francisco 的 House Blend 10 周库存够不够？给采购建议。",
+     "params": {"sku": 11001, "location": "San Francisco", "weeks": 10}},
+    {"id": "pos-qry-001", "kind": "query", "query": "现在 Seattle 仓库都有哪些货、各多少？",
+     "params": {"sql": "SELECT * FROM inventory WHERE location='Seattle'"}},
+    {"id": "pos-qry-002", "kind": "query", "query": "12001 这个 SKU 有哪些供应商可选？单价从低到高列出来。",
+     "params": {"sql": "SELECT * FROM suppliers WHERE sku=12001 ORDER BY unit_cost"}},
+    {"id": "pos-qry-003", "kind": "query", "query": "把 House Blend 未来 8 周的周需求给我。",
+     "params": {"sku": 11001, "location": "San Francisco", "weeks": 8, "tool": "forecast"}},
+    {"id": "pos-qry-004", "kind": "query", "query": "从 Seattle 发货到 San Francisco 每件运费多少？",
+     "params": {"source": "Seattle", "destination": "San Francisco", "tool": "shipping"}},
+    {"id": "neg-stk-001", "kind": "negative", "query": "Seattle 的 Colombian Coffee 这一周需要补货吗？",
+     "params": {"sku": 13001, "location": "Seattle", "weeks": 1}},
+    {"id": "neg-stk-002", "kind": "negative", "query": "Portland 的 Italian Roast 未来一周要补货吗？",
+     "params": {"sku": 12001, "location": "Portland", "weeks": 1}},
+    {"id": "neg-stk-003", "kind": "negative", "query": "San Francisco 的 House Blend 未来一周要不要下补货单？",
+     "params": {"sku": 11001, "location": "San Francisco", "weeks": 1}},
+    {"id": "neg-irr-001", "kind": "irrelevant", "query": "今天旧金山的天气怎么样？", "params": {}}
+  ]
+}

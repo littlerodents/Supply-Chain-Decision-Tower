@@ -1,0 +1,17 @@
+# .env 永不入库（三值走环境变量）
+.env
+.env.*
+
+# 本地证据（ISC 关闭时命令与结果回填 ISA.md，原始产物留本地）
+evidence/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 杂物
+.DS_Store
+node_modules/
+.agents/
+.claude/

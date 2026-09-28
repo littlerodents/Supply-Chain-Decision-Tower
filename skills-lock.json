@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "repro-pack": {
+      "source": "./skills/repro-pack",
+      "sourceType": "local",
+      "computedHash": "aca52ea97963841c5e9a913f4f05696b3055b04916f4e3fefa27f3ab5f9794ee"
+    },
+    "supply-chain-control-tower": {
+      "source": "./skills/supply-chain-control-tower",
+      "sourceType": "local",
+      "computedHash": "e1cf0c24ff14be4c874241d8e8871d9cc1fd9712e1ef27d82777ba18c52859ff"
+    }
+  }
+}

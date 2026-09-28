@@ -1,0 +1,9 @@
+{
+    "google_api_key": "<<YOUR KEY>>",
+    "text_model": "gemini-pro",
+
+    "project": "<<YOUR PROJECT NAME>>",
+    "location": "us-central1",
+
+    "data_folder": "data"
+}
