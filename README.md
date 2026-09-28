@@ -54,7 +54,7 @@ OpenClaw 网关（DGX Spark，systemd 常驻）
 PASS / FAIL 判定 + 可下载决策单
 
 本地轴：数据/工具/面板/120B 模型 → DGX Spark 统一内存
-云脑（可选）：StepFun step-3.7-flash（评测门控选出）
+云脑（备用）：StepFun step-3.7-flash（可选路由，12/12 评测）
 ```
 
 ## 测试结果

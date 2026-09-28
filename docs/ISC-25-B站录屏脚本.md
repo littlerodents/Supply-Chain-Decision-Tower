@@ -34,6 +34,15 @@ nvidia-smi
 
 > 台词：这台是 DGX Spark，GB10 Grace Blackwell，119G 统一内存，CUDA 13。86G 的 Nemotron-120B 整个常驻在统一内存里——数据、工具、模型、面板，**全栈都在这一台机器本地，敏感数据不出机器**。
 
+画面 A（可选 10s，若用架构图页，口径必须是）：
+
+```
+左栏（本地 DGX Spark ⭐主力）：Nemotron-120B 推理 + Python 适配器 + 确定性审计 + 7 只读工具 + 数据
+中栏：OpenClaw 网关 + Skill SOP
+右栏（虚线·备用）：StepFun step-3.7-flash 云端路由（可选）
+```
+> 注意：架构图只有一颗星——本地 120B。云端画成虚线备用框；不出现任何其他模型。
+
 画面 B（15s）：展示 CUDA 证据（`evidence/` 下 CUDA benchmark 输出或 dmon 截屏）：
 
 > 台词：补货扫描要核算上百万种参数组合，我们自写了 CUDA kernel 在 GB10 上批量算，Nsight Systems 剖析留档——本地算力不是摆设，是真的在干活。
@@ -45,31 +54,33 @@ nvidia-smi
 ```bash
 export PATH=$HOME/node26/bin:$PATH
 openclaw agent --session-id pi-dgx-demo-take1 \
+  --model ollama/nemotron-3-super:120b-a12b \
   --message "San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？" --json
 ```
 
-等待（可剪辑加速，但保留工具调用可见部分）。
+等待约 1-3 分钟（本地 120B 推理，可剪辑加速，但保留工具调用可见部分）。
 
-> 台词（边等边念）：注意，回答里每个数字都必须有工具证据——这是写进 SOP 的红线：没有工具输出，就没有回答。它现在正在查库存、算缺口、比供应商和运费。决策智能体出单之后，还有第二个智能体独立调工具复算、逐字段对比——审计盖章才算数。
+> 台词（边等边念）：现在跑的是**本地 Nemotron-120B**——86GB 的模型整个躺在 DGX Spark 的统一内存里，零云端。回答里每个数字都必须有工具证据，这是写进 SOP 的红线：没有工具输出，就没有回答。它正在查库存、算缺口、比供应商和运费；协议输出由 Python 适配器组装、第二个智能体独立调工具复算逐字段对账——审计盖章才算数。
 
 结果出来后，把 JSON 关键字段指给镜头看：
 
 > 台词：看这个决策——传统缺口分析说要补 3268 件，但 ROP 优化算法说：只需补 359 件。再订货点等于提前期需求加安全库存：需求波动 σ=35，95% 服务水平下安全库存只要 57 件。我们不是暴力补全缺口，而是科学计算最优订量——**减少过度库存 89%**。供应商 Nature Source Coffee，单价 34.5 加运费 2 块，全部来自工具直算，不是模型猜的。
 
-### 镜 3B · 本地 120B 加分 take（可选，剪辑插入 10-15 秒）
+### 镜 3B · 云端备用 take（可选，剪辑插入 10-15 秒）
 
 ```bash
 openclaw agent --session-id pi-dgx-demo-take1b \
-  --model ollama/nemotron-3-super:120b-a12b \
+  --model stepfun/step-3.7-flash \
   --message "San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？" --json
 ```
 
-> 台词：同一套流水线，把决策脑切到本地 120B，照样出带审计签章的决策单——零云端。本地推理较慢，这里加速播放。
+> 台词：同一套流水线也有云端备用路由——StepFun step-3.7-flash，13 秒出单，12/12 评测通过。但它是备用的：决策、审计、数据都在本地，这台机器不联网照样签决策单。
 
 ### 镜 4 · 负例 live（1:55-2:20）
 
 ```bash
 openclaw agent --session-id pi-dgx-demo-take2 \
+  --model ollama/nemotron-3-super:120b-a12b \
   --message "Seattle 仓库 SKU 13001 未来 1 周够卖吗？需要补货吗？" --json
 ```
 
