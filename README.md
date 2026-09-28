@@ -97,6 +97,9 @@ cd skills/supply-chain-control-tower/panel && python3 -m streamlit run app.py --
 | [ISC-24 表单内容包](docs/ISC-24-表单内容包.md) | 提交材料 |
 | [ISC-25 征文初稿](docs/ISC-25-征文初稿.md) | 叙述文稿 |
 | [ISC-25 B站录屏脚本](docs/ISC-25-B站录屏脚本.md) | 演示分镜 |
+| [复原手册](REBUILD.md) | 换一台 DGX Spark 怎么把系统原样跑起来 |
+
+> 审计智能体的 Skill 在 [`skill-audit/`](skill-audit/SKILL.md)（与 `skill/` 的决策 Skill 构成双智能体）。
 
 ## 过程记录（诚实展示）
 
