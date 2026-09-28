@@ -22,7 +22,7 @@ OpenClaw 网关（DGX Spark，systemd 常驻）
 PASS / FAIL 判定 JSON（mismatches 精确到字段）
 
 本地轴：SQLite/CSV 数据 · Streamlit 面板 :8501（工具证据 + 实时 Agent 最小闭环） · ollama（120B 86GB / 30B MoE 18GB）
-云脑：StepFun step-3.7-flash（默认路由，评测门控选出：3/3 vs 本地 1/3、0/2）
+云脑（备用）：StepFun step-3.7-flash（可选路由，12/12 评测）
 算法插槽：scripts/algorithms.py（安全库存/ROP/EOQ/报童，教科书用例测试通过）
 
 面板四模式（panel/app.py，内置 48 SKU / 64 组合 / 75 供应商行 + 用户上传数据）：

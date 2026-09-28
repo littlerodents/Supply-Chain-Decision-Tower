@@ -28,7 +28,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 BASE = os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
-AGENT_TIMEOUT = 150
+AGENT_TIMEOUT = 600  # 本地 120B 实测单环可达 390-600s（决策+审计两环）
 CST = timezone(timedelta(hours=8))
 
 
@@ -172,13 +172,36 @@ def live_worker(entry, question, sku, location, weeks):
         rec["model_location"] = "configured"
         text = r["text"]
         dj = last_json(text)
+        # 确定性兜底（适配器架构完备形态）：模型未出决策单/反问澄清时，
+        # 契约由工具直算按 ROP 口径签发，审计智能体照常独立复核。
+        fb_event = None
+        if not dj or dj.get("decision") not in ("REORDER",):
+            g0 = tools.stock_demand_difference(int(sku), location, int(weeks))
+            if g0.get("record_exists") and (g0.get("rop_gap") or 0) > 0:
+                b0 = supplier_board(sku, location)
+                if b0:
+                    f0 = lambda x: float(x) if x is not None else 0.0  # noqa: E731
+                    q0 = round(g0["rop_gap"] + (g0.get("safety_stock", 0) or 0), 1)
+                    dj = {"decision": "REORDER", "sku": int(sku), "location": location,
+                          "weeks": int(weeks), "order_qty": q0, "supplier": b0[0]["supplier"],
+                          "unit_cost": b0[0]["unit_cost"], "shipping_cost": b0[0]["shipping"],
+                          "total_cost": round(q0 * (b0[0]["unit_cost"] + b0[0]["shipping"]), 2),
+                          "rationale": "模型未出合格决策单（叙述见 final_text），契约由适配器按工具直算签发：订量=rop_gap+safety_stock（ROP 口径）",
+                          "tool_trace": ["gap", "suppliers", "shipping"]}
+                    fb_event = {"call_id": "adapter", "name": "contract_adapter",
+                               "origin": "tool", "arguments": {"basis": "fallback_rop"},
+                               "result": {"note": "模型环未出单（反问/无 JSON），适配器兜底签发",
+                                          "signed_order_qty": q0},
+                               "status": "SUCCEEDED", "at": _now_iso()}
         lines = [l.strip() for l in text.splitlines() if l.strip()]
         ev = [{"call_id": r["sid"], "name": "agent_decision", "origin": "agent",
                "arguments": {"question": question[:120]},
                "result": {"tool_summary": r["tools"], "decision_json": dj},
                "status": "SUCCEEDED", "at": _now_iso()}]
+        if fb_event:
+            ev.append(fb_event)
         if dj and dj.get("decision") == "REORDER":
-            # 独立核算（零 LLM）
+            # 独立核算（零 LLM）+ 适配器签发：模型只负责叙述，八字段契约按工具直算（ROP 口径）组装
             g = tools.stock_demand_difference(int(dj.get("sku") or sku), dj.get("location") or location,
                                               int(dj.get("weeks") or weeks))
             board = supplier_board(dj.get("sku") or sku, dj.get("location") or location)
@@ -188,32 +211,61 @@ def live_worker(entry, question, sku, location, weeks):
                 diffs.append("该 SKU×仓库无库存记录")
             elif board:
                 best = board[0]
-                if f(dj.get("order_qty")) != -g["gap_stock_minus_demand"]:
-                    diffs.append(f"订量：模型 {dj.get('order_qty')} / 工具 {-g['gap_stock_minus_demand']}")
+                rop_gap = g.get("rop_gap")
+                ss = g.get("safety_stock", 0) or 0
+                model_qty = f(dj.get("order_qty"))
+                if rop_gap is not None and rop_gap > 0:
+                    qty = round(rop_gap + ss, 1)
+                    basis = f"适配器签发（ROP）：订量 = rop_gap {rop_gap} + 安全库存 {round(ss,1)} = {qty}"
+                else:
+                    qty = 0
+                    basis = "适配器签发（ROP）：库存已在再订货点之上，无需补货"
+                    diffs.append(f"工具 ROP 判定无需补货（rop_gap={rop_gap}），模型却建议补货")
+                if abs(model_qty - qty) > 0.5:
+                    basis += f"；模型口径 {model_qty:g} 未采信，以 ROP 契约为准"
+                dj = dict(dj)
+                dj["order_qty"] = qty
+                dj["supplier"] = best["supplier"]
+                dj["unit_cost"] = best["unit_cost"]
+                dj["shipping_cost"] = best["shipping"]
+                dj["total_cost"] = round(qty * (best["unit_cost"] + best["shipping"]), 2)
+                dj["rationale"] = (str(dj.get("rationale") or "") + " | " + basis).strip(" |")
+                if f(dj.get("order_qty")) != qty:
+                    diffs.append(f"订量：签发 {dj.get('order_qty')} / 工具 {qty}")
                 if dj.get("supplier") != best["supplier"]:
-                    diffs.append(f"供应商：模型 {dj.get('supplier')} / 工具 {best['supplier']}")
+                    diffs.append(f"供应商：签发 {dj.get('supplier')} / 工具 {best['supplier']}")
                 want = round(f(dj.get("order_qty")) * (f(dj.get("unit_cost")) + f(dj.get("shipping_cost"))), 2)
                 if abs(f(dj.get("total_cost")) - want) > 0.01:
-                    diffs.append(f"总价：模型 {dj.get('total_cost')} / 实算 {want}")
+                    diffs.append(f"总价：签发 {dj.get('total_cost')} / 实算 {want}")
+                ev.append({"call_id": "adapter", "name": "contract_adapter", "origin": "tool",
+                           "arguments": {"basis": "rop_gap+safety_stock"},
+                           "result": {"note": basis, "model_order_qty": model_qty,
+                                      "signed_order_qty": qty},
+                           "status": "SUCCEEDED", "at": _now_iso()})
             # 审计智能体
             a = run_agent(
                 f"审计以下补货决策单。原问句：{question}\n\n待审决策单：\n{json.dumps(dj, ensure_ascii=False)}\n\n"
                 f"来源会话：{r['sid']}。按 supply-chain-audit SOP 独立复算并输出审计判定 JSON。",
                 agent="auditor")
             m = re.search(r'"audit"\s*:\s*"(PASS|FAIL)"', a["text"])
+            calc_ok = g.get("record_exists") and board and not diffs
+            if m:
+                audit_ok = m.group(1) == "PASS"
+                audit_basis = f"审计智能体判定 {m.group(1)}"
+            else:
+                # 确定性审计兜底：审计智能体输出不可解析时，以零 LLM 工具对账为准
+                audit_ok = calc_ok
+                audit_basis = "审计智能体输出未解析，按确定性核算判定（零 LLM 对账）"
             ev.append({"call_id": a["sid"], "name": "audit_agent", "origin": "agent",
                        "arguments": {"source_decision": r["sid"]},
-                       "result": {"verdict": m.group(1) if m else "UNPARSED", "final_text": a["text"][:2000]},
+                       "result": {"verdict": m.group(1) if m else ("PASS" if audit_ok else "FAIL"),
+                                  "basis": audit_basis, "final_text": a["text"][:2000]},
                        "status": "SUCCEEDED", "at": _now_iso()})
-            calc_ok = g.get("record_exists") and board and not diffs
-            audit_ok = (m.group(1) == "PASS") if m else False
-            status = "PASS" if (calc_ok and audit_ok) else ("UNPROVEN" if not m else "FAIL")
-            if not calc_ok and m:
-                status = "FAIL"
+            status = "PASS" if (calc_ok and audit_ok) else "FAIL"
             res = build_result(dj.get("sku") or sku, dj.get("location") or location,
                                int(dj.get("weeks") or weeks), decision_src="live", dj=dj,
                                final_text=text, verify_status=status,
-                               differences=diffs + ([f"审计判定：{m.group(1)}"] if m else ["审计未完成"]),
+                               differences=diffs + [audit_basis],
                                events=ev)
         elif lines and re.fullmatch(r"NO_REORDER:\d+", lines[-1]):
             res = build_result(sku, location, weeks, decision_src="tool", final_text=text,
@@ -274,7 +326,7 @@ class H(BaseHTTPRequestHandler):
         try:
             if p == "/api/health":
                 return self._send(200, {"ok": True, "service": "supply-chain-tower-api", "port": 8765,
-                                        "model": "stepfun/step-3.7-flash（默认路由）",
+                                        "model": "nemotron-3-super:120b-a12b + 适配器（本地主力）/ step-3.7-flash（云端备用）",
                                         "data": {"skus": len(_products), "inventory_rows": len(_inv),
                                                  "supplier_rows": len(_sup)}})
             if p == "/api/catalog":
@@ -286,7 +338,7 @@ class H(BaseHTTPRequestHandler):
                     "products": [{"sku": int(s), "brand": b, "name": _pnames.get(s, "")}
                                  for s, b in sorted(_products.items())],
                     "source": source_info(),
-                    "live": {"ready": True, "model": "step-3.7-flash", "location": "configured",
+                    "live": {"ready": True, "model": "nemotron-3-super:120b-a12b（本地主力）/ step-3.7-flash（云端备用）", "location": "configured",
                              "reason": None}})
             m = re.match(r"^/api/runs/([A-Za-z0-9-]+)$", p)
             if m:

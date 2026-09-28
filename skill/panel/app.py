@@ -25,7 +25,7 @@ import streamlit as st
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # skill 根
 DATA = os.path.join(BASE, "data")
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
-AGENT_TIMEOUT_S = 90  # 实测决策任务 18-39s，留余量
+AGENT_TIMEOUT_S = 420  # 本地 120B 实测每环 1-6 分钟（决策/审计各一环）
 
 st.set_page_config(page_title="供应链控制塔", page_icon="🚦", layout="wide")
 
@@ -52,7 +52,7 @@ st.markdown(
     "补货决策 · 工具直算 + 双智能体审计</span></h1>", unsafe_allow_html=True)
 st.markdown(
     f"<p class='muted'>数据读取 {time.strftime('%F %T')} · 8 条库存 / 9 条供应商 / 6 SKU · "
-    "本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）</p>",
+    "本地样本·非实时库存·合成预测 · 推理：本地 Nemotron-120B + 适配器为主 · 云端 StepFun 备用</p>",
     unsafe_allow_html=True)
 
 _spec = importlib.util.spec_from_file_location("tools", os.path.join(BASE, "scripts", "tools.py"))
@@ -152,12 +152,15 @@ def verify_decision(dj: dict) -> dict:
         return {"verdict": "FAIL", "checks": [("库存记录", False, f"{loc} 无 SKU {sku} 库存记录")]}
     g = tools.stock_demand_difference(sku, loc, weeks)
     gap = g["gap_stock_minus_demand"]
+    rop_gap = g.get("rop_gap")
+    ss = g.get("safety_stock", 0) or 0
+    want_qty = round(rop_gap + ss, 1) if (rop_gap is not None and rop_gap > 0) else 0
     board = supplier_board(sku, loc)
     if board.empty:
         return {"verdict": "FAIL", "checks": [("供应商", False, f"SKU {sku} 无供应商记录")]}
     best = board.iloc[0]
     checks = [
-        ("订量=短缺量", f(dj.get("order_qty")) == -gap, f"模型答 {dj.get('order_qty')} / 工具算 {-gap}"),
+        ("订量=rop_gap+安全库存", f(dj.get("order_qty")) == want_qty, f"模型答 {dj.get('order_qty')} / 工具算 {want_qty}"),
         ("供应商=总单价最低", dj.get("supplier") == best["supplier"],
          f"模型答 {dj.get('supplier')} / 工具算 {best['supplier']}"),
         ("单价一致", abs(f(dj.get("unit_cost")) - best["unit_cost"]) <= 0.01, ""),
@@ -327,7 +330,7 @@ with tab_scan:
                 [__import__("sys").executable, os.path.join(BASE, "scripts", "daily_scan.py")],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             try:
-                p.wait(timeout=90)
+                p.wait(timeout=AGENT_TIMEOUT_S)
             except subprocess.TimeoutExpired:
                 p.kill()
                 st.error("扫描超时（90s）——请截图告诉我")
@@ -375,24 +378,28 @@ with tab_scan:
                 dw = st.slider("下钻决策周期（本卡片与问句都按它，最长 1 年）", 1, 52, rep["weeks"], key="drill_w")
                 g = tools.stock_demand_difference(int(s["sku"]), s["location"], dw)
                 dgap = g["gap_stock_minus_demand"]
+                d_rop = g.get("rop_gap") or 0
+                d_ss = g.get("safety_stock", 0) or 0
+                dqty = round(d_rop + d_ss, 1)
                 board = supplier_board(int(s["sku"]), s["location"])
-                if dgap < 0 and not board.empty:
+                if d_rop > 0 and not board.empty:
                     best = board.iloc[0]
                     st.markdown(
                         f"<div class='card'><h4>{html.escape(str(s['sku']))} {html.escape(brand_disp(s['brand']))} @ {html.escape(loc_disp(s['location']))}"
                         + (" <span class='bad'>⭐ 运费翻转</span>" if s["flip"] else "") + "</h4>"
-                        f"<div class='bad'>缺 {-dgap} 件（库存 {g['current_stock']} / {dw} 周需求 {g['forecast_demand']}）</div>"
+                        f"<div class='bad'>已跌破再订货点 ROP {g.get('reorder_point')}（库存 {g['current_stock']}）· 需补 {dqty} 件"
+                        f"（rop_gap {d_rop} + 安全库存 {round(d_ss, 1)}）</div>"
                         f"<div class='muted' style='margin-top:.4rem'>建议：向 <b>{html.escape(str(best['supplier']))}</b>"
-                        f"（{html.escape(str(best['location']))}）下单 <b>{-dgap}</b> 件 · "
+                        f"（{html.escape(str(best['location']))}）下单 <b>{dqty}</b> 件 · "
                         f"单价 ${best['unit_cost']:.2f} + 运费 ${best['shipping_to_dest']:.2f} = "
                         f"<b>${best['total_unit_cost']:.2f}/件</b> · 总成本 "
-                        f"<b>${-dgap * best['total_unit_cost']:,.2f}</b></div>"
+                        f"<b>${dqty * best['total_unit_cost']:,.2f}</b></div>"
                         "<div class='muted'>候选比价见下方「工具证据」页同款表格；每一步数字可核验</div></div>",
                         unsafe_allow_html=True)
                 elif dgap >= 0:
                     st.markdown(verdict_card(True, "该周期下库存充足",
                                              f"余量 +{dgap} 件 · 无需补货（NO_REORDER:{dgap}）"), unsafe_allow_html=True)
-                if st.button("🤖 让 Agent 出正式决策单（就地出单，约 60-120 秒，勿点其它）"):
+                if st.button("🤖 让 Agent 出正式决策单（就地出单，约 2-7 分钟（本地 120B），勿点其它）"):
                     qq = (f"{s['location']} 的 {s['brand']} 未来 {dw} 周库存够不够？"
                           f"要补的话找哪家供应商、总价多少？")
                     ph = st.empty(); ph.info(f"运行中：{qq}")
@@ -425,9 +432,10 @@ with tab_tool:
                 g = tools.stock_demand_difference(int(rr["sku"]), wloc, weeks)
                 gaps.append({"SKU": int(rr["sku"]), "品牌": brand_disp(_products.get(int(rr["sku"]), "?")),
                              "库存": int(rr["quantity"]), f"{weeks}周需求": g["forecast_demand"],
-                             "缺口": g["gap_stock_minus_demand"]})
+                             "缺口": g["gap_stock_minus_demand"], "ROP缺口": g.get("rop_gap"),
+                             "安全库存": round(g.get("safety_stock", 0) or 0, 1)})
             gdf = pd.DataFrame(gaps)
-            n_short = int((gdf["缺口"] < 0).sum())
+            n_short = int((gdf["ROP缺口"] > 0).sum())
             st.markdown(f"<div class='card'><h4>{wloc} · {len(gdf)} 个 SKU 有记录"
                         f"<span class='bad'>（{n_short} 短缺）</span> / "
                         f"<span class='good'>{len(gdf)-n_short} 充足</span> · 周期 {weeks} 周</h4></div>",
@@ -454,13 +462,17 @@ with tab_tool:
         elif sku is not None:
             g = tools.stock_demand_difference(sku, loc, weeks)
             gap = g["gap_stock_minus_demand"]
-            if gap < 0:
+            rop_gap = g.get("rop_gap") or 0
+            ss = g.get("safety_stock", 0) or 0
+            if rop_gap > 0:
+                qty = round(rop_gap + ss, 1)
                 board = supplier_board(sku, loc)
                 best = board.iloc[0]
                 flip = board.sort_values("unit_cost").iloc[0]["supplier"] != best["supplier"]
                 st.markdown(
-                    f"<div class='card'><h4><span class='bad'>🔻 短缺 {-gap} 件 · 建议补货 {-gap} 件</span></h4>"
-                    f"<div class='big'>${-gap * best['total_unit_cost']:,.2f}</div>"
+                    f"<div class='card'><h4><span class='bad'>🔻 已跌破再订货点（ROP {g.get('reorder_point')}）· 建议补货 {qty} 件</span></h4>"
+                    f"<div class='muted'>rop_gap {rop_gap} + 安全库存 {round(ss, 1)}</div>"
+                    f"<div class='big'>${qty * best['total_unit_cost']:,.2f}</div>"
                     f"<div class='muted'>推荐 {html.escape(str(best['supplier']))}（{html.escape(str(best['location']))}）· "
                     f"${best['unit_cost']:.2f} + 运费 ${best['shipping_to_dest']:.2f} = "
                     f"<b>${best['total_unit_cost']:.2f}/件</b></div>"
