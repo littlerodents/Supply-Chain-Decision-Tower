@@ -16,7 +16,7 @@
 用法（MCP 客户端配置示例）：
   {"mcpServers": {"supply-chain-tower": {
       "command": "python3",
-      "args": ["~/.openclaw/workspace/skills/supply-chain-control-tower/scripts/mcp_server.py"]}}}
+      "args": ["/home/sparker/.openclaw/workspace/skills/supply-chain-control-tower/scripts/mcp_server.py"]}}}
 
 协议：JSON-RPC 2.0，stdio 按行分帧；initialize/tools list/tools call/ping。
 """
@@ -144,7 +144,7 @@ def tool_reorder_decision(question: str) -> dict:
 
 
 TOOLS = [
-    {"name": "gap", "description": "库存-需求缺口（决策原语）：gap<0 短缺需补货，>=0 充足",
+    {"name": "gap", "description": "ROP 驱动决策：返回 rop_gap(正=低于ROP需补货)、reorder_point、safety_stock",
      "inputSchema": {"type": "object", "properties": {
          "sku": {"type": "integer"}, "location": {"type": "string"}, "weeks": {"type": "integer"}},
          "required": ["sku", "location", "weeks"]}},

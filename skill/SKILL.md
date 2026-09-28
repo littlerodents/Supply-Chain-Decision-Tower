@@ -12,6 +12,8 @@ metadata: { "openclaw": { "emoji": "🚦", "requires": { "bins": ["python3"] } }
 > **硬规则（优先于一切）：凡回答中出现库存/需求/补货量/价格/运费数字，必须先有对应工具输出作证据——禁止凭记忆或估算作答。没有工具输出，就没有回答。**
 
 > **输出格式契约（判据按此机器判定）：正例回复以恰好一个 ```json 代码块结尾，其后不得再有任何正文、追问或选项列表（"还需要我…吗/你要我做哪个"之类禁止）；即使本轮工具已算出全部数字、即使认为结论"已给出"，也必须在回复末尾完整重写决策 JSON 代码块，不得以"见上文"为由省略；负例回复的最后一行是裸文本 `NO_REORDER:<盈余>`——禁止用反引号或代码围栏包裹，禁止附加任何 JSON 块/代码块。**
+>
+> **OUTPUT CONTRACT (English, equally binding — reply in the user's language, but ALWAYS end with the machine-readable block):** For a replenishment decision, the reply MUST end with exactly one ```json fenced block containing the complete decision JSON with keys: decision, sku, location, weeks, order_qty, supplier, unit_cost, shipping_cost, total_cost, rationale, tool_trace. Never end with a question, an offer ("shall I...?"), or any text after the block — even if all numbers were already stated in prose above, restate them in the JSON block. For a no-replenishment case, the last line must be bare text `NO_REORDER:<surplus>` with no fences and no JSON block.
 
 ## 问句分类（第一步）
 
@@ -23,7 +25,12 @@ metadata: { "openclaw": { "emoji": "🚦", "requires": { "bins": ["python3"] } }
 
 1. **补齐参数**：SKU（品牌名↔SKU 映射先读 `references/knowledge.md`）、仓库、决策周期（周）。**周期缺失必须先问，不许默认猜测**；「本周/这一周/未来一周」即 1 周，属周期明确，无需追问
 2. `gap` 工具先看 `record_exists`：**为 false 时直接回复「该仓无此品库存记录，未作决策」——禁止把缺记录当零库存算缺口、禁止出决策单、也禁止输出 NO_REORDER（无记录 ≠ 库存充足），这是第一红线**
-3. `gap >= 0`（有记录）→ **不补**，末行输出 `NO_REORDER:<gap>`（如 +140），**禁止给出任何补货建议、订量或供应商**
+3. `gap` 判定（有记录时）——注意 ROP 驱动模式：
+   - 工具返回 `rop_gap`（ROP−库存，正=低于再订货点）和 `safety_stock`（安全库存）
+   - **rop_gap > 0 → 需补货**，建议订量 = rop_gap + safety_stock（不是裸缺口！）
+   - **rop_gap <= 0 → 不补**（库存高于再订货点，预防性不行动）
+   - 推理时用"库存已跌破再订货点 ROP=xxx"的语言，不说"缺口 xxx 件"
+   - `gap >= 0`（旧逻辑，仅供参考）→ 不补，末行输出 `NO_REORDER:<gap>`（如 +140），**禁止给出任何补货建议、订量或供应商**
 3. `gap < 0` → 短缺量 = `-gap`：
    - `suppliers` 工具查该 SKU 的供应商，按 `unit_cost` 排序
    - 对每个候选调 `shipping`（供应商所在城市 → 目标仓库），比较 `unit_cost + unit_shipping_cost` 总单价
