@@ -1,0 +1,70 @@
+============================================================
+本地双 Agent 全链路测试
+决策脑：ollama/nemotron-3-super:120b-a12b + 格式适配器
+审计脑：ollama/nemotron-3-super:120b-a12b
+云端参与：零
+============================================================
+
+============================================================
+决策 Agent 测试 [pos1] — 本地 Nemotron-120B
+问句：San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？
+============================================================
+
+模型：ollama/nemotron-3-super:120b-a12b · 144s · 工具：11调/2败
+
+--- 120B 原始推理（前 300 字）---
+Based on the supply chain analysis, here's the decision for SKU 13001 in the San Francisco warehouse for the next 12 weeks:
+
+```json
+{"decision":"REORDER","sku":13001,"location":"San Francisco","weeks":12,"order_qty":3268,"supplier":"Nature Source Coffee","unit_cost":34.5,"shipping_cost":2.0,"total_
+
+--- 格式适配器输出（八字段决策 JSON）---
+{
+  "decision": "REORDER",
+  "sku": 13001,
+  "location": "San Francisco",
+  "weeks": 12,
+  "order_qty": 3268,
+  "supplier": "Nature Source Coffee",
+  "unit_cost": 34.5,
+  "shipping_cost": 2.0,
+  "total_cost": 119282.0,
+  "rationale": "Based on the supply chain analysis, here's the decision for SKU 13001 in the San Francisco warehouse for the next 12 weeks:\n\n```json\n{\"decision\":\"REORDER\",\"sku\":13001,\"location\":\"San Francisco\",\"weeks",
+  "tool_trace": [
+    "gap",
+    "suppliers",
+    "shipping"
+  ],
+  "_source": "local:nemotron-120b + format_adapter"
+}
+
+✅ PASS
+
+============================================================
+审计 Agent 测试 [pos1] — 本地 Nemotron-120B
+============================================================
+
+模型：ollama/nemotron-3-super:120b-a12b · 139s · 工具：21调/2败
+
+--- 120B 审计原始输出（前 400 字）---
+<tool_call>
+
+审计判定：❌ 未通过
+
+============================================================
+负例测试 — 本地 Nemotron-120B
+============================================================
+
+55s · 工具：7调/5败
+回复（前 300 字）：Let me fix the path - it should be .openclaw:
+
+负例判定：❌ 不合格
+
+============================================================
+汇总
+============================================================
+决策 Agent（正例）：✅
+审计 Agent：❌
+负例测试：❌
+
+全程本地模型：nemotron-3-super:120b-a12b（零云端调用）
