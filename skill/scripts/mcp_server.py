@@ -95,14 +95,16 @@ def _verify(dj: dict) -> dict:
     except (TypeError, ValueError):
         return {"verdict": "FAIL", "checks": ["sku/location/weeks 不完整"]}
     g = tools.stock_demand_difference(sku, loc, weeks)
-    gap = g["gap_stock_minus_demand"]
+    rop_gap = g.get("rop_gap")
+    ss = g.get("safety_stock", 0) or 0
+    want_qty = round(rop_gap + ss, 1) if (rop_gap is not None and rop_gap > 0) else 0
     best = _best_supplier(sku, loc)
     checks = []
     if best is None:
         return {"verdict": "FAIL", "checks": [f"SKU {sku} 无供应商"]}
     f = lambda x: float(x) if x is not None else 0.0  # noqa: E731
-    checks.append(f"订量: {dj.get('order_qty')} vs 工具 {-gap} -> "
-                  f"{'OK' if f(dj.get('order_qty')) == -gap else 'MISMATCH'}")
+    checks.append(f"订量(ROP): {dj.get('order_qty')} vs 工具 {want_qty} -> "
+                  f"{'OK' if f(dj.get('order_qty')) == want_qty else 'MISMATCH'}")
     checks.append(f"供应商: {dj.get('supplier')} vs 工具 {best['supplier']} -> "
                   f"{'OK' if dj.get('supplier') == best['supplier'] else 'MISMATCH'}")
     want = round(f(dj.get("order_qty")) * (f(dj.get("unit_cost")) + f(dj.get("shipping_cost"))), 2)
@@ -131,6 +133,10 @@ def tool_reorder_decision(question: str) -> dict:
         package["audit_agent"] = {"session": a["sid"], "model": f"{a['provider']}/{a['model']}",
                                   "tool_summary": a["tools"], "final_text": a["text"],
                                   "verdict": m.group(1) if m else "UNPARSED"}
+        if package["audit_agent"]["verdict"] == "UNPARSED":
+            # 确定性审计兜底：审计智能体输出不可解析时，以零 LLM 复算为准
+            package["audit_agent"]["verdict"] = v["verdict"]
+            package["audit_agent"]["fallback"] = "审计智能体输出未解析，按确定性核算判定（零 LLM 对账）"
         package["overall"] = "PASS" if (v["verdict"] == "PASS" and package["audit_agent"]["verdict"] == "PASS") else "FAIL"
     elif dj is None and re.search(r"^NO_REORDER:\d+$", r["text"].strip().splitlines()[-1]):
         package["independent_verification"] = {"verdict": "PASS", "checks": ["负例末行合规（纯文本 NO_REORDER）"]}

@@ -25,24 +25,23 @@ metadata: { "openclaw": { "emoji": "🚦", "requires": { "bins": ["python3"] } }
 
 1. **补齐参数**：SKU（品牌名↔SKU 映射先读 `references/knowledge.md`）、仓库、决策周期（周）。**周期缺失必须先问，不许默认猜测**；「本周/这一周/未来一周」即 1 周，属周期明确，无需追问
 2. `gap` 工具先看 `record_exists`：**为 false 时直接回复「该仓无此品库存记录，未作决策」——禁止把缺记录当零库存算缺口、禁止出决策单、也禁止输出 NO_REORDER（无记录 ≠ 库存充足），这是第一红线**
-3. `gap` 判定（有记录时）——注意 ROP 驱动模式：
+3. `gap` 判定（有记录时）——ROP 驱动模式，**全流程唯一订量口径**：
    - 工具返回 `rop_gap`（ROP−库存，正=低于再订货点）和 `safety_stock`（安全库存）
-   - **rop_gap > 0 → 需补货**，建议订量 = rop_gap + safety_stock（不是裸缺口！）
-   - **rop_gap <= 0 → 不补**（库存高于再订货点，预防性不行动）
+   - **rop_gap > 0 → 需补货**，订量 = rop_gap + safety_stock（**禁止**使用裸缺口 stock−demand 口径订量）
+   - **rop_gap <= 0 → 不补**（库存高于再订货点，预防性不行动）：末行裸文本 `NO_REORDER:<gap_stock_minus_demand>`（如 +140），**禁止给出任何补货建议、订量或供应商**
    - 推理时用"库存已跌破再订货点 ROP=xxx"的语言，不说"缺口 xxx 件"
-   - `gap >= 0`（旧逻辑，仅供参考）→ 不补，末行输出 `NO_REORDER:<gap>`（如 +140），**禁止给出任何补货建议、订量或供应商**
-3. `gap < 0` → 短缺量 = `-gap`：
+4. 补货时选供应商：
    - `suppliers` 工具查该 SKU 的供应商，按 `unit_cost` 排序
    - 对每个候选调 `shipping`（供应商所在城市 → 目标仓库），比较 `unit_cost + unit_shipping_cost` 总单价
-   - 推荐总单价最低者；建议订量 = 短缺量
-   - **总成本必须用 python3 实算**（如 `python3 -c "print(1941*(21.9+2.0))"`，四舍五入到分），**禁止心算乘法**——LLM 长乘法不可靠
-4. 输出**决策 JSON**（最终回复的最后一个代码块）：
+   - 推荐总单价最低者（警惕运费翻转：单价最低≠总单价最低）
+   - **总成本必须用 python3 实算**（订量 × 总单价，四舍五入到分），**禁止心算乘法**——LLM 长乘法不可靠
+5. 输出**决策 JSON**（最终回复的最后一个代码块）：
 
 ```json
 {"decision":"REORDER","sku":13001,"location":"San Francisco","weeks":12,
- "order_qty":3268,"supplier":"Nature Source Coffee","unit_cost":34.5,
- "shipping_cost":2.0,"total_cost":119282.0,
- "rationale":"未来12周预测需求3298，现库30，缺3268；唯一供应商 Seattle，单价34.5+运费2.0",
+ "order_qty":359.4,"supplier":"Nature Source Coffee","unit_cost":34.5,
+ "shipping_cost":2.0,"total_cost":13118.1,
+ "rationale":"ROP=332.2（μ×L+z×σ×√L，95%SL），库存30已跌破再订货点：rop_gap=302、安全库存57.4，订量=359.4；总单价最低供应商 Nature Source Coffee（34.5+运费2.0）",
  "tool_trace":["gap","suppliers","shipping"]}
 ```
 
@@ -67,8 +66,9 @@ python3 $S kb   # 产品/仓库/供应商拓扑全量
 
 - 不写入/修改任何数据（只读）
 - 不编造供应商、价格、库存数字——一切数字必须来自工具输出
+- **问句已含 SKU/仓库/周期时，禁止反问澄清**：库存、价格、运费、需求一律调工具获取，禁止向用户索要任何数据
 - 周期（weeks）不明时先问，不许猜
-- **负例（gap≥0）绝不产补货建议**——宁可只回一句 NO_REORDER
+- **负例（rop_gap≤0）绝不产补货建议**——宁可只回一句 NO_REORDER
 - 不推断库存商品之外的任何业务判断（如停售、调价）
 
 ## 上游与修复

@@ -49,22 +49,26 @@ nvidia-smi
 
 ### 镜 3 · ROP 正例 live（0:50-1:55）★核心镜头
 
-画面：终端。逐字敲入（或粘贴）：
+画面：终端。逐字敲入（或粘贴）——**走产品 API（本地 120B 全链路：决策 → 适配器签发 → 独立核算 → 审计），此路径已实测 PASS**：
 
 ```bash
-export PATH=$HOME/node26/bin:$PATH
-openclaw agent --session-id pi-dgx-demo-take1 \
-  --model ollama/nemotron-3-super:120b-a12b \
-  --message "San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？" --json
+curl -s http://127.0.0.1:8765/api/runs -X POST -H 'Content-Type: application/json' -d '{
+  "request_id":"demo-take1","session_id":"demo-take1","mode":"live",
+  "question":"San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？",
+  "sku":13001,"location":"San Francisco","weeks":12}'
 ```
 
-等待约 1-3 分钟（本地 120B 推理，可剪辑加速，但保留工具调用可见部分）。
+轮询出结果（本地 120B 约 2-7 分钟，可剪辑加速）：
 
-> 台词（边等边念）：现在跑的是**本地 Nemotron-120B**——86GB 的模型整个躺在 DGX Spark 的统一内存里，零云端。回答里每个数字都必须有工具证据，这是写进 SOP 的红线：没有工具输出，就没有回答。它正在查库存、算缺口、比供应商和运费；协议输出由 Python 适配器组装、第二个智能体独立调工具复算逐字段对账——审计盖章才算数。
+```bash
+curl -s "http://127.0.0.1:8765/api/runs/demo-take1?session_id=demo-take1" | python3 -m json.tool
+```
+
+> 台词（边等边念）：现在跑的是本地 Nemotron-120B——86GB 的模型整个躺在 DGX Spark 统一内存里，零云端。回答里每个数字都必须有工具证据：没有工具输出，就没有回答。注意架构的关键一层：**模型负责推理和叙述，八字段决策单由 Python 适配器按工具直算签发，审计层独立复算逐字段对账**——模型的嘴可以飘，签出去的合同飘不了。
 
 结果出来后，把 JSON 关键字段指给镜头看：
 
-> 台词：看这个决策——传统缺口分析说要补 3268 件，但 ROP 优化算法说：只需补 359 件。再订货点等于提前期需求加安全库存：需求波动 σ=35，95% 服务水平下安全库存只要 57 件。我们不是暴力补全缺口，而是科学计算最优订量——**减少过度库存 89%**。供应商 Nature Source Coffee，单价 34.5 加运费 2 块，全部来自工具直算，不是模型猜的。
+> 台词：看这个决策——传统缺口分析说要补 3268 件，ROP 优化算法说：只需补 **359.4** 件。再订货点 332.2，等于提前期需求加安全波动；库存 30 已跌破它，rop_gap 302、安全库存 57.4。我们不是暴力补全缺口，而是科学计算最优订量——**减少过度库存 89%**。供应商 Nature Source Coffee，单价 34.5 加运费 2 块，总价 13118.1 美元——全部来自工具直算和适配器签发，verification: PASS。
 
 ### 镜 3B · 云端备用 take（可选，剪辑插入 10-15 秒）
 
@@ -79,14 +83,15 @@ openclaw agent --session-id pi-dgx-demo-take1b \
 ### 镜 4 · 负例 live（1:55-2:20）
 
 ```bash
-openclaw agent --session-id pi-dgx-demo-take2 \
-  --model ollama/nemotron-3-super:120b-a12b \
-  --message "Seattle 仓库 SKU 13001 未来 1 周够卖吗？需要补货吗？" --json
+curl -s http://127.0.0.1:8765/api/runs -X POST -H 'Content-Type: application/json' -d '{
+  "request_id":"demo-take2","session_id":"demo-take2","mode":"tool",
+  "question":"Seattle 仓库 SKU 13001 未来 1 周够卖吗？需要补货吗？",
+  "sku":13001,"location":"Seattle","weeks":1}' | python3 -m json.tool
 ```
 
-> 台词：换一个仓库，只看一周。库存 300，需求 200，盈余 100——看最后一行。
+> 台词：换一个仓库，只看一周。库存 300，需求 200，盈余 100——看决策。
 
-高亮末行 `NO_REORDER:100`：
+高亮 `NO_REORDER` 与盈余 100：
 
 > 台词：NO_REORDER，盈余 100。它没有"建议适度补货"，没有给供应商，什么建议都没有——库存够就是够。通用大模型总倾向于显得有用，这一行是我们专门设计出来的信任时刻。
 
@@ -115,7 +120,7 @@ python3 ~/mcp_demo.py        # 仓库内副本：evidence/mcp_demo.py
 ## 录制前自检（5 分钟）
 
 1. `systemctl --user is-active openclaw-gateway` 必须是 `active`。
-2. 空跑一条 take 确认网关通：用 take0 跑正例（别占用 take1/take2）。
+2. 空跑确认链路通：用 request_id=demo-take0 走镜 3 同款 API live 命令跑一遍正例，确认最终 verification: PASS（约 2-7 分钟；别占用 take1/take2）。
 3. 前端 `http://192.168.11.205:5173` 提前打开加载完，两个模式各点一遍；Streamlit:8501 备份机位可开。
 4. 结尾卡提前双击打开确认照片加载正常（无外网依赖，照片已内嵌）。
 5. 终端字号调大（录屏可读），背景干净，敲命令慢一点。
