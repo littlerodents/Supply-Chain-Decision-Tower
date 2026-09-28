@@ -108,6 +108,8 @@ cd skills/supply-chain-control-tower/panel && python3 -m streamlit run app.py --
 
 > 失败不是浪费，是付费的学习。这份记录就是收据。
 
+**原始提交链**：从 D0 脚手架起的每一次提交（SPEC/ISA/STATUS、spike 探针、七轮评测证据）完整保留在本仓库的 [`process` 分支](https://github.com/littlerodents/repro-pack/tree/process)；`main` 为整理后的交付版。
+
 ## 团队
 
 ![团队合照](docs/images/team.jpg)
