@@ -126,15 +126,21 @@ def custom_scan(canon: pd.DataFrame, weeks: int, ship_fn, forecast_fn=None) -> d
     """在用户数据上跑巡检，报告结构与 daily_scan 一致（便于复用渲染）。"""
     sup_rows = canon[(canon["supplier"] != "") & canon["supplier"].notna() & (canon["unit_cost"] > 0)] \
         if "supplier" in canon else pd.DataFrame()
+    Z, LEAD, CV = 1.645, 1.0, 0.20  # 95% SL；自有数据无需求历史：σ 按 CV=0.2 估算、提前期按 1 周
     shortages, ample = [], []
     uniq = canon.drop_duplicates(subset=["sku", "location"], keep="first")
     for _, r in uniq.iterrows():
-        demand = float(r["weekly_demand"]) * weeks
+        mu = float(r["weekly_demand"])
+        demand = mu * weeks
+        ss = Z * (CV * mu) * (LEAD ** 0.5)
+        rop = mu * LEAD + ss
+        rop_gap = rop - float(r["quantity"])
         gap = float(r["quantity"]) - demand
         base = {"sku": r["sku"], "brand": r["product_name"] or r["sku"], "location": r["location"],
-                "stock": int(r["quantity"]), "demand": int(round(demand)), "gap": int(round(gap))}
-        if gap < 0:
-            entry = dict(base, order_qty=int(-round(gap)))
+                "stock": int(r["quantity"]), "demand": int(round(demand)), "gap": int(round(gap)),
+                "rop_gap": int(round(rop_gap)), "safety_stock": round(ss, 1)}
+        if rop_gap > 0:  # ROP 驱动：库存已跌破再订货点 = 需补货
+            entry = dict(base, order_qty=int(round(rop_gap + ss)))
             cands = sup_rows[(sup_rows["sku"] == r["sku"])].drop_duplicates(
                 subset=["supplier"], keep="first") if not sup_rows.empty else pd.DataFrame()
             if not cands.empty:
