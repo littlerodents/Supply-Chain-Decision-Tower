@@ -1,5 +1,7 @@
 # SPARK-DEPLOY · D3 部署剧本（SSH 一到就照跑）
 
+> ⚠️ **历史剧本（2026-09-23，旧 repro-pack 方向，已被 D12 选题改道废弃）**。保留作过程记录；**当前系统的部署复原手册是 [REBUILD.md](../REBUILD.md)**。下文第 3-5 步的 repro-pack skill 装载/冒烟流程属旧方向；模型分工段已按 9/29 终局口径修正（主力=本地 Nemotron-120B+适配器，云端 StepFun 仅备用，其他本地模型已移除）。
+
 > 目标：1 小时内从「裸 Spark」到「OpenClaw 里 repro-pack ready + 冒烟通过」。
 > 配方来源：官方安装器 + 训练营 workshop notebook（真实命令提取），非凭记忆。
 
@@ -33,11 +35,11 @@ openclaw config set gateway.bind lan
 openclaw config set agents.defaults.thinkingDefault off
 ```
 
-**Gateway 主脑 = 本地 Qwen（推荐）**：`openclaw config set agents.defaults.model.primary 'ollama/qwen3.6:35b'`
-——本地算力叙事 + 不需要在 Spark 放 StepFun key 给 gateway。若机器有 Ollama+Qwen 直接可用；没有就先 `ollama pull qwen3.6:35b`（37.5GB，耗时看带宽，可后台跑）。
+**Gateway 主脑 = 本地 Nemotron-120B + 适配器（项目终局配置）**：`openclaw config set agents.defaults.model.primary 'ollama/nemotron-3-super:120b-a12b'`
+——本地算力叙事 + 不需要在 Spark 放 StepFun key 给 gateway；输出协议由 Python 适配器与确定性审计兜底（17/17 全绿）。模型导入走 ModelScope 拉 GGUF 后 `ollama create`（ollama 官方源仅 2.2MB/s，ModelScope 实测 24MB/s）。
 
-**可选档（叙事加分，不进主演示）**：owner 要求保留「更大模型也跑过」的叙事口子——D3 上机时可顺手 `ollama pull` 一个更大的 Qwen（如 72B 级，FP4 约 36–40GB，128GB 统一内存放得下），拉取成功后 `openclaw config set agents.defaults.model.primary` 一行即可切换。**注意：dense 大模型在 GB10 上生成速度慢一个量级，只进 README/征文素材，主演示仍用 35B-A3B 快档**；若拉取/适配失败，记一笔「72B 无 ARM64 配方」即可，不迫。
-**skill 的主脑与 gateway 无关**：repro_pack.py 自己拿 `REPRO_*` 三值调 StepFun。
+**云端备用（可选）**：StepFun step-3.7-flash（12/12 评测通过）。需要时 `openclaw models auth` 注入 key，再 `openclaw config set agents.defaults.model.primary 'stepfun/step-3.7-flash'` 一行切换——仅作本地模型不可用或需要快速演示时的备用路由。
+**skill 的主脑与 gateway 配置一致**：本地 Nemotron-120B（适配器架构）。
 
 ## 第 3 步 · 装入 skill（训练营 cell 37 配方）
 
@@ -68,5 +70,5 @@ bash "$SKILL_DST/scripts/run.sh" <一段 30s 小录屏> --out /tmp/smoke --no-is
 
 ## 已知未知（连上后再钉）
 
-- OpenClaw 配 OpenAI 兼容 provider 的确切语法（本剧本不需要它，gateway 走本地 Qwen；仅当 Qwen 拉模型太慢才回来查 docs.openclaw.ai）
+- OpenClaw 配 OpenAI 兼容 provider 的确切语法（本剧本不需要它，gateway 走本地模型；仅当配置云端备用路由时才回来查 docs.openclaw.ai）
 - GB10 上 GPU 状态工具名（nvidia-smi 或 dmesg）
