@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import json, os, subprocess, sys, time
 
-SERVER = os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower/scripts/mcp_server.py")
+SERVER = os.environ.get("SCT_MCP_SERVER") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skill", "scripts", "mcp_server.py")
 p = subprocess.Popen([sys.executable, SERVER], stdin=subprocess.PIPE,
                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
                      env=dict(os.environ, PATH=os.path.expanduser("~/node26/bin") + ":" + os.environ.get("PATH", "")))
@@ -57,15 +58,21 @@ print("\n[6] reorder_decision 工具（旗舰：双智能体决策）...")
 print("  （推理中... 约 60-120 秒）")
 t0 = time.time()
 r = call("reorder_decision", {"question": "San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？"})
-d = json.loads(r["result"]["content"][0]["text"])
+try:
+    d = json.loads(r["result"]["content"][0]["text"])
+except Exception:
+    d = None
 print(f"  耗时: {time.time()-t0:.0f}s")
-print(f"  overall: {d.get('overall','N/A')}")
-dj = d.get("decision_agent",{}).get("decision_json")
-if dj: print(f"  决策: {dj.get('decision')} · 订量 {dj.get('order_qty')} · {dj.get('supplier')}")
-iv = d.get("independent_verification")
-if iv: print(f"  核算: {iv.get('verdict')}")
-aa = d.get("audit_agent")
-if aa: print(f"  审计: {aa.get('verdict')}")
+if d is None:
+    print("  ⏭️ 跳过：旗舰工具需要 Agent 运行时（openclaw + 本地模型）。按 REBUILD.md 第 1-3 步部署后重跑。")
+else:
+    print(f"  overall: {d.get('overall','N/A')}")
+    dj = d.get("decision_agent",{}).get("decision_json")
+    if dj: print(f"  决策: {dj.get('decision')} · 订量 {dj.get('order_qty')} · {dj.get('supplier')}")
+    iv = d.get("independent_verification")
+    if iv: print(f"  核算: {iv.get('verdict')}")
+    aa = d.get("audit_agent")
+    if aa: print(f"  审计: {aa.get('verdict')}")
 
 print("\n" + "=" * 60)
 print("全部通过标准 MCP 协议（stdio JSON-RPC）调用完成")

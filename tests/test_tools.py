@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TOOLS = os.path.join(BASE, "skills", "supply-chain-control-tower", "scripts", "tools.py")
+TOOLS = os.path.join(BASE, "skill", "scripts", "tools.py")
 
 spec = importlib.util.spec_from_file_location("tools", TOOLS)
 tools = importlib.util.module_from_spec(spec)
@@ -67,7 +67,7 @@ def test_gap_negative_case_exists():
 
 def test_kb_products():
     import pandas as pd
-    sup = pd.read_csv(os.path.join(BASE, "skills", "supply-chain-control-tower/data/suppliers.csv"))
+    sup = pd.read_csv(os.path.join(BASE, "skill", "data/suppliers.csv"))
     assert len(sup[sup.sku == 12001]) == 2  # 双供应商比价场景存在性锁
 
 

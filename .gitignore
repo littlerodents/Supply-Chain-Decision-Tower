@@ -15,3 +15,6 @@ __pycache__/
 node_modules/
 .agents/
 .claude/
+
+# 运行产物（跑 quick start 会在本地生成巡检报告）
+skill/panel/reports/

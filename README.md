@@ -73,18 +73,23 @@ PASS / FAIL 判定 + 可下载决策单
 ## 快速开始（DGX Spark 上）
 
 ```bash
+# 依赖（工具层/巡检/面板）：numpy、pandas、streamlit
+python3 -m pip install -r requirements.txt
+
 # 每日巡检（ROP 驱动）：全 SKU×仓库 一键扫描
-python3 skills/supply-chain-control-tower/scripts/daily_scan.py
+python3 skill/scripts/daily_scan.py
 
 # MCP 演示（7 工具一键全通）
 python3 evidence/mcp_demo.py
 
 # 经典算法（安全库存/ROP/EOQ/报童）
-python3 skills/supply-chain-control-tower/scripts/algorithms.py from-forecast --sku 13001 --location "San Francisco" --weeks 12
+python3 skill/scripts/algorithms.py from-forecast --sku 13001 --location "San Francisco" --weeks 12
 
 # 面板
-cd skills/supply-chain-control-tower/panel && python3 -m streamlit run app.py --server.port 8501
+cd skill/panel && python3 -m streamlit run app.py --server.port 8501
 ```
+
+> 以上命令在仓库内可直接运行（需 numpy/pandas，面板另需 streamlit）。实时 Agent / API 服务 / 评测套件需按 [REBUILD.md](REBUILD.md) 部署到运行时路径（默认 `~/.openclaw/workspace/skills/supply-chain-control-tower`，可用 `SCT_BASE` 覆盖）。
 
 ## 文档
 

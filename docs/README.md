@@ -37,7 +37,7 @@ PASS / FAIL 判定 JSON（mismatches 精确到字段）
 
 ```bash
 # 每日巡检（产品形态）：全 SKU×仓库 一键扫描，秒级出短缺排行与决策单草稿
-python3 skills/supply-chain-control-tower/scripts/daily_scan.py
+python3 skill/scripts/daily_scan.py
 
 # 双智能体流水线（每 take 自动唯一会话）
 ~/isc-submission-20260927/bin/two-agent-pipeline.sh "San Francisco 仓库 SKU 13001 未来 12 周够卖吗？需要补货吗？" demo
