@@ -26,7 +26,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-BASE = os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
+BASE = os.environ.get("SCT_BASE") or os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
 AGENT_TIMEOUT = 600  # 本地 120B 实测单环可达 390-600s（决策+审计两环）
 CST = timezone(timedelta(hours=8))

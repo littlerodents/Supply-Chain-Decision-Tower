@@ -6,7 +6,7 @@ from datetime import datetime, timezone, timedelta
 OPENCLAW = os.path.expanduser("~/node26/bin/openclaw")
 MODEL = "ollama/nemotron-3-super:120b-a12b-t0"  # temperature=0 烤入，与网关默认一致
 ENV = dict(os.environ, PATH=os.path.expanduser("~/node26/bin") + ":" + os.environ.get("PATH", ""))
-BASE = os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
+BASE = os.environ.get("SCT_BASE") or os.path.expanduser("~/.openclaw/workspace/skills/supply-chain-control-tower")
 CST = timezone(timedelta(hours=8))
 
 spec = importlib.util.spec_from_file_location("tools", os.path.join(BASE, "scripts", "tools.py"))

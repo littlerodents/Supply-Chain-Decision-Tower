@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """金答案生成器（ISC-16 判据）：绕过 LLM，用 tools 直接算每个任务的标准答案。
 
-运行：python3 skills/supply-chain-control-tower/evals/gold_gen.py
+运行：python3 skill/evals/gold_gen.py
 产物：同目录 gold.json（任务 id → 金答案）。金答案直算，零手填。
 """
 import importlib.util
