@@ -3,7 +3,7 @@
 
 用法（本地跑，Nemotron 走 SSH 隧道 → 租机 ollama 的 OpenAI 兼容端点）：
     # 先开隧道（复用 ControlMaster）:
-    # sshpass -e ssh -p 39954 $CM -N -L 11434:127.0.0.1:11434 sparker@spark.zhujihezi.com &
+    # ssh -p <SSH端口> <用户>@<租机地址> -N -L 11434:127.0.0.1:11434 &
     python3 tools/compare_fde.py --runs 3
     # 单测一端:
     python3 tools/compare_fde.py --runs 3 --only nemotron-local

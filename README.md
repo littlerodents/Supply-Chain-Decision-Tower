@@ -95,7 +95,7 @@ cd skills/supply-chain-control-tower/panel && python3 -m streamlit run app.py --
 | [本地模型攻坚终报](docs/本地模型攻坚终报.md) | Nemotron 五轮调优全负 + 148B 部署尝试 |
 | [前端对接规格书](docs/03-新前端对接规格书.md) | HTTP API 契约（/api/catalog + /api/runs） |
 | [ISC-24 表单内容包](docs/ISC-24-表单内容包.md) | 提交材料 |
-| [ISC-25 征文初稿](docs/ISC-25-征文初稿.md) | 叙述文稿 |
+| [参赛征文](docs/征文-供应链控制塔.md) | 叙述文稿 |
 | [ISC-25 B站录屏脚本](docs/ISC-25-B站录屏脚本.md) | 演示分镜 |
 | [复原手册](REBUILD.md) | 换一台 DGX Spark 怎么把系统原样跑起来 |
 
