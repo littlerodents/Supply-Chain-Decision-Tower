@@ -99,6 +99,50 @@ def run_agent(question: str, brain: tuple, use_skill: bool):
     return final, rounds, calls, round(time.time() - t0, 1), tokens
 
 
+AUDIT_SYS = """你是供应链决策审计 agent（另一独立智能体，与作答者无通信）。
+用户会给你：原问题 + 作答者的最终回答。你的职责：独立使用工具（bash 调用 tools.py，与作答者相同协议）复核关键数字（缺口/库存/预测/单价/运费/总量），然后只输出一行判定：
+- 数字全部正确 → `VERDICT: PASS`
+- 有错 → `VERDICT: FAIL` + 一个修正后的八字段决策 JSON 代码块（或 NO_REORDER:<gap>）
+不要寒暄，不要重复作答者的推理。"""
+
+
+def run_verifier(question: str, worker_final: str, brain: tuple):
+    """双 agent 审计：verifier 独立复核 worker 终答。返回 (final_text, tool_calls, latency)。"""
+    msgs = [{"role": "user", "content":
+             f"{AUDIT_SYS}\n\n---\n\n原问题：{question}\n\n作答者最终回答：\n{worker_final[:3000]}\n\n请独立复核。"}]
+    t0, calls = time.time(), 0
+    final = worker_final
+    for _ in range(4):
+        out, _u, _l = chat(msgs, model=brain[1], base_url=brain[0], api_key=brain[2], timeout=300)
+        final = out
+        cmds = extract_bash(out)
+        if not cmds:
+            break
+        feedback = []
+        for c in cmds[:4]:
+            calls += 1
+            r = subprocess.run(c, shell=True, capture_output=True, text=True, timeout=90)
+            feedback.append(f"$ {c}\n{r.stdout.strip()[:2000]}")
+        msgs.append({"role": "assistant", "content": out})
+        msgs.append({"role": "user", "content": "工具输出：\n" + "\n\n".join(feedback) + "\n\n给出最终判定（PASS 或 FAIL+修正JSON）。"})
+    return final, calls, round(time.time() - t0, 1)
+
+
+def apply_verdict(worker_final: str, verdict_text: str) -> str:
+    """FAIL 且审计给出修正 JSON/NO_REORDER 时采纳修正，否则维持原答。"""
+    if "VERDICT: FAIL" in verdict_text:
+        if "NO_REORDER" in verdict_text:
+            return verdict_text[verdict_text.find("NO_REORDER"):]
+        m = re.findall(r"\{[^{}]*\"decision\"[^{}]*\}", verdict_text, re.DOTALL)
+        for s in reversed(m):
+            try:
+                json.loads(s)
+                return s
+            except Exception:  # noqa: BLE001
+                continue
+    return worker_final
+
+
 def judge(task, gold, final_text, tool_calls) -> dict:
     k, tid = task["kind"], task["id"]
     res = {"task": tid, "pass": False}
@@ -135,6 +179,7 @@ def main():
     ap.add_argument("--brain", choices=list(BRAINS), required=True)
     ap.add_argument("--context", choices=["bare", "skill"], required=True)
     ap.add_argument("--tasks", help="逗号分隔 id，缺省全量")
+    ap.add_argument("--verify", choices=list(BRAINS), help="审计 agent 所用主脑（双 agent 协同）")
     a = ap.parse_args()
     tasks = json.load(open(os.path.join(SKILL, "evals", "evals.json")))["tasks"]
     gold = json.load(open(os.path.join(SKILL, "evals", "gold.json")))
@@ -145,8 +190,15 @@ def main():
     results = []
     for t in tasks:
         final, rounds, calls, lat, tok = run_agent(t["query"], brain, a.context == "skill")
+        v_info = {}
+        if a.verify and t["kind"] in ("decision", "negative"):
+            v_text, v_calls, v_lat = run_verifier(t["query"], final, BRAINS[a.verify])
+            corrected = apply_verdict(final, v_text)
+            v_info = {"verifier": a.verify, "verdict": ("FAIL-corrected" if corrected != final else "PASS/kept"),
+                      "verifier_tools": v_calls, "verifier_latency_s": v_lat}
+            final = corrected
         r = judge(t, gold[t["id"]], final, calls)
-        r.update({"rounds": rounds, "tool_calls": calls, "latency_s": lat, "tokens": tok})
+        r.update({"rounds": rounds, "tool_calls": calls, "latency_s": lat, "tokens": tok, **v_info})
         results.append(r)
         print(f"[{a.brain}/{a.context}] {t['id']:14s} {'✓' if r['pass'] else '✗'} "
               f"rounds={rounds} tools={calls} lat={lat}s | 期望 {r.get('expect','')[:50]}")

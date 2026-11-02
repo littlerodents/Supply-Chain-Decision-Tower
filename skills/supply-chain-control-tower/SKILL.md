@@ -30,24 +30,26 @@ metadata: { "openclaw": { "emoji": "🚦", "requires": { "bins": ["python3"] } }
 ```json
 {"decision":"REORDER","sku":13001,"location":"San Francisco","weeks":12,
  "order_qty":3268,"supplier":"Nature Source Coffee","unit_cost":34.5,
- "shipping_cost":2.0,"total_cost":119284.0,
+ "shipping_cost":2.0,"total_cost":119282.0,
  "rationale":"未来12周预测需求3298，现库30，缺3268；唯一供应商 Seattle，单价34.5+运费2.0",
  "tool_trace":["gap","suppliers","shipping"]}
 ```
 
 负例末行（纯文本）：`NO_REORDER:140`
 
-## 工具（bash 调用，全部 JSON 输出；脚本相对本 skill 目录）
+## 工具（bash 调用，全部 JSON 输出；从任意当前目录都能调用）
+
+OpenClaw 上的安装路径如下。**不要猜系统用户名或工作目录，也不要把 skill 名称当可调用工具**；只运行实际存在的 `scripts/tools.py`。其他宿主先定位所读 `SKILL.md` 的绝对路径，将 `S` 改为其同目录的 `scripts/tools.py` 绝对路径。找不到脚本时报告路径错误，不编造业务数字。
 
 ```bash
-S=scripts/tools.py
-python3 $S gap --sku 13001 --location "San Francisco" --weeks 12   # 缺口（决策原语）
-python3 $S inventory --sql "SELECT * FROM inventory WHERE location='Seattle'"
-python3 $S suppliers --sql "SELECT * FROM suppliers WHERE sku=12001 ORDER BY unit_cost"
-python3 $S forecast --sku 11001 --location "San Francisco" --weeks 8
-python3 $S shipping --source Seattle --destination "San Francisco"
-python3 $S chart --sku 13001 --location "San Francisco" --weeks 26 --out /tmp/f.png
-python3 $S kb   # 产品/仓库/供应商拓扑全量
+S="$HOME/.openclaw/workspace/skills/supply-chain-control-tower/scripts/tools.py"
+python3 "$S" gap --sku 13001 --location "San Francisco" --weeks 12   # 缺口（决策原语）
+python3 "$S" inventory --sql "SELECT * FROM inventory WHERE location='Seattle'"
+python3 "$S" suppliers --sql "SELECT * FROM suppliers WHERE sku=12001 ORDER BY unit_cost"
+python3 "$S" forecast --sku 11001 --location "San Francisco" --weeks 8
+python3 "$S" shipping --source Seattle --destination "San Francisco"
+python3 "$S" chart --sku 13001 --location "San Francisco" --weeks 26 --out /tmp/f.png
+python3 "$S" kb   # 产品/仓库/供应商拓扑全量
 ```
 
 完整 API 语义：`references/api.md`；业务映射（品牌名→SKU、仓库、供应商格局）：`references/knowledge.md`。
