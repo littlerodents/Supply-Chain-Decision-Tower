@@ -1,32 +1,24 @@
-# BENCHMARK · supply-chain-control-tower skill（四象限实测）
+# BENCHMARK · supply-chain-control-tower（阶段性测量，非验收报告）
 
-> 2026-09-25 · 方法：同一任务集（8 正例决策/查询 + 3 负例 + 1 无关，金答案由工具直算，零手填），{裸 prompt, +skill} × {step-3.7-flash（StepFun 云端）, nemotron-3-super-120b（GB10 本地）} 四象限。
-> 评测协议：agent 模拟循环（模型可发 bash 调工具，白名单执行，≤5 轮）；判定只看终答对金答案。原始数据 `evidence/evals/results-*.json`，一键复跑 `python3 tools/run_evals.py --brain <b> --context <c>`。
+> 2026-09-26 核对。12 题任务集：8 条正例、3 条负例、1 条无关；金答案由工具直算。下表是**本地评测 runner** 的留存文件统计，不是 DGX OpenClaw 真入口的通过率。`evidence/` 被 gitignore，私仓读者目前无法仅凭仓库复核原始 JSON。`tools/run_evals.py` 有未验收的 `--verify` 实验改动，重跑前须隔离输出，不能覆盖旧证据。
 
-## 主表：命中率 / 延迟中位
+| 模型与条件 | 现存原始文件 | 留存结果 | 解释边界 |
+|---|---|---|---|
+| StepFun / 裸 | `results-stepfun-bare.json` | 2/12 | 裸组没有与 +skill 组等同的数据/工具权限，不能直接计算 Skill 因果增益 |
+| StepFun / +skill | `results-stepfun-skill-run2.json` | 10/12 | 曾记录 12/12，但同名原始文件现被审计试验覆盖成 4/4（审计工具调用 0 次），**不能作为完整 12 题复核证据** |
+| Nemotron / 裸 | `results-nemotron-bare.json` | 2/12 | 同上，不能直接归因 |
+| Nemotron / +skill | `results-nemotron-skill.json`、`-run2.json`、`-run3.json` | **12/12、9/12、11/12** | 轮次上限/提示词版本不完全相同；单次 12/12 不能称稳定满分 |
 
-| | 裸 prompt | + skill |
-|---|---|---|
-| **step-3.7-flash**（云端 API） | 2/12（16.7%）· 4.5s | **12/12（100%）** · 6.6s · 33 次工具调用 |
-| **nemotron-3-super-120b**（GB10 本地） | 2/12（16.7%）· 28s | **12/12（100%）** · 97s · 33 次工具调用 |
+以上文件均在本地 `evidence/evals/`。StepFun 当前 `results-stepfun-skill.json` 仅 **4 条**，不是原来的 12 题结果；历史 `summary.json` 对 StepFun/+skill 目前也仅记 `n=1`。不得拿被覆盖的文件名或 4/4 冒烟恢复已失去的基线。
 
-## 三个结论
+## 真入口：2026-09-26 DGX OpenClaw（阻塞）
 
-1. **skill 是能力的载体，主脑只是引擎**：两颗架构迥异的脑子（云端多模态旗舰 vs 本地 MoE 120B）裸奔时以同样姿势翻车（2/12，全是无工具幻觉数字），装上同一份 skill 后双双 100%——正确性由 skill 的知识+工具契约决定，不由模型档次决定。
-2. **换脑自由**：同一 skill、同一任务集，换脑后正确率不变、只有速度差（6.6s vs 97s）——「换脑三值」的实证：`base_url/model/api_key` 三值切换，能力资产不绑定任何厂商。
-3. **本地算力可行**：120B MoE 在 DGX Spark（119Gi 统一内存）上全程参与评测，33 次工具链调用零失败——「Agent Skills × 大模型 × 本地算力」三融合的实测底座。
+在真实 Gateway 用 SKU 13001 / San Francisco / 12 周自然问句，多个新会话 `status=ok` 却只说要查运费、**没有决策 JSON**；按绝对路径试探与临时 Skill 文档修正都未解决，远端文档已回滚。OpenClaw 的 Skill 列表虽为 `✓ ready`，不能替代入口验收。
 
-## 负例零误触（P0 红线）
+OpenClaw 官方支持 `$技能名` 显式引用；一次正例因此输出了正确的数量 **3268**、供应商 Nature Source Coffee、总价 **119282**，但只是 Markdown，**未满足决策 JSON 契约**。另一独立负例（SKU 13001 / Seattle / 1 周）工具直算缺口 **+100**，Gateway 在 26 次工具调用后仍没有给出 `NO_REORDER:100`。因此不能写「负例零误触已在真入口验证」。详见 `evidence/2026-09-26-iris-preflight/PROBE.md` 与 Gateway 留存轨迹；入口证据为代理操作机器自证，非主人签收。
 
-两颗脑子 × 带 skill：负例 3/3 + 无关 1/1 全部正确拒绝（`NO_REORDER:<余量>` / 零工具调用）；裸 prompt 下负例全部误触（编造补货建议或无法给出依据）。
+## 目前可以／不可以得出的结论
 
-## 过程发现（skill 工程笔记，也是征文素材）
-
-- **触发≠遵守**：3.7-flash 在无硬规则版本下偶发「自信裸答」（跳过工具直接作答，10-11/12 波动）。修复：SKILL.md 加入硬规则「凡数字必须先有工具输出作证据」→ 12/12 稳定。教训：SOP 步骤不够，合规要写成红线。
-- 上游案例三处 bug 在移植期修复（hash 不稳定 ×2、f-string 致库存恒 0），转化即修复。
-
-## 版本注记（方差如实记录）
-
-- 3.7+skill：无硬规则版 10-11/12（波动源=自信裸答）→ **硬规则版 12/12**（表中数字）。
-- nemotron+skill：run1 12/12（轮上限5）；run2 9/12——其中 2 题为**5 轮耗尽**（13 次工具调用仍在验证，非答错）→ 轮上限提至 8 后 run3 复测中，落盘后更新。
-- 方法论注：LLM 评测必须多轮——单轮 12/12 会高估稳定性，我们公开全部轮次。
+- **已证实**：工具层对指定样本可直算金答案；DGX 上 OpenClaw 能识别安装的 Skill；本地 runner 在若干条件下有上述命中数。
+- **未证明**：宿主 OpenClaw 自然问句能稳定按契约出单；两种模型等权限对照下的 Skill 因果增益；跨模型稳定性、有效的多 agent 审计、Iris 串接收益。
+- **下一验收**：先在两个独立新会话得到严格正例 JSON（`decision=REORDER`、3268、Nature Source Coffee、119282，含工具证据），并在负例新会话末行输出 `NO_REORDER:100`、零补货建议；再用相同数据/工具权限和锁定提示词版本重复评测，单列失败轮与延迟。未过则保留阻塞状态，不拍成成功演示。
