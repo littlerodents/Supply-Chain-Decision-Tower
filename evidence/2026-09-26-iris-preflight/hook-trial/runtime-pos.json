@@ -1,0 +1,6 @@
+{
+  "session_id": "pi-dgx-hooktest-pos1",
+  "final_text": "Now let me read the SKILL.md file to understand how to use the supply chain control tower skill:",
+  "observed_tools": ["read", "tool_search", "ls"],
+  "verdict": "FAIL: no decision JSON, no 3268/119282/Nature Source Coffee; model announced intent then stopped; /home/parker never attempted so the hook had no trigger opportunity"
+}

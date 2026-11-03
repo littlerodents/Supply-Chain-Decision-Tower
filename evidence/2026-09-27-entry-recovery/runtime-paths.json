@@ -1,0 +1,10 @@
+{
+  "observed_at": "2026-09-27T07:31:03.250+00:00",
+  "gateway_exe": "/home/sparker/node26/bin/node",
+  "gateway_cwd": "/home/sparker",
+  "gateway_script_paths": [
+    "/home/sparker/node26/lib/node_modules/openclaw/dist/index.js"
+  ],
+  "gateway_exec_path": "/home/sparker/node26/bin/node",
+  "listening_panel": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      2048               *:8501            *:*    users:((\"python3\",pid=2006237,fd=6))"
+}

@@ -1,0 +1,6 @@
+{
+  "session_id": "pi-dgx-hooktest-pos2",
+  "final_text": "Let me search more specifically for the supply chain control tower skill:",
+  "observed_tools": ["tool_search"],
+  "verdict": "FAIL: no decision JSON, no 3268/119282/Nature Source Coffee; 3 tool calls then self-stopped; all 5 'parker' hits were /home/sparker system-prompt paths, not the bad path"
+}

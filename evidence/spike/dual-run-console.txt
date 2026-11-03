@@ -1,0 +1,10 @@
+[step-3.7-flash] run1: lat=9.32s tok=5437 hits=1/3 has_bug=True
+[step-3.7-flash] run2: lat=10.9s tok=5731 hits=1/3 has_bug=True
+[step-3.7-flash] run3: lat=10.18s tok=5350 hits=1/3 has_bug=True
+[step-5-preview] run1: lat=15.87s tok=6010 hits=1/3 has_bug=True
+[step-5-preview] run2: lat=16.33s tok=5624 hits=1/3 has_bug=True
+[step-5-preview] run3: lat=11.9s tok=5427 hits=1/3 has_bug=True
+
+=== 摘要（中位延迟 / 平均 tokens / 质量命中）===
+step-3.7-flash       lat=10.18s tok=5506 hits=[1, 1, 1]
+step-5-preview       lat=15.87s tok=5687 hits=[1, 1, 1]

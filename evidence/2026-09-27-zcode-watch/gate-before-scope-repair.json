@@ -1,0 +1,16 @@
+{
+  "outcome_id": "zcode-dgx-monitor-report-20260927",
+  "valid": false,
+  "invalid_reason": "contradictory current evidence for RUNTIME:OUTCOME",
+  "stage": "UNPROVEN",
+  "verified_layers": [],
+  "missing_layers": [
+    "SOURCE",
+    "BUILD",
+    "RUNTIME",
+    "OWNER_ENTRYPOINT"
+  ],
+  "failed_layers": [],
+  "unfit_evidence": [],
+  "owner_notes": []
+}

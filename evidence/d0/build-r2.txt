@@ -1,0 +1,8 @@
+=== 3. 好卡过验 ===
+VALID
+GOOD_CARD: PASS
+=== 4. 红队：坏卡必须以正确理由被拒 ===
+RED_TEAM: PASS (两张坏卡均以校验理由被拒)
+RED_TEAM_EXIT=0
+=== 回归：py_compile ===
+PASS

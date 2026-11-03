@@ -1,0 +1,5 @@
+=== 完整链路含 gh issue（不加 --no-issue）===
+[issue] https://github.com/littlerodents/repro-pack/issues/1
+PACK:/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/packs/d2-issue-test
+=== 验证 issue 真实存在 ===
+1	OPEN	[repro-pack] network: Save 按钮触发的保存操作		2026-09-23T06:51:07Z

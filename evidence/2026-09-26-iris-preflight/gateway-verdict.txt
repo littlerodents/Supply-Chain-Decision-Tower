@@ -1,0 +1,7 @@
+2026-09-26 DGX OpenClaw Gateway 真入口（代理操作的机器证据，非主人签收）
+问句：San Francisco 仓库的 SKU 13001 未来 12 周够卖吗？如果不够，需要补货多少、找哪个供应商、总成本多少？只查询，不实际下单。
+契约：正例必须生成 decision=REORDER、order_qty=3268、supplier=Nature Source Coffee、total_cost=119282 的完整决策 JSON；独立负例应 NO_REORDER。不是以进程 exit=0/status=ok 代替业务验收。
+前：openclaw agent --session-id pi-dgx-20260926-pos1 --json --timeout 420 → status=ok / 116239ms / 9 calls / 3 failures；答复只说需要查运费，无 JSON。相同 session 续问 → status=ok / 355810ms / 73 calls / 2 failures；答复只说准备运行 shipping，无 JSON。
+本地文档修复临时部署后：新 session pi-dgx-20260926-pos2 同问句 → status=ok / 134355ms / 12 calls / 5 failures；答复仍只说需要查运费，无 JSON。脱敏轨迹指出把 skill 视为 callable tool、read/ls 错指 /home/parker；远端 SKILL 已恢复原版。
+诊断（不是自然交互验收）：显式给正确 /home/sparker 路径的新 session pi-dgx-20260926-path-diagnostic → status=ok / 112688ms / 19 calls / 11 failures，仍访问 /home/parker 路径，只说查看 workspace，无 JSON。
+判据结果：正例 FAIL；负例未跑，UNPROVEN；Iris 串接未安装，UNPROVEN。原始 JSON 在 DGX 私有 /tmp/pi-dgx-*.json；三份内建脱敏轨迹在 DGX 私有 ~/.openclaw/trajectory-exports/，无凭据/原始轨迹对外发布。

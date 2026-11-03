@@ -1,0 +1,1 @@
+{"schema_version":"1.0","has_bug":true,"confidence":0.9,"source":{"recording":"pos-001.mp4","duration_sec":30},"bug":{"type":"ui-rendering","severity":"major","location":"设置页保存按钮","error_text":"","timestamps":[12.5],"repro_steps":["打开设置页","点击保存"],"affected_area":"settings"}}

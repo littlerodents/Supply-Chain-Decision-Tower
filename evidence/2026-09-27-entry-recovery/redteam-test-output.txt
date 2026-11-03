@@ -1,0 +1,9 @@
+valid_positive_control PASS PASS
+wrong_total_control FAIL FAIL
+missing_required_rationale_and_trace FAIL PASS
+negative_order_quantity_accepted FAIL PASS
+correct_negative_control PASS PASS
+wrong_negative_gap FAIL PASS
+negative_with_reorder_advice FAIL PASS
+FALSE_PASSES 4
+DEPLOYED_DATA_LOCKED_CASES_MATCH

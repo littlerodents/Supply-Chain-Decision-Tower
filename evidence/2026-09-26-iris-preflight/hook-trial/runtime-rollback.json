@@ -1,0 +1,7 @@
+{
+  "action": "openclaw plugins disable pi-supply-read-guard",
+  "result": "Disabled plugin \"pi-supply-read-guard\".",
+  "pids_after": {"gateway": 2010301, "spawn_broker": 2010380, "streamlit_panel": 2006235},
+  "leftovers": "plugin dir /tmp/pi-supply-read-guard and run outputs /tmp/pi-dgx-hook-{pos1,pos2,neg1}.json remain on DGX /tmp (inert; owner may clean)",
+  "note": "manual review record; monitor does not auto-execute rollback"
+}

@@ -1,0 +1,61 @@
+locator.uncheck: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('checkbox', { name: /串审计智能体/ })[22m
+[2m    - locator resolved to <input checked title="" tabindex="0" type="checkbox" data-react-aria-pressable="true" aria-label="串审计智能体（第二个真实 LLM 智能体独立复算）"/>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <label data-rac="" data-selected="true" data-react-aria-pressable="true" class="st-emotion-cache-7tv5ne e15oan334">…</label> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-zy6yx3 e15ve43o4">…</div> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <label data-rac="" data-selected="true" data-react-aria-pressable="true" class="st-emotion-cache-7tv5ne e15oan334">…</label> intercepts pointer events[22m
+[2m  2 × retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <svg viewBox="0 0 10 8" aria-hidden="true">…</svg> from <div class="st-emotion-cache-xjxhw3 e15oan335">…</div> subtree intercepts pointer events[22m
+[2m  7 × retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-zy6yx3 e15ve43o4">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <label data-rac="" data-selected="true" data-react-aria-pressable="true" class="st-emotion-cache-7tv5ne e15oan334">…</label> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <svg viewBox="0 0 10 8" aria-hidden="true">…</svg> from <div class="st-emotion-cache-xjxhw3 e15oan335">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <svg viewBox="0 0 10 8" aria-hidden="true">…</svg> from <div class="st-emotion-cache-xjxhw3 e15oan335">…</div> subtree intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 500ms[22m
+

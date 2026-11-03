@@ -1,0 +1,9 @@
+=== run.sh 入口冒烟 ===
+VALID
+=== 自包含安装态模拟（拷到陌生目录） ===
+VALID
+STANDALONE VALID OK
+=== 安装态 E2E：正例 ===
+PACK:/tmp/dgx/pack-e2e2
+=== 安装态 E2E：负例 ===
+NO_BUG_FOUND

@@ -1,0 +1,293 @@
+{
+  "observed_at": "2026-09-27T07:36:53.001+00:00",
+  "agents": [
+    {
+      "id": "main",
+      "name": "main",
+      "model": "stepfun/step-3.7-flash",
+      "workspace": "/home/sparker/.openclaw/workspace",
+      "agentDir": "/home/sparker/.openclaw/agents/main/agent"
+    },
+    {
+      "id": "auditor",
+      "name": "auditor",
+      "model": "stepfun/step-3.7-flash",
+      "workspace": "/home/sparker/.openclaw/workspace",
+      "agentDir": "/home/sparker/.openclaw/agents/auditor/agent"
+    }
+  ],
+  "sessions_help": "OpenClaw 2026.9.5 (ec9c1a1) — All your chats, one OpenClaw.\n\nUsage: openclaw sessions [options] [command]\n\nList stored conversation sessions\n\nOptions:\n  --active <minutes>  Only show sessions updated within the past N minutes\n  --agent <id>        Agent id to inspect (required for multiple explicit\n                      agents)\n  --all-agents        Aggregate sessions across all configured agents (default:\n                      false)\n  -h, --help          Display help for command\n  --json              Output as JSON (default: false)\n  --limit <count>     Max sessions to show (default: 100; use \"all\" for full\n                      output)\n  --store <path>      Legacy session store selector path\n  --verbose           Verbose logging (default: false)\n\nCommands:\n  archive             Archive stored sessions via the running gateway\n  cleanup             Run session-store maintenance now\n  compact             Compact a stored session transcript via the running\n                      gateway\n  delete              Delete stored sessions and their live artifacts via the\n                      running gateway. Retained archives can remain searchable.\n  export-trajectory   Export a redacted trajectory bundle for a stored session\n  list                List stored conversation sessions\n  tail                Tail human-readable session trajectory progress\n\nExamples:\n  openclaw sessions\n    List all sessions.\n  openclaw sessions --agent work\n    List sessions for one agent.\n  openclaw sessions --all-agents\n    Aggregate sessions across agents.\n  openclaw sessions --active 120\n    Only last 2 hours.\n  openclaw sessions --limit 25\n    Show the newest 25 sessions.\n  openclaw sessions --json\n    Machine-readable output.\n  openclaw sessions --store ./tmp/sessions.sqlite\n    Use a specific session store.\n\nShows token usage per session when the agent reports it; set the model entry's contextTokens to cap the window and show %.\n\nDocs: https://docs.openclaw.ai/cli/sessions",
+  "main_sessions_exists": true,
+  "project_named_tmp_files": [
+    {
+      "name": "pi-dgx-pos2.json",
+      "directory": false,
+      "bytes": 13249,
+      "mtime": "2026-09-25T16:43:48.635+00:00"
+    },
+    {
+      "name": "pi-dgx-explicit-skill.json",
+      "directory": false,
+      "bytes": 15733,
+      "mtime": "2026-09-26T07:05:03.040+00:00"
+    },
+    {
+      "name": "pi-dgx-step26-pos1.json",
+      "directory": false,
+      "bytes": 706,
+      "mtime": "2026-09-26T14:03:10.190+00:00"
+    },
+    {
+      "name": "pi-dgx-explicit-export.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T07:07:15.071+00:00"
+    },
+    {
+      "name": "pi-dgx-pos1.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:14:30.293+00:00"
+    },
+    {
+      "name": "pi-dgx-step26c-pos1.json",
+      "directory": false,
+      "bytes": 29187,
+      "mtime": "2026-09-26T14:44:14.488+00:00"
+    },
+    {
+      "name": "pi-dgx-audit27-aud.json",
+      "directory": false,
+      "bytes": 30787,
+      "mtime": "2026-09-26T22:02:30.575+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-pos1.json",
+      "directory": false,
+      "bytes": 28654,
+      "mtime": "2026-09-26T17:45:47.036+00:00"
+    },
+    {
+      "name": "pi-dgx-export.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:33:17.152+00:00"
+    },
+    {
+      "name": "pi-dgx-step-pos1.json",
+      "directory": false,
+      "bytes": 572,
+      "mtime": "2026-09-26T13:27:55.855+00:00"
+    },
+    {
+      "name": "pi-dgx-pos2.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:41:33.563+00:00"
+    },
+    {
+      "name": "pi-dgx-path-diagnostic.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:46:30.947+00:00"
+    },
+    {
+      "name": "pi-dgx-path-diagnostic.json",
+      "directory": false,
+      "bytes": 13299,
+      "mtime": "2026-09-25T16:48:24.458+00:00"
+    },
+    {
+      "name": "pi-dgx-neg-skill.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T07:07:40.637+00:00"
+    },
+    {
+      "name": "pi-dgx-hook-neg1.json",
+      "directory": false,
+      "bytes": 13918,
+      "mtime": "2026-09-26T09:53:01.616+00:00"
+    },
+    {
+      "name": "pi-dgx-step26c-pos2.json",
+      "directory": false,
+      "bytes": 29570,
+      "mtime": "2026-09-26T14:44:39.115+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-neg1.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T17:46:19.876+00:00"
+    },
+    {
+      "name": "pi-dgx-step26b-pos1.json",
+      "directory": false,
+      "bytes": 29497,
+      "mtime": "2026-09-26T14:43:16.409+00:00"
+    },
+    {
+      "name": "pi-dgx-qwen26-pos1.json",
+      "directory": false,
+      "bytes": 13813,
+      "mtime": "2026-09-26T17:00:18.907+00:00"
+    },
+    {
+      "name": "pi-dgx-pos1.json",
+      "directory": false,
+      "bytes": 13240,
+      "mtime": "2026-09-25T16:16:27.305+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-pos2.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T17:46:00.012+00:00"
+    },
+    {
+      "name": "pi-dgx-nem26-pos2.json",
+      "directory": false,
+      "bytes": 16284,
+      "mtime": "2026-09-26T16:21:07.759+00:00"
+    },
+    {
+      "name": "pi-dgx-step26c-neg1.json",
+      "directory": false,
+      "bytes": 27981,
+      "mtime": "2026-09-26T14:45:01.241+00:00"
+    },
+    {
+      "name": "pi-dgx-pos1-turn2.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:19:18.880+00:00"
+    },
+    {
+      "name": "pi-dgx-qwen26-neg1.json",
+      "directory": false,
+      "bytes": 13671,
+      "mtime": "2026-09-26T17:04:06.736+00:00"
+    },
+    {
+      "name": "pi-dgx-smoke26.json",
+      "directory": false,
+      "bytes": 13126,
+      "mtime": "2026-09-26T14:07:09.229+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-pos2.json",
+      "directory": false,
+      "bytes": 29906,
+      "mtime": "2026-09-26T17:46:12.813+00:00"
+    },
+    {
+      "name": "pi-dgx-explicit-export.json",
+      "directory": false,
+      "bytes": 492,
+      "mtime": "2026-09-26T07:07:16.256+00:00"
+    },
+    {
+      "name": "pi-dgx-audit27-dec.json",
+      "directory": false,
+      "bytes": 30161,
+      "mtime": "2026-09-26T22:01:44.094+00:00"
+    },
+    {
+      "name": "pi-dgx-export-pos2.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:45:00.828+00:00"
+    },
+    {
+      "name": "pi-dgx-export-meta.json",
+      "directory": false,
+      "bytes": 449,
+      "mtime": "2026-09-25T16:33:18.582+00:00"
+    },
+    {
+      "name": "pi-dgx-nem26-neg1.json",
+      "directory": false,
+      "bytes": 13554,
+      "mtime": "2026-09-26T16:22:05.227+00:00"
+    },
+    {
+      "name": "pi-dgx-hook-pos1.json",
+      "directory": false,
+      "bytes": 13104,
+      "mtime": "2026-09-26T09:47:58.008+00:00"
+    },
+    {
+      "name": "pi-dgx-audit27-dec.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T22:01:19.423+00:00"
+    },
+    {
+      "name": "pi-dgx-hook-pos2.json",
+      "directory": false,
+      "bytes": 13005,
+      "mtime": "2026-09-26T09:56:28.403+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-pos1.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T17:45:23.189+00:00"
+    },
+    {
+      "name": "pi-dgx-explicit-skill.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-26T07:02:23.136+00:00"
+    },
+    {
+      "name": "pi-dgx-export-path-meta.json",
+      "directory": false,
+      "bytes": 486,
+      "mtime": "2026-09-25T16:49:06.865+00:00"
+    },
+    {
+      "name": "pi-dgx-export-pos2-meta.json",
+      "directory": false,
+      "bytes": 474,
+      "mtime": "2026-09-25T16:45:01.940+00:00"
+    },
+    {
+      "name": "pi-dgx-nem26-pos1.json",
+      "directory": false,
+      "bytes": 15018,
+      "mtime": "2026-09-26T16:18:04.559+00:00"
+    },
+    {
+      "name": "pi-dgx-skill-before-20260926.md",
+      "directory": false,
+      "bytes": 4072,
+      "mtime": "2026-09-25T16:40:52.305+00:00"
+    },
+    {
+      "name": "pi-dgx-pos1-turn2.json",
+      "directory": false,
+      "bytes": 13110,
+      "mtime": "2026-09-25T16:25:15.381+00:00"
+    },
+    {
+      "name": "pi-dgx-neg-skill.json",
+      "directory": false,
+      "bytes": 13075,
+      "mtime": "2026-09-26T07:10:12.453+00:00"
+    },
+    {
+      "name": "pi-dgx-export-path.err",
+      "directory": false,
+      "bytes": 0,
+      "mtime": "2026-09-25T16:49:05.055+00:00"
+    },
+    {
+      "name": "pi-dgx-final27-neg1.json",
+      "directory": false,
+      "bytes": 27780,
+      "mtime": "2026-09-26T17:46:27.283+00:00"
+    }
+  ]
+}

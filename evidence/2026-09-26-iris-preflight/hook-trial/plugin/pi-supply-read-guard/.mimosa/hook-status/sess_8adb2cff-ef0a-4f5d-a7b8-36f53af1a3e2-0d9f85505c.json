@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-26T10:03:17.511Z",
+  "sessionId": "sess_8adb2cff-ef0a-4f5d-a7b8-36f53af1a3e2",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/evidence/2026-09-26-iris-preflight/hook-trial/runtime-rollback.json",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 3,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

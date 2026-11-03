@@ -1,0 +1,19 @@
+{
+  "outcome_id": "repro-pack-d0-scaffold",
+  "claimed_stage": "DONE",
+  "owner_failure": false,
+  "completion_scope": "INTERNAL",
+  "internal_justification": "D0 脚手架里程碑：最终验收在 9/29 赛事表单提交（owner 入口，ISC-11），今晚仅锚定源码与构建两层，模型链路留待 D1 spike",
+  "required_layers": ["SOURCE", "BUILD"],
+  "claim": {"facets": [], "member_scope": "SINGLE", "required_member_types": ["OUTCOME"]},
+  "evidence": [
+    {"layer": "SOURCE", "outcome_id": "repro-pack-d0-scaffold", "observation_id": "rp-d0-src-01", "passed": true,
+     "evidence_ref": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/skills/repro-pack/scripts/repro_pack.py", "modality": "SOURCE_INSPECTION",
+     "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-22T18:27:33.000Z", "authority": "PRIMARY_SOURCE",
+     "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "BUILD", "outcome_id": "repro-pack-d0-scaffold", "observation_id": "rp-d0-build-01", "passed": true,
+     "evidence_ref": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/evidence/d0/build-r2.txt", "modality": "EXECUTABLE_CHECK",
+     "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-22T18:27:33.000Z", "authority": "EXECUTABLE_CHECK",
+     "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null}
+  ]
+}

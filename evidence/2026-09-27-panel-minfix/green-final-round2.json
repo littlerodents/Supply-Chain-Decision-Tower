@@ -1,0 +1,294 @@
+{
+  "mode": "ISOLATED_STREAMLIT_UI_REPLY_REPLAY",
+  "new_model_calls": 0,
+  "results": [
+    {
+      "case": "good_positive",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 独立核算：通过</span></h4><div class='muted'><div>✅ 订量=短缺量 <span class='muted'>模型答 3268 / 工具算 3268</span></div><div>✅ 供应商=总单价最低 <span class='muted'>模型答 Nature Source Coffee / 工具算 Nature Source Coffee</span></div><div>✅ 单价一致 <span class='muted'></span></div><div>✅ 运费一致 <span class='muted'></span></div><div>✅ 总价=订量×总单价(±0.01) <span class='muted'>模型答 119282.0 / 实算 119282.0</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "good_negative",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 负例核验：通过 · 无需补货</span></h4><div class='muted'><div>原问句 SKU 13001 / Seattle / 1周；库存 300 − 需求 200 = 100；解释仅含已核实事实或无需补货</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "wrong_gap",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未通过</span></h4><div class='muted'><div>模型余量与原问句工具核算不符；独立余量 100 件</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "advice",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>余量吻合，但解释含无法独立认证的内容/建议；不声明零补货建议，不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "negative_quantity",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 订量 <span class='muted'>REORDER订量必须为有限正整数件数，不能是负数、零、布尔值或小数</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "missing_fields",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 必填字段 <span class='muted'>缺少 rationale, tool_trace</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "wrong_total",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>✅ 订量=短缺量 <span class='muted'>模型答 3268 / 工具算 3268</span></div><div>✅ 供应商=总单价最低 <span class='muted'>模型答 Nature Source Coffee / 工具算 Nature Source Coffee</span></div><div>✅ 单价一致 <span class='muted'></span></div><div>✅ 运费一致 <span class='muted'></span></div><div>❌ 总价=订量×总单价(±0.01) <span class='muted'>模型答 119284 / 实算 119282.0</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "missing_weeks",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>原问句的SKU/仓库/1–26周周期不能唯一确认；不猜参数、不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "shortage_as_negative",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未通过</span></h4><div class='muted'><div>模型余量与原问句工具核算不符；独立余量 -3268 件</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "unknown_prose",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>余量吻合，但解释含无法独立认证的内容/建议；不声明零补货建议，不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "negated_advice",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 负例核验：通过 · 无需补货</span></h4><div class='muted'><div>原问句 SKU 13001 / Seattle / 1周；库存 300 − 需求 200 = 100；解释仅含已核实事实或无需补货</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "ambiguous_scope",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>原问句的SKU/仓库/1–26周周期不能唯一确认；不猜参数、不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "default_auditor_off",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [],
+      "fixture_calls": 0
+    },
+    {
+      "case": "historical_negative",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 负例核验：通过 · 无需补货</span></h4><div class='muted'><div>原问句 SKU 13001 / Seattle / 1周；库存 300 − 需求 200 = 100；解释仅含已核实事实或无需补货</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "empty_question",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>原问句的SKU/仓库/1–26周周期不能唯一确认；不猜参数、不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "empty_reply",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 未通过：没有合格的决策单，末行也不是 NO_REORDER 纯文本</span></h4></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "double_marker",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未通过</span></h4><div class='muted'><div>负例含重复协议标记或代码块，不能只取最后一个</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "mixed_decisions",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 未通过：补货JSON与NO_REORDER并存，正负决策冲突</span></h4></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "mixed_wrong_gap",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 未通过：补货JSON与NO_REORDER并存，正负决策冲突</span></h4></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "wrong_context_positive",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 原问句绑定 <span class='muted'>模型location与原问句不一致</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "eight_field_positive",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 独立核算：通过</span></h4><div class='muted'><div>✅ 订量=短缺量 <span class='muted'>模型答 3268 / 工具算 3268</span></div><div>✅ 供应商=总单价最低 <span class='muted'>模型答 Nature Source Coffee / 工具算 Nature Source Coffee</span></div><div>✅ 单价一致 <span class='muted'></span></div><div>✅ 运费一致 <span class='muted'></span></div><div>✅ 总价=订量×总单价(±0.01) <span class='muted'>模型答 119282.0 / 实算 119282.0</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "wrong_prefix_fact",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>余量吻合，但解释含无法独立认证的内容/建议；不声明零补货建议，不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "zero_quantity",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 订量 <span class='muted'>REORDER订量必须为有限正整数件数，不能是负数、零、布尔值或小数</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "boolean_quantity",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 订量 <span class='muted'>REORDER订量必须为有限正整数件数，不能是负数、零、布尔值或小数</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "fractional_quantity",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 订量 <span class='muted'>REORDER订量必须为有限正整数件数，不能是负数、零、布尔值或小数</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "empty_rationale",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 必填字段 <span class='muted'>rationale须为非空文本，tool_trace须为非空文本列表（字段有效不等于真实工具调用已证明）</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "empty_trace",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 必填字段 <span class='muted'>rationale须为非空文本，tool_trace须为非空文本列表（字段有效不等于真实工具调用已证明）</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "nan_money",
+      "expected_success": false,
+      "actual_success": false,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 金额 <span class='muted'>单价、运费和总价必须为有限非负数</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "zero_gap",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 负例核验：通过 · 无需补货</span></h4><div class='muted'><div>原问句 SKU 13001 / Seattle / 1周；库存 200 − 需求 200 = 0；解释仅含已核实事实或无需补货</div></div></div>"
+      ],
+      "fixture_calls": 1
+    }
+  ]
+}

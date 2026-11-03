@@ -1,0 +1,15 @@
+{
+  "content": "用户在MyApp仪表板尝试保存设置时遇到500内部服务器错误，系统提示保存失败并询问是否重试。",
+  "usage": {
+    "prompt_tokens": 690,
+    "completion_tokens": 207,
+    "total_tokens": 897,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "latency_sec": 2.88
+}

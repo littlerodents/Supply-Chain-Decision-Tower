@@ -1,0 +1,7 @@
+{
+  "observed_at": "2026-09-27T08:07:45.127+00:00",
+  "tunnel_cancel_exit": 0,
+  "local_forward_closed": true,
+  "owner_master_retained": true,
+  "owner_master_check": "Master running (pid=46119)"
+}

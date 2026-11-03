@@ -1,0 +1,18 @@
+{
+  "outcome_id": "zcode-dgx-monitor-report-20260927",
+  "valid": true,
+  "invalid_reason": null,
+  "stage": "PARTIAL",
+  "verified_layers": [
+    "SOURCE",
+    "BUILD"
+  ],
+  "missing_layers": [
+    "OWNER_ENTRYPOINT"
+  ],
+  "failed_layers": [
+    "RUNTIME"
+  ],
+  "unfit_evidence": [],
+  "owner_notes": []
+}

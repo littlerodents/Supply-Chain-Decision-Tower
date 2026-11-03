@@ -1,0 +1,16 @@
+{
+  "outcome_id": "supply-tower-20260926-hooktrial-entrypoint",
+  "claimed_stage": "REOPENED",
+  "owner_failure": false,
+  "completion_scope": "OWNER_FACING",
+  "required_layers": ["SOURCE", "BUILD", "RUNTIME", "OWNER_ENTRYPOINT"],
+  "claim": {"facets": ["REPLACEMENT"], "member_scope": "SINGLE", "required_member_types": ["OUTCOME"]},
+  "evidence": [
+    {"layer": "SOURCE", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "guard-source-20260926-hook", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/guard.mjs", "modality": "SOURCE_INSPECTION", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "PRIMARY_SOURCE", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "BUILD", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "node-tests-20260926-hook", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/final-tests.txt", "modality": "EXECUTABLE_CHECK", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "EXECUTABLE_CHECK", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "RUNTIME", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "dgx-pid-trace-20260926-hook", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/TRIAL-RECORD.md", "modality": "RUNTIME_OBSERVATION", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "DIRECT_RUNTIME", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "RUNTIME", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "neg-pass-20260926-hook", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/runtime-neg.json", "modality": "RUNTIME_OBSERVATION", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "DIRECT_RUNTIME", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "OWNER_ENTRYPOINT", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "pos1-entry-20260926-hook", "passed": false, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/runtime-pos.json", "modality": "BEFORE_AFTER", "coverage": ["OUTCOME"], "phase": "AFTER", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "DIRECT_OWNER_ENTRYPOINT", "baseline_parity": "MISMATCH", "baseline_ref": "pi-dgx-20260926-pos1-baseline"},
+    {"layer": "OWNER_ENTRYPOINT", "outcome_id": "supply-tower-20260926-hooktrial-entrypoint", "observation_id": "pos2-entry-20260926-hook", "passed": false, "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/runtime-pos2.json", "modality": "BEFORE_AFTER", "coverage": ["OUTCOME"], "phase": "AFTER", "observed_at": "2026-09-26T10:03:36.000Z", "authority": "DIRECT_OWNER_ENTRYPOINT", "baseline_parity": "MISMATCH", "baseline_ref": "pi-dgx-20260926-pos1-baseline"}
+  ]
+}

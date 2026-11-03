@@ -1,0 +1,26 @@
+{
+  "mode": "ISOLATED_STREAMLIT_UI_REPLY_REPLAY",
+  "new_model_calls": 0,
+  "results": [
+    {
+      "case": "historical_negative",
+      "expected_success": true,
+      "actual_success": false,
+      "pass": false,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 负例核验：未验证 · 需复核</span></h4><div class='muted'><div>余量吻合，但解释含无法独立认证的内容/建议；不声明零补货建议，不判通过</div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "zero_gap",
+      "expected_success": true,
+      "actual_success": true,
+      "pass": true,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 负例核验：通过 · 无需补货</span></h4><div class='muted'><div>原问句 SKU 13001 / Seattle / 1周；库存 200 − 需求 200 = 0；解释仅含已核实事实或无需补货</div></div></div>"
+      ],
+      "fixture_calls": 1
+    }
+  ]
+}

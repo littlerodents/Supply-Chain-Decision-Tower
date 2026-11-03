@@ -1,0 +1,10 @@
+file:///Users/evander/Desktop/2026-Evander-%E5%B7%A5%E4%BD%9C%E5%8F%B0/dgx-hackathon/repro-pack/evidence/2026-09-27-entry-recovery/capture-cdp.mjs:19
+    const timer=setTimeout(()=>{pending.delete(n);reject(new Error('CDP timeout: '+method));},15000);
+                                                         ^
+
+Error: CDP timeout: Page.enable
+    at Timeout._onTimeout (file:///Users/evander/Desktop/2026-Evander-%E5%B7%A5%E4%BD%9C%E5%8F%B0/dgx-hackathon/repro-pack/evidence/2026-09-27-entry-recovery/capture-cdp.mjs:19:58)
+    at listOnTimeout (node:internal/timers:585:17)
+    at process.processTimers (node:internal/timers:521:7)
+
+Node.js v22.23.2

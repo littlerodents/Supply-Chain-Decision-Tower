@@ -1,0 +1,7 @@
+{
+  "stage": "plugin_disabled_after_trial",
+  "gateway_pid_before": 2010301,
+  "gateway_pid_after": 2010301,
+  "hook_trigger_count": 0,
+  "note": "install/enable/inspect/disable all hot-applied (Gateway generation 3); broker 2010380 and panel 2006235 also unchanged; zero restarts. hook_trigger_count=0 because neither positive session attempted the bad /home/parker path (see TRIAL-RECORD.md)."
+}

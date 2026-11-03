@@ -1,0 +1,7 @@
+2026-09-26 DGX Spark 直接运行观察（通过 owner 已登录 Terminal，同一 SSH 会话）
+`uname -m` → aarch64；`free -h` → 119Gi 总、约 114Gi 空闲时可用；`df -h /home` → 2.7T 可用。
+服务监听：Ollama 127.0.0.1:11434、OpenClaw :3030、Streamlit :8501；`openclaw skills list --eligible` → supply-chain-control-tower ✓ ready。
+`curl http://127.0.0.1:11434/api/tags` → nemotron-3-super:120b-a12b 磁盘约 80.9Gi；`/api/ps` 在闲时 → []；这不能证明可与 Iris 同时加载。
+脚本直跑（DGX `/home/sparker/.openclaw/workspace/skills/supply-chain-control-tower/scripts/tools.py`）：`shipping --source Seattle --destination 'San Francisco'` → 2.0；`gap --sku 13001 --location 'San Francisco' --weeks 12` → -3268、现库 30。
+官方 Hugging Face Iris-mini 权重 URL：DGX 与 Mac 均超时；GitHub 官方 Harness README 可达；Iris 权重未下载/启动，搜索 agent 未连入；官方 Harness 需要自备 SERPER 搜索、摘要模型、judge 服务。
+临时部署本地修订 SKILL 后从非技能目录直跑 shipping=2.0，OpenClaw skill 仍 ready，但新鲜 Gateway 问句失败；已校验修订版 SHA256 `a6b4d1b6e4286e39a15f9e5ee008cb8464788b3b0cd59ef3ad028b618f47802c`，按备份回滚 DGX SKILL.md 至原 SHA256 `ed2e5badef4ea6449f0bda30cce194cbb0244305c122dc60e87f669497a47f9d`。没停/重启服务、没改固件、没发消息/下单。

@@ -1,0 +1,42 @@
+{
+  "outcome_id": "zcode-dgx-monitor-report-20260927",
+  "claimed_stage": "PARTIAL",
+  "owner_failure": false,
+  "completion_scope": "OWNER_FACING",
+  "required_layers": ["SOURCE", "BUILD", "RUNTIME", "OWNER_ENTRYPOINT"],
+  "claim": {"facets": [], "member_scope": "SINGLE", "required_member_types": ["OUTCOME"]},
+  "evidence": [
+    {
+      "layer": "SOURCE", "outcome_id": "zcode-dgx-monitor-report-20260927",
+      "observation_id": "fixed-readonly-observer-source", "passed": true,
+      "evidence_ref": "./evidence/2026-09-27-zcode-watch/watch.py",
+      "modality": "SOURCE_INSPECTION", "coverage": ["OUTCOME"], "phase": "CURRENT",
+      "observed_at": "2026-09-26T22:43:40.023Z", "authority": "PRIMARY_SOURCE",
+      "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null
+    },
+    {
+      "layer": "BUILD", "outcome_id": "zcode-dgx-monitor-report-20260927",
+      "observation_id": "nine-monitor-boundary-tests", "passed": true,
+      "evidence_ref": "./evidence/2026-09-27-zcode-watch/test-output.txt",
+      "modality": "EXECUTABLE_CHECK", "coverage": ["OUTCOME"], "phase": "CURRENT",
+      "observed_at": "2026-09-26T22:43:40.023Z", "authority": "EXECUTABLE_CHECK",
+      "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME", "outcome_id": "zcode-dgx-monitor-report-20260927",
+      "observation_id": "two-five-minute-local-heartbeats", "passed": true,
+      "evidence_ref": "./evidence/2026-09-27-zcode-watch/events.jsonl",
+      "modality": "RUNTIME_OBSERVATION", "coverage": ["OUTCOME"], "phase": "CURRENT",
+      "observed_at": "2026-09-26T22:43:40.023Z", "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME", "outcome_id": "zcode-dgx-monitor-report-20260927",
+      "observation_id": "dgx-runtime-still-unobserved", "passed": false,
+      "evidence_ref": "./evidence/2026-09-27-zcode-watch/VERIFY.md",
+      "modality": "RUNTIME_OBSERVATION", "coverage": ["OUTCOME"], "phase": "CURRENT",
+      "observed_at": "2026-09-26T22:43:40.023Z", "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null
+    }
+  ]
+}

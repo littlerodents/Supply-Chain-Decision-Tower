@@ -1,0 +1,5 @@
+{
+  "timeout": true,
+  "reached_guard": true,
+  "test_budget_s": 5
+}

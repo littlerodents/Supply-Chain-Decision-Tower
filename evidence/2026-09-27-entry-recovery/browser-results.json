@@ -1,0 +1,177 @@
+{
+  "started_at": "2026-09-27T07:48:34.915Z",
+  "isolated_browser": true,
+  "new_model_requests": 0,
+  "cases": [
+    {
+      "name": "ui-initial",
+      "at": "2026-09-27T07:49:06.288Z",
+      "pass": true,
+      "expected": [
+        "本地样本",
+        "合成预测"
+      ],
+      "text": "Deploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:48:57 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n12\n\n1\n\n26\n\n⚠️ 无库存记录\nPortland 仓无 SKU 11001 的库存记录。工具对无记录按 0 处理，本面板不把未知库存当作真实零库存给补货结论。\n未来 12 周需求预测 · 11001 @ Portland\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 12 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 11001 → Portland（按总单价）",
+      "screenshot": "ui-initial.png"
+    },
+    {
+      "name": "ui-positive-tool",
+      "at": "2026-09-27T07:49:17.823Z",
+      "pass": true,
+      "expected": [
+        "短缺 3268 件",
+        "119,282.00",
+        "Nature Source Coffee",
+        "当前库存",
+        "30 件",
+        "3298 件",
+        "12 个数据点"
+      ],
+      "text": "Deploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:08 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n12\n\n1\n\n26\n\n🔻 短缺 3268 件 · 建议补货 3268 件\n$119,282.00\n推荐 Nature Source Coffee（Seattle）· $34.50 + 运费 $2.00 = $36.50/件\n\n当前库存\n\n30 件\n\n未来 12 周需求\n\n3298 件\n\n未来 12 周需求预测 · 13001 @ San Francisco\nOct 04\nOct 11\nOct 18\nOct 25\nNovember\nNov 08\nNov 15\nNov 22\nNov 29\nDec 06\nDec 13\n0\n50\n100\n150\n200\n250\n300\n350\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 12 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 13001 → San Francisco（按总单价）",
+      "screenshot": "ui-positive-tool.png"
+    },
+    {
+      "name": "ui-negative-tool",
+      "at": "2026-09-27T07:49:20.505Z",
+      "pass": true,
+      "expected": [
+        "NO_REORDER:100",
+        "300 件",
+        "200 件",
+        "1 个数据点"
+      ],
+      "text": "3 options available.\nSan Francisco, selected\nSeattle\nSeattle, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:20 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n1\n\n1\n\n26\n\n✅ 库存充足 · 无需补货\n余量 +100 件 · 负例口径 NO_REORDER:100 · 不给任何补货建议\n\n当前库存\n\n300 件\n\n未来 1 周需求\n\n200 件\n\n未来 1 周需求预测 · 13001 @ Seattle\nMon 28\n0\n100\n200\n50\n150\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 1 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 13001 → Seattle（按总单价）",
+      "screenshot": "ui-negative-tool.png"
+    },
+    {
+      "name": "ui-missing-record",
+      "at": "2026-09-27T07:49:21.905Z",
+      "pass": true,
+      "expected": [
+        "无 SKU 13001 的库存记录",
+        "不把未知库存当作真实零库存"
+      ],
+      "text": "3 options available.\nSan Francisco, selected\nSeattle\nSeattle, selected\n3 options available.\nSeattle, selected\nPortland\nPortland, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:21 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n1\n\n1\n\n26\n\n⚠️ 无库存记录\nPortland 仓无 SKU 13001 的库存记录。工具对无记录按 0 处理，本面板不把未知库存当作真实零库存给补货结论。\n未来 1 周需求预测 · 13001 @ Portland\nMon 28\n0\n100\n200\n50\n150\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 1 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 13001 → Portland（按总单价）",
+      "screenshot": "ui-missing-record.png"
+    },
+    {
+      "name": "ui-horizon-26",
+      "at": "2026-09-27T07:49:23.396Z",
+      "pass": true,
+      "expected": [
+        "未来 26 周需求预测",
+        "26 个数据点"
+      ],
+      "text": "3 options available.\nSan Francisco, selected\nSeattle\nSeattle, selected\n3 options available.\nSeattle, selected\nPortland\nPortland, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:22 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n26\n\n1\n\n26\n\n⚠️ 无库存记录\nPortland 仓无 SKU 13001 的库存记录。工具对无记录按 0 处理，本面板不把未知库存当作真实零库存给补货结论。\n未来 26 周需求预测 · 13001 @ Portland\nOct 04\nOct 11\nOct 18\nOct 25\nNovember\nNov 08\nNov 15\nNov 22\nNov 29\nDec 06\nDec 13\nDec 20\nDec 27\nJan 03\nJan 10\nJan 17\nJan 24\nJan 31\nFeb 07\nFeb 14\nFeb 21\nFeb 28\nMar 07\nMar 14\nMar 21\n0\n50\n100\n150\n200\n250\n300\n350\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 26 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 13001 → Portland（按总单价）",
+      "screenshot": "ui-horizon-26.png"
+    },
+    {
+      "name": "ui-supplier-origin",
+      "at": "2026-09-27T07:49:25.314Z",
+      "pass": true,
+      "expected": [
+        "Coffee Wholesale USA（San Francisco）"
+      ],
+      "text": "3 options available.\nSeattle, selected\nPortland\nPortland, selected\n6 options available.\n13001 Colombian Coffee, selected\n11001 House Blend\n11001 House Blend, selected\n3 options available.\nPortland, selected\nSan Francisco\nSan Francisco, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:24 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n26\n\n1\n\n26\n\n🔻 短缺 5045 件 · 建议补货 5045 件\n$120,575.50\n推荐 Coffee Wholesale USA（San Francisco）· $21.90 + 运费 $2.00 = $23.90/件\n\n当前库存\n\n250 件\n\n未来 26 周需求\n\n5295 件\n\n未来 26 周需求预测 · 11001 @ San Francisco\nOct 04\nOct 11\nOct 18\nOct 25\nNovember\nNov 08\nNov 15\nNov 22\nNov 29\nDec 06\nDec 13\nDec 20\nDec 27\nJan 03\nJan 10\nJan 17\nJan 24\nJan 31\nFeb 07\nFeb 14\nFeb 21\nFeb 28\nMar 07\nMar 14\nMar 21\n0\n50\n100\n150\n200\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 26 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 11001 → San Francisco（按总单价）",
+      "screenshot": "ui-supplier-origin.png"
+    },
+    {
+      "name": "ui-live-observed-not-submitted",
+      "at": "2026-09-27T07:49:25.719Z",
+      "pass": true,
+      "expected": [
+        "自然问句",
+        "审计智能体"
+      ],
+      "text": "3 options available.\nSeattle, selected\nPortland\nPortland, selected\n6 options available.\n13001 Colombian Coffee, selected\n11001 House Blend\n11001 House Blend, selected\n3 options available.\nPortland, selected\nSan Francisco\nSan Francisco, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:24 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n自然问句 → Agent 决策\n\n每问独立会话 · 单次提交 · 本地等待 90s 超时不自动重试 · 独立核算=确定性工具复算（零 LLM）\n\n填入：正例 T-01\n\n填入：负例 T-02\n\n填入：运费翻转陷阱\n\n问句\n\n串审计智能体（第二个真实 LLM 智能体独立复算）\n\n▶ 提交（单次）",
+      "screenshot": "ui-live-observed-not-submitted.png"
+    },
+    {
+      "name": "ui-live-1366-not-submitted",
+      "at": "2026-09-27T07:49:26.798Z",
+      "pass": true,
+      "expected": [
+        "问句",
+        "提交"
+      ],
+      "text": "3 options available.\nSeattle, selected\nPortland\nPortland, selected\n6 options available.\n13001 Colombian Coffee, selected\n11001 House Blend\n11001 House Blend, selected\n3 options available.\nPortland, selected\nSan Francisco\nSan Francisco, selected\nDeploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 15:49:24 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n自然问句 → Agent 决策\n\n每问独立会话 · 单次提交 · 本地等待 90s 超时不自动重试 · 独立核算=确定性工具复算（零 LLM）\n\n填入：正例 T-01\n\n填入：负例 T-02\n\n填入：运费翻转陷阱\n\n问句\n\n串审计智能体（第二个真实 LLM 智能体独立复算）\n\n▶ 提交（单次）",
+      "screenshot": "ui-live-1366-not-submitted.png"
+    }
+  ],
+  "console": [
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"date\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"demand\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"date\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"demand\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"date\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"demand\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"date\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"demand\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"date\": [Infinity, -Infinity]"
+    },
+    {
+      "type": "warning",
+      "text": "WARN Infinite extent for field \"demand\": [Infinity, -Infinity]"
+    }
+  ],
+  "page_errors": [],
+  "network_failures": [],
+  "http_errors": [],
+  "initial_dom": "Deploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n决策视图\n\nSKU\n\n仓库\n\n决策周期（周）\n\n12\n\n1\n\n26\n\n⚠️ 无库存记录\nPortland 仓无 SKU 11001 的库存记录。工具对无记录按 0 处理，本面板不把未知库存当作真实零库存给补货结论。\n未来 12 周需求预测 · 11001 @ Portland\n\n确定性合成预测（crc32 稳定化，不随仓库变化）——与 skill 工具层同源 · 图示 12 个数据点 = 所选周期\n\n库存全量（只读原始数据）\n供应商比价 · SKU 11001 → Portland（按总单价）",
+  "controls": [
+    {
+      "tag": "INPUT",
+      "role": "combobox",
+      "label": "SKU",
+      "type": "text",
+      "value": "11001 House Blend",
+      "now": null
+    },
+    {
+      "tag": "INPUT",
+      "role": "combobox",
+      "label": "仓库",
+      "type": "text",
+      "value": "Portland",
+      "now": null
+    },
+    {
+      "tag": "INPUT",
+      "role": null,
+      "label": "决策周期（周）",
+      "type": "range",
+      "value": "12",
+      "now": null
+    }
+  ],
+  "live_auditor_default": true,
+  "live_submit_present": 1,
+  "live_auditor_after_uncheck": false,
+  "finished_at": "2026-09-27T07:49:26.953Z"
+}

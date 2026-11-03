@@ -1,0 +1,36 @@
+=== E2E 正例（3.7 Flash）===
+PACK:/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/packs/d1-pos
+=== E2E 负例（3.7 Flash）——必须 NO_BUG_FOUND 且零产包 ===
+                                  ^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+NEG_CHECK: 零产包 ✓
+=== 红队回归：坏卡仍被拒 ===
+缺必填字段: {missing}"
+REJECTED ✓
+=== 正例包过验 ===
+VALID
+VALID ✓
+=== E2E 负例重跑 ===
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: has_bug=false 时 bug 必须为空（负例零误触的第一道闸）
+NEG_CHECK: 零产包 ✓
+=== 正例包内容 ===
+bugcard.json
+frames
+repro.md
+{"has_bug": true, "type": "network", "severity": "critical", "timestamps": [2.37, 3.16, 3.95], "location": "MyApp Dashboard 设置保存功能", "error_text": "Error 500: Internal Server Error\nFailed to save settings. Re"}
+=== 红队回归 ×2 ===
+2
+VALID
+=== E2E 负例（这次盯退出码）===
+[negative] 录屏未发现 bug——不产包、不开 issue
+NO_BUG_FOUND
+EXIT=0
+NEG_CHECK: 零产包 ✓
+=== 正例帧抽取验证 ===
+total 280
+drwxr-xr-x  5 evander  staff    160 Sep 23 02:40 .
+drwxr-xr-x  5 evander  staff    160 Sep 23 02:40 ..
+-rw-r--r--  1 evander  staff  19669 Sep 23 02:40 frame_00_2s.png
+-rw-r--r--  1 evander  staff  58425 Sep 23 02:40 frame_01_3s.png
+-rw-r--r--  1 evander  staff  58425 Sep 23 02:40 frame_02_3s.png

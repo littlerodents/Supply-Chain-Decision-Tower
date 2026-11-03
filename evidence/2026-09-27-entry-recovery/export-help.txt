@@ -1,0 +1,19 @@
+
+OpenClaw 2026.9.5 (ec9c1a1) — All your chats, one OpenClaw.
+
+Usage: openclaw sessions export-trajectory [options]
+
+Export a redacted trajectory bundle for a stored session
+
+Options:
+  --agent <id>                     Agent id for resolving the default session
+                                   store
+  -h, --help                       Display help for command
+  --json                           Output JSON (default: false)
+  --output <path>                  Output directory name inside
+                                   .openclaw/trajectory-exports
+  --request-json-base64 <payload>  Base64url-encoded export request
+  --session-key <key>              Session key to export
+  --store <path>                   Legacy session store selector path
+  --workspace <path>               Workspace root for the export (default:
+                                   current directory)

@@ -1,0 +1,52 @@
+{
+  "read_at": "2026-09-27T09:23:19.743Z",
+  "last_scan": "2026-09-27T09:19:38.509Z",
+  "samples": 130,
+  "remote_samples": 21,
+  "panel_changes": [
+    {
+      "at": "2026-09-27T07:43:56.700Z",
+      "path": "DGX/panel/app.py",
+      "before": "6f932197d697",
+      "after": "8e480f310384"
+    },
+    {
+      "at": "2026-09-27T08:29:24.295Z",
+      "path": "DGX/panel/app.py",
+      "before": "8e480f310384",
+      "after": "187d1d4d3b7f"
+    },
+    {
+      "at": "2026-09-27T08:39:26.979Z",
+      "path": "DGX/panel/app.py",
+      "before": "187d1d4d3b7f",
+      "after": "c4feead2303e"
+    },
+    {
+      "at": "2026-09-27T08:44:28.129Z",
+      "path": "DGX/panel/app.py",
+      "before": "c4feead2303e",
+      "after": "b2f97807afa9"
+    },
+    {
+      "at": "2026-09-27T08:49:29.523Z",
+      "path": "DGX/panel/app.py",
+      "before": "b2f97807afa9",
+      "after": "2bf80c54a9f0"
+    },
+    {
+      "at": "2026-09-27T08:54:30.907Z",
+      "path": "DGX/panel/app.py",
+      "before": "2bf80c54a9f0",
+      "after": "d13f8c2d72aa"
+    },
+    {
+      "at": "2026-09-27T09:09:37.325Z",
+      "path": "DGX/panel/app.py",
+      "before": "d13f8c2d72aa",
+      "after": "4fa8578be381"
+    }
+  ],
+  "authorship": "UNKNOWN",
+  "browser_1710_new_upload_tab": true
+}

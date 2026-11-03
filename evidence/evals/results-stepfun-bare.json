@@ -1,0 +1,110 @@
+[
+  {
+    "task": "pos-dec-001",
+    "pass": false,
+    "expect": "REORDER 3268×Nature Source Coffee ≈119282.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 11.8,
+    "tokens": 1667
+  },
+  {
+    "task": "pos-dec-002",
+    "pass": false,
+    "expect": "REORDER 2587×Coffee Wholesale USA ≈64416.3",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 23.6,
+    "tokens": 2906
+  },
+  {
+    "task": "pos-dec-003",
+    "pass": false,
+    "expect": "REORDER 1790×Coffee Wholesale USA ≈46361.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 24.9,
+    "tokens": 3910
+  },
+  {
+    "task": "pos-dec-004",
+    "pass": false,
+    "expect": "REORDER 1941×Coffee Wholesale USA ≈46389.9",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 10.3,
+    "tokens": 1245
+  },
+  {
+    "task": "pos-qry-001",
+    "pass": false,
+    "expect": "数字集一致：100.0,300.0,12001.0,13001.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 2.3,
+    "tokens": 218
+  },
+  {
+    "task": "pos-qry-002",
+    "pass": false,
+    "expect": "数字集一致：23.9,31.9,12001.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 3.0,
+    "tokens": 318
+  },
+  {
+    "task": "pos-qry-003",
+    "pass": false,
+    "expect": "数字集一致：200.0,205.0,211.0,216.0,221.0,224.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 5.3,
+    "tokens": 720
+  },
+  {
+    "task": "pos-qry-004",
+    "pass": true,
+    "expect": "数字集一致：2.0",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 4.9,
+    "tokens": 659
+  },
+  {
+    "task": "neg-stk-001",
+    "pass": false,
+    "expect": "NO_REORDER+100",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 3.3,
+    "tokens": 356
+  },
+  {
+    "task": "neg-stk-002",
+    "pass": false,
+    "expect": "NO_REORDER+140",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 4.0,
+    "tokens": 524
+  },
+  {
+    "task": "neg-stk-003",
+    "pass": false,
+    "expect": "NO_REORDER+50",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 3.8,
+    "tokens": 484
+  },
+  {
+    "task": "neg-irr-001",
+    "pass": true,
+    "expect": "零工具调用",
+    "rounds": 1,
+    "tool_calls": 0,
+    "latency_s": 3.1,
+    "tokens": 352
+  }
+]

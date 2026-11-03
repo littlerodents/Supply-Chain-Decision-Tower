@@ -1,0 +1,9 @@
+{
+  "observed_at": "2026-09-27T09:14:12.178Z",
+  "control_socket_exists": false,
+  "local_forward_closed": true,
+  "deployment_exit": 255,
+  "deployment_receipt_bytes": 0,
+  "deployment_state": "UNPROVEN",
+  "password_requested_in_chat": false
+}
