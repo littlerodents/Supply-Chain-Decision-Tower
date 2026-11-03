@@ -1,0 +1,149 @@
+{
+  "outcome_id": "supply-tower-20260926-step-entrypoint",
+  "claimed_stage": "ACCEPTED",
+  "owner_failure": false,
+  "completion_scope": "OWNER_FACING",
+  "required_layers": [
+    "SOURCE",
+    "BUILD",
+    "RUNTIME",
+    "OWNER_ENTRYPOINT"
+  ],
+  "claim": {
+    "facets": [],
+    "member_scope": "SINGLE",
+    "required_member_types": [
+      "OUTCOME"
+    ]
+  },
+  "evidence": [
+    {
+      "layer": "SOURCE",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "skill-md-total-fix-20260926-step",
+      "passed": true,
+      "evidence_ref": "./skills/supply-chain-control-tower/SKILL.md",
+      "modality": "SOURCE_INSPECTION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "PRIMARY_SOURCE",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "BUILD",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "defect-causality-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/step-acceptance/pos1-preSkillFix.json",
+      "modality": "EXECUTABLE_CHECK",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "EXECUTABLE_CHECK",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "pos1-runtime-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/step-acceptance/pos1.json",
+      "modality": "RUNTIME_OBSERVATION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "pos2-runtime-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/step-acceptance/pos2.json",
+      "modality": "RUNTIME_OBSERVATION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "neg1-runtime-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/step-acceptance/neg1.json",
+      "modality": "RUNTIME_OBSERVATION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "OWNER_ENTRYPOINT",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "baseline-localbrain-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/hook-trial/results/pos1-hooktest.json",
+      "modality": "BEFORE_AFTER",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "BEFORE",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_OWNER_ENTRYPOINT",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": "pi-dgx-20260926-pos1-baseline"
+    },
+    {
+      "layer": "OWNER_ENTRYPOINT",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "after-strict-pass-20260926-step",
+      "passed": true,
+      "evidence_ref": "./evidence/2026-09-26-iris-preflight/step-acceptance/VERDICT.md",
+      "modality": "BEFORE_AFTER",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "AFTER",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_OWNER_ENTRYPOINT",
+      "baseline_parity": "MATCH",
+      "baseline_ref": "pi-dgx-20260926-pos1-baseline"
+    },
+    {
+      "layer": "OWNER_ENTRYPOINT",
+      "outcome_id": "supply-tower-20260926-step-entrypoint",
+      "observation_id": "owner-feishu-20260926-step",
+      "passed": true,
+      "evidence_ref": "feishu:supply-tower-20260926-step-entrypoint",
+      "modality": "OWNER_CONFIRMATION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-26T14:45:58.000Z",
+      "authority": "DIRECT_OWNER_ENTRYPOINT",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    }
+  ]
+}

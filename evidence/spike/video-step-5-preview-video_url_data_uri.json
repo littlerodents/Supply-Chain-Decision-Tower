@@ -1,0 +1,15 @@
+{
+  "content": "点击保存按钮后，系统弹出“Error 500: Internal Server Error”提示，导致设置保存失败。",
+  "usage": {
+    "prompt_tokens": 4124,
+    "completion_tokens": 128,
+    "total_tokens": 4252,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "latency_sec": 4.65
+}

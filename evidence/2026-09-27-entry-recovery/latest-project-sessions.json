@@ -1,0 +1,438 @@
+{
+  "observed_at": "2026-09-27T07:43:10.958+00:00",
+  "limit": 60,
+  "active_minutes": 720,
+  "project_sessions": [
+    {
+      "sessionId": "pi-dgx-panel-93cf58df",
+      "updatedAt": 1790494967427,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-panel-d67538fb",
+      "updatedAt": 1790493793555,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-005-ext1",
+      "updatedAt": 1790493107962,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-004-ext1",
+      "updatedAt": 1790493100016,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-006-ext1",
+      "updatedAt": 1790493090124,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-005-ext1",
+      "updatedAt": 1790493058147,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-irr-001-ext1",
+      "updatedAt": 1790493036134,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-003-ext1",
+      "updatedAt": 1790493019498,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-002-ext1",
+      "updatedAt": 1790493006431,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-001-ext1",
+      "updatedAt": 1790492990496,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-004-ext1",
+      "updatedAt": 1790492980530,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-003-ext1",
+      "updatedAt": 1790492972939,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-002-ext1",
+      "updatedAt": 1790492960097,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-001-ext1",
+      "updatedAt": 1790492952154,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-004-ext1",
+      "updatedAt": 1790492943809,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-003-ext1",
+      "updatedAt": 1790492910284,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-002-ext1",
+      "updatedAt": 1790492891915,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-001-ext1",
+      "updatedAt": 1790492869676,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-irr-001-r5",
+      "updatedAt": 1790492546228,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-003-r5",
+      "updatedAt": 1790492530452,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-002-r5",
+      "updatedAt": 1790492517981,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-001-r5",
+      "updatedAt": 1790492507040,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-004-r5",
+      "updatedAt": 1790492496825,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-003-r5",
+      "updatedAt": 1790492489239,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-002-r5",
+      "updatedAt": 1790492475704,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-001-r5",
+      "updatedAt": 1790492462267,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-004-r5",
+      "updatedAt": 1790492453653,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-003-r5",
+      "updatedAt": 1790492431698,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-002-r5",
+      "updatedAt": 1790492413455,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-001-r5",
+      "updatedAt": 1790492378606,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-irr-001-r4",
+      "updatedAt": 1790492306148,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-003-r4",
+      "updatedAt": 1790492290811,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-002-r4",
+      "updatedAt": 1790492278186,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-001-r4",
+      "updatedAt": 1790492268886,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-004-r4",
+      "updatedAt": 1790492258857,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-003-r4",
+      "updatedAt": 1790492249478,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-002-r4",
+      "updatedAt": 1790492235499,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-001-r4",
+      "updatedAt": 1790492225308,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-004-r4",
+      "updatedAt": 1790492216911,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-003-r4",
+      "updatedAt": 1790492196205,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-002-r4",
+      "updatedAt": 1790492171172,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-001-r4",
+      "updatedAt": 1790492156555,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-irr-001-r3",
+      "updatedAt": 1790461379351,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-003-r3",
+      "updatedAt": 1790461373520,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-002-r3",
+      "updatedAt": 1790461362936,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-001-r3",
+      "updatedAt": 1790461353724,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-004-r3",
+      "updatedAt": 1790461340215,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-003-r3",
+      "updatedAt": 1790461333244,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-002-r3",
+      "updatedAt": 1790461323345,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-001-r3",
+      "updatedAt": 1790461315245,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-004-r3",
+      "updatedAt": 1790461308083,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-003-r3",
+      "updatedAt": 1790461289721,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-002-r3",
+      "updatedAt": 1790461267595,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-dec-001-r3",
+      "updatedAt": 1790461262805,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-irr-001-r2",
+      "updatedAt": 1790460541256,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-003-r2",
+      "updatedAt": 1790460534443,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-002-r2",
+      "updatedAt": 1790460525297,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-neg-stk-001-r2",
+      "updatedAt": 1790460511115,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-004-r2",
+      "updatedAt": 1790460504265,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    },
+    {
+      "sessionId": "pi-dgx-eval27-pos-qry-003-r2",
+      "updatedAt": 1790460496498,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "kind": "direct"
+    }
+  ],
+  "exit": 0,
+  "metadata_rows_examined": 60,
+  "top_level_keys": [
+    "path",
+    "count",
+    "totalCount",
+    "limitApplied",
+    "hasMore",
+    "activeMinutes",
+    "sessions"
+  ]
+}

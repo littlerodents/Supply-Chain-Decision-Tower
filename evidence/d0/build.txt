@@ -1,0 +1,36 @@
+=== 1. py_compile ===
+PY_COMPILE: PASS (3 files)
+=== 2. probe.py 导入链（应打印 usage 错误而非 ModuleNotFoundError）===
+usage: probe.py [-h] [--model MODEL] {text,image,video} [path]
+=== 3. 好卡过验 ===
+Traceback (most recent call last):
+  File "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/skills/repro-pack/scripts/repro_pack.py", line 175, in <module>
+    validate(json.load(open(a.validate)))
+  File "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/skills/repro-pack/scripts/repro_pack.py", line 77, in validate
+    with open(SCHEMA_PATH) as f:
+         ^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/skills/repro-pack/scripts/references/bugcard.schema.json'
+=== 4. 红队：坏卡必须以正确理由被拒 ===
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+AssertionError: bad1 处置错误: ers/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/skills/repro-pack/scripts/references/bugcard.schema.json'
+
+RED_TEAM_EXIT=1
+=== 5. intake 边界 ===
+[intake] 文件不存在: /nonexistent.mp4
+=== 6. render_repro 纯函数 ===
+RENDER_REPRO: PASS
+# Repro · ui-rendering / major
+
+- 位置：设置页保存按钮
+- 错误原文：`（画面无文本错误）`
+- 出错时间戳：[12.5]
+
+## 复现步骤
+1. 打开设置页
+2. 点击保存
+
+> 由 repro-pack 从操作录屏自动装配。置信度 0.9。
+
+=== 7. 环境依赖 ===
+/opt/homebrew/bin/ffmpeg /opt/homebrew/bin/ffprobe /opt/homebrew/bin/gh 

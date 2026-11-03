@@ -1,0 +1,23 @@
+#!/usr/bin/expect
+# Establish one multiplexed SSH master to the DGX Spark.
+# Password comes from the DGX_SSH_PASS environment variable only.
+set timeout 45
+set pass $env(DGX_SSH_PASS)
+spawn ssh -M -S /tmp/dgx-spark-master.sock \
+    -o ControlPersist=8h \
+    -o StrictHostKeyChecking=accept-new \
+    -o ServerAliveInterval=30 \
+    -fN -p 39954 sparker@spark.zhujihezi.com
+expect {
+    -re {[Pp]assword} {
+        send -- "$pass\r"
+        exp_continue
+    }
+    -re {yes/no} {
+        send -- "yes\r"
+        exp_continue
+    }
+    eof
+}
+catch wait result
+exit [lindex $result 3]

@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-09-27T07:34:31.125+00:00",
+  "cli_exists": true,
+  "version": "OpenClaw 2026.9.5 (ec9c1a1)",
+  "default_model": {
+    "primary": "stepfun/step-3.7-flash"
+  },
+  "agents": {
+    "exit": 1
+  },
+  "project_receipts": []
+}

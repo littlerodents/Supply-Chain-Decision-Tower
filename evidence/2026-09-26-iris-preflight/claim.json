@@ -1,0 +1,15 @@
+{
+  "outcome_id": "dgx-iris-control-tower-20260926",
+  "claimed_stage": "PARTIAL",
+  "owner_failure": false,
+  "completion_scope": "OWNER_FACING",
+  "required_layers": ["SOURCE", "BUILD", "RUNTIME", "OWNER_ENTRYPOINT"],
+  "claim": {"facets": ["REPLACEMENT"], "member_scope": "SINGLE", "required_member_types": ["OUTCOME"]},
+  "evidence": [
+    {"layer": "SOURCE", "outcome_id": "dgx-iris-control-tower-20260926", "observation_id": "source-skill-20260926", "passed": true, "evidence_ref": "./skills/supply-chain-control-tower/SKILL.md", "modality": "SOURCE_INSPECTION", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-25T16:54:13.000Z", "authority": "PRIMARY_SOURCE", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "BUILD", "outcome_id": "dgx-iris-control-tower-20260926", "observation_id": "pytest-skill-20260926", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/local-pytest.txt", "modality": "EXECUTABLE_CHECK", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-25T16:54:13.000Z", "authority": "EXECUTABLE_CHECK", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "RUNTIME", "outcome_id": "dgx-iris-control-tower-20260926", "observation_id": "runtime-dgx-20260926", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/runtime-check.txt", "modality": "RUNTIME_OBSERVATION", "coverage": ["OUTCOME"], "phase": "CURRENT", "observed_at": "2026-09-25T16:54:13.000Z", "authority": "DIRECT_RUNTIME", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": null},
+    {"layer": "OWNER_ENTRYPOINT", "outcome_id": "dgx-iris-control-tower-20260926", "observation_id": "gateway-before-20260926", "passed": true, "evidence_ref": "./evidence/2026-09-26-iris-preflight/PROBE.md", "modality": "BEFORE_AFTER", "coverage": ["OUTCOME"], "phase": "BEFORE", "observed_at": "2026-09-25T16:28:44.000Z", "authority": "DIRECT_OWNER_ENTRYPOINT", "baseline_parity": "NOT_APPLICABLE", "baseline_ref": "pi-dgx-20260926-pos1"},
+    {"layer": "OWNER_ENTRYPOINT", "outcome_id": "dgx-iris-control-tower-20260926", "observation_id": "gateway-after-20260926", "passed": false, "evidence_ref": "./evidence/2026-09-26-iris-preflight/gateway-verdict.txt", "modality": "BEFORE_AFTER", "coverage": ["OUTCOME"], "phase": "AFTER", "observed_at": "2026-09-25T16:54:13.000Z", "authority": "DIRECT_OWNER_ENTRYPOINT", "baseline_parity": "MISMATCH", "baseline_ref": "pi-dgx-20260926-pos1"}
+  ]
+}

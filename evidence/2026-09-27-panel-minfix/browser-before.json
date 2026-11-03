@@ -1,0 +1,19 @@
+{
+  "started_at": "2026-09-27T09:10:03.671Z",
+  "phase": "before",
+  "new_model_requests": 0,
+  "submitted": false,
+  "console": [],
+  "errors": [],
+  "network_failures": [],
+  "http_errors": [],
+  "checks": [
+    {
+      "name": "new_session_auditor_default",
+      "pass": true
+    }
+  ],
+  "auditor_default": true,
+  "live_text": "Deploy\n🚦 供应链控制塔 补货决策 · 工具直算 + 双智能体审计\n\n数据读取 2026-09-27 17:10:10 · 8 条库存 / 9 条供应商 / 6 SKU · 本地样本·非实时库存·合成预测 · 决策脑 StepFun step-3.7-flash（默认路由）\n\n📋 每日巡检（产品形态）\n\n🧮 工具证据（零 LLM）\n\n🤖 实时 Agent（默认路由）\n\n📤 上传我的数据\n\n自然问句 → Agent 决策\n\n每问独立会话 · 单次提交 · 本地等待 90s 超时不自动重试 · 独立核算=确定性工具复算（零 LLM）\n\n填入：正例 T-01\n\n填入：负例 T-02\n\n填入：运费翻转陷阱\n\n问句\n\n串审计智能体（第二个真实 LLM 智能体独立复算）\n\n▶ 提交（单次，约 40-90 秒，点一次即可）",
+  "finished_at": "2026-09-27T09:10:16.094Z"
+}

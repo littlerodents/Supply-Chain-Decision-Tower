@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""Run a command on the DGX Spark via the owner's logged-in Mac Terminal tab.
+
+Safety: refuses to type unless the front Terminal window is the DGX session
+(sparker@spark-5c72) and the selected tab looks idle at a shell prompt.
+The command comes from /tmp/dgx-term-cmd.txt; this helper performs no file
+writes and every subprocess call uses constant arguments only.
+
+Usage:
+  printf 'hostname' > /tmp/dgx-term-cmd.txt   # any shell-safe one-liner
+  dgx-term.py [--timeout N]
+Prints only the output between the BEGIN/END markers of the latest run.
+"""
+import subprocess
+import sys
+import time
+
+HOST_MARK = 'sparker@spark-5c72'
+BEGIN = '__DGX_TRIAL_BEGIN__'
+END = '__DGX_TRIAL_END__'
+
+SCRIPT_GET_NAME = 'tell application "Terminal" to get name of front window'
+SCRIPT_GET_CONTENTS = (
+    'tell application "Terminal" to get contents of selected tab of front window'
+)
+# Constant script: reads the command file at runtime, wraps it in markers,
+# and types it into the logged-in DGX tab.
+SCRIPT_RUN_WRAPPED = (
+    'set cmdText to do shell script "cat /tmp/dgx-term-cmd.txt"\n'
+    'tell application "Terminal" to do script '
+    '("printf \'\\\\n' + BEGIN + '\\\\n\'; " & cmdText & "; printf \'\\\\n' + END + '\\\\n\'") '
+    'in selected tab of front window'
+)
+
+
+def run_const(script):
+    return subprocess.run(
+        ['osascript', '-e', script], capture_output=True, text=True, shell=False
+    )
+
+
+def tab_contents():
+    r = run_const(SCRIPT_GET_CONTENTS)
+    if r.returncode != 0:
+        sys.exit(f'OSA_ERR: {r.stderr.strip()}')
+    return r.stdout
+
+
+def main():
+    timeout = 60
+    args = sys.argv[1:]
+    if args and args[0] == '--timeout':
+        timeout = int(args[1])
+
+    r = run_const(SCRIPT_GET_NAME)
+    name = r.stdout.strip()
+    if HOST_MARK not in name:
+        sys.exit(f'WRONG_WINDOW: front window is {name!r}')
+
+    before = tab_contents()
+    lines = [ln for ln in before.splitlines() if ln.strip()]
+    if not lines or not lines[-1].rstrip().endswith('$'):
+        sys.exit(f'BUSY_OR_NOT_PROMPT: last line is {lines[-1] if lines else "<empty>"!r}')
+
+    end_count_before = before.count(END)
+    r = run_const(SCRIPT_RUN_WRAPPED)
+    if r.returncode != 0:
+        sys.exit(f'OSA_ERR: {r.stderr.strip()}')
+
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        time.sleep(1.0)
+        contents = tab_contents()
+        if contents.count(END) > end_count_before:
+            start = contents.rfind(BEGIN)
+            stop = contents.rfind(END)
+            if start != -1 and stop > start:
+                print(contents[start + len(BEGIN):stop].strip())
+                return
+    sys.exit('TIMEOUT waiting for remote command to finish')
+
+
+if __name__ == '__main__':
+    main()

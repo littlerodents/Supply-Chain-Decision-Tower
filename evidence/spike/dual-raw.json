@@ -1,0 +1,100 @@
+{
+  "recording": "assets/samples/clip.mp4",
+  "gold": {
+    "type": "runtime-error",
+    "timestamp": 2.0,
+    "location_kw": "save"
+  },
+  "runs": {
+    "step-3.7-flash": [
+      {
+        "run": 1,
+        "latency": 9.32,
+        "total_tokens": 5437,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "critical",
+        "timestamps": [
+          2.37,
+          3.16,
+          3.95
+        ],
+        "location": "MyApp Dashboard 错误提示区域"
+      },
+      {
+        "run": 2,
+        "latency": 10.9,
+        "total_tokens": 5731,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "critical",
+        "timestamps": [
+          2.37,
+          3.16,
+          3.95
+        ],
+        "location": "MyApp Dashboard 错误提示区域"
+      },
+      {
+        "run": 3,
+        "latency": 10.18,
+        "total_tokens": 5350,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "critical",
+        "timestamps": [
+          2.37,
+          3.16,
+          3.95
+        ],
+        "location": "MyApp Dashboard 错误提示区域"
+      }
+    ],
+    "step-5-preview": [
+      {
+        "run": 1,
+        "latency": 15.87,
+        "total_tokens": 6010,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "major",
+        "timestamps": [
+          2.37
+        ],
+        "location": "MyApp Dashboard 保存操作错误提示"
+      },
+      {
+        "run": 2,
+        "latency": 16.33,
+        "total_tokens": 5624,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "critical",
+        "timestamps": [
+          2.37,
+          3.16,
+          3.95
+        ],
+        "location": "MyApp Dashboard 页面顶部的错误提示横幅"
+      },
+      {
+        "run": 3,
+        "latency": 11.9,
+        "total_tokens": 5427,
+        "quality_hits": 1,
+        "has_bug": true,
+        "type": "network",
+        "severity": "major",
+        "timestamps": [
+          2.37
+        ],
+        "location": "MyApp Dashboard 保存设置功能"
+      }
+    ]
+  }
+}

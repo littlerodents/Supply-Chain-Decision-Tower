@@ -1,0 +1,14 @@
+=== forecast/kb 冒烟 ===
+[{"date":"2026-09-28T00:00:00.000","demand":200},{"date":"2026-10-05T00:00:00.000","demand":205},{"date":"2026-10-12T00:00:00.000","demand":211}]
+{
+  "products": [
+    {
+      "sku": 11001,
+      "brand": "House Blend",
+=== ISC-13: npx skills 实装 ===
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────╯
+
+│
+└  Done!  Review skills before use; they run with full agent permissions.
+

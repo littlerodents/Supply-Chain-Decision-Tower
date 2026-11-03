@@ -1,0 +1,41 @@
+{
+    "_comment": "This document describes products and their properties.",
+    "products": [
+        {
+            "sku": 11001,
+            "brand": "House Blend",
+            "name": "Medium Roast Ground Coffee",
+            "description": "Crafted in the AllDay tradition, House Blend Medium Roast Coffee is rich and never-bitter\nComplex, medium-bodied ground coffee with caramel undertones and bright aromatic flavor\nMade with 100% Arabica coffee beans"
+        },
+        {
+            "sku": 12001,
+            "brand": "Italian Roast",
+            "name": "Espresso Italiano",
+            "description": "Our Italian Roast Espresso Coffee is a Delicious Dark Roast with Tangy Red Fruit Undertones. Made from 100% Arabica Coffee Beans.\nAvailable in Whole Bean or Pre-Ground as 16 oz, 2 lb and 5 lb bags. \nAn Exclusive Artisanal Blend of Our Single-Origin Coffees.\nIn Order to Reduce Our Carbon Footprint, All Our Coffees are roasted in our Environmentally Friendly Roaster.\nProudly Roasted, Blended, and Packaged in the USA."
+        },
+        {
+            "sku": 13001,
+            "brand": "Colombian Coffee",
+            "name": "Colombian Fresh Roasted",
+            "description": "Balanced, full-bodied medium roast with a smooth finish\n100% Arabica coffee grown in Colombia\nRoasted and packed in the U.S.A."
+        },
+        {
+            "sku": 14001,
+            "brand": "Breakfast Blend",
+            "name": "Light Roast Ground Coffee",
+            "description": "Bright and smooth morning blend with citrus notes\n100% Arabica coffee beans\nRoasted and packed in the U.S.A."
+        },
+        {
+            "sku": 15001,
+            "brand": "Decaf Espresso",
+            "name": "Swiss Water Decaf Espresso",
+            "description": "All the flavor, none of the caffeine\nSwiss Water Process decaffeinated espresso roast\n100% Arabica coffee beans"
+        },
+        {
+            "sku": 16001,
+            "brand": "French Roast",
+            "name": "Dark Roast Whole Bean Coffee",
+            "description": "Bold and smoky French roast with a heavy body\nSingle-origin dark roast, whole bean\nRoasted and packed in the U.S.A."
+        }
+    ]
+}

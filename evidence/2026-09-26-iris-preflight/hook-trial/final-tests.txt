@@ -1,0 +1,22 @@
+# final test run 2026-09-26T10:03:36.000Z
+$ node --test test/guard.test.mjs
+ok 1 - rewrites only the exact observed bad read for a test session
+ok 2 - does not touch already correct or adjacent paths
+ok 3 - does not touch any other tool or session
+ok 4 - fails closed without target file or HOME
+ok 5 - exact-match boundary: near misses and other skills stay untouched
+ok 6 - session gate is prefix-exact and case-sensitive
+ok 7 - rewrites a minimal event carrying no extra params
+# tests 7
+# pass 7
+# fail 0
+
+$ node --test plugin/pi-supply-read-guard/test/plugin.test.mjs
+ok 1 - shipped guard.mjs matches the unit-tested canonical copy
+ok 2 - registers exactly one before_tool_call handler matching only read
+ok 3 - handler rewrites the bad read under a prepared HOME and preserves params
+ok 4 - handler fails open (undefined, never throws) for every negative shape
+ok 5 - no rewrite when the target SKILL.md does not exist under HOME
+# tests 5
+# pass 5
+# fail 0

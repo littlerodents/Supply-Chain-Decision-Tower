@@ -1,0 +1,53 @@
+{
+  "outcome_id": "dgx-panel-minimal-repair-20260927",
+  "claimed_stage": "PARTIAL",
+  "owner_failure": false,
+  "completion_scope": "OWNER_FACING",
+  "required_layers": [
+    "SOURCE",
+    "BUILD",
+    "RUNTIME",
+    "OWNER_ENTRYPOINT"
+  ],
+  "claim": {
+    "facets": [],
+    "member_scope": "SINGLE",
+    "required_member_types": [
+      "OUTCOME"
+    ]
+  },
+  "evidence": [
+    {
+      "layer": "SOURCE",
+      "outcome_id": "dgx-panel-minimal-repair-20260927",
+      "observation_id": "candidate-only-not-deployed",
+      "passed": true,
+      "evidence_ref": "evidence/2026-09-27-panel-minfix/app-candidate.py",
+      "modality": "SOURCE_INSPECTION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-27T09:30:21.911Z",
+      "authority": "PRIMARY_SOURCE",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "BUILD",
+      "outcome_id": "dgx-panel-minimal-repair-20260927",
+      "observation_id": "latest-candidate-guard-stress-only",
+      "passed": true,
+      "evidence_ref": "evidence/2026-09-27-panel-minfix/stress-green.txt",
+      "modality": "EXECUTABLE_CHECK",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-27T09:30:21.911Z",
+      "authority": "EXECUTABLE_CHECK",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    }
+  ]
+}

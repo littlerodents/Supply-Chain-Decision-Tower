@@ -1,0 +1,34 @@
+{
+  "stepfun/bare": {
+    "n": 12,
+    "p": 2,
+    "lat_med": 4.45,
+    "lat_max": 24.9,
+    "tools": 0,
+    "tok_avg": 1113
+  },
+  "stepfun/skill": {
+    "n": 1,
+    "p": 1,
+    "lat_med": 6.6,
+    "lat_max": 6.6,
+    "tools": 1,
+    "tok_avg": 5333
+  },
+  "nemotron/bare": {
+    "n": 12,
+    "p": 2,
+    "lat_med": 28.4,
+    "lat_max": 170.7,
+    "tools": 0,
+    "tok_avg": 1086
+  },
+  "nemotron/skill": {
+    "n": 12,
+    "p": 12,
+    "lat_med": 96.5,
+    "lat_max": 555.4,
+    "tools": 33,
+    "tok_avg": 12860
+  }
+}

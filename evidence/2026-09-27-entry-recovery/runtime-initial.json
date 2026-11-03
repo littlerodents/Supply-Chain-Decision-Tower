@@ -1,0 +1,112 @@
+{
+  "observed_at": "2026-09-27T07:28:53.884+00:00",
+  "user": "sparker",
+  "arch": "aarch64",
+  "project_exists": true,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 4909,
+      "mtime": "2026-09-27T06:59:09.020+00:00",
+      "sha256": "ee9f4e681803ebcbc68898115d7052c4b9bc3839863270eac68e4ed8e2259cee"
+    },
+    {
+      "path": "data/inventory.csv",
+      "bytes": 307,
+      "mtime": "2026-09-27T07:06:32.936+00:00",
+      "sha256": "3da1d077c38a151e904810b2b71c16abb90627c229f7ced01898e7c794c39f86"
+    },
+    {
+      "path": "data/products.json",
+      "bytes": 2187,
+      "mtime": "2026-09-27T07:06:32.936+00:00",
+      "sha256": "7d0a1a1e9dc43aa1c1f7fb205cc8e6f50b6cb94e40685757096c2c3640e75bab"
+    },
+    {
+      "path": "data/suppliers.csv",
+      "bytes": 409,
+      "mtime": "2026-09-27T07:06:32.936+00:00",
+      "sha256": "47a10fa7bf26ad107e1ccd7a6889d655b491e89a97cb29915dd64f5a1f5f794b"
+    },
+    {
+      "path": "data/suppliers.json",
+      "bytes": 2163,
+      "mtime": "2026-09-24T12:30:53.000+00:00",
+      "sha256": "152cc5a7323621ecaf94f53d04dec2a46d22c1143ff0763f13bc5319b06f16e5"
+    },
+    {
+      "path": "evals/evals.json",
+      "bytes": 4720,
+      "mtime": "2026-09-27T07:07:12.248+00:00",
+      "sha256": "f8677f586a2f11b546b598a9a2fbff76dc2bedb537a32864b1d54e1952f8a39d"
+    },
+    {
+      "path": "evals/gold.json",
+      "bytes": 2925,
+      "mtime": "2026-09-27T07:07:12.446+00:00",
+      "sha256": "9b11aea376b626bad3a01e0b8b5e8e6e23d1cbc9cf7b7c566c7faa83bd592cfa"
+    },
+    {
+      "path": "evals/gold_gen.py",
+      "bytes": 3460,
+      "mtime": "2026-09-24T12:48:52.000+00:00",
+      "sha256": "0e9a208ba5b03f3e3f78eabd92bf939323f4ce1d47533e21ba1a2f8a70f2ee62"
+    },
+    {
+      "path": "references/api.md",
+      "bytes": 1952,
+      "mtime": "2026-09-24T12:32:19.000+00:00",
+      "sha256": "42657f0a8fc81781fce94e413526e98f3e1fb7dec7e7cd60bf6255cc08ec8c92"
+    },
+    {
+      "path": "references/knowledge.md",
+      "bytes": 2509,
+      "mtime": "2026-09-27T07:07:12.248+00:00",
+      "sha256": "97b3c82be4c9d2d36561e91253a7ac71a60490bff951c49e46f193f690f4a246"
+    },
+    {
+      "path": "panel/app.py",
+      "bytes": 12095,
+      "mtime": "2026-09-27T07:22:19.415+00:00",
+      "sha256": "6f932197d697d8b4774564e98a5da5bbbd5fe76523600e707d53cd8b7b0238ff"
+    },
+    {
+      "path": "scripts/algorithms.py",
+      "bytes": 4894,
+      "mtime": "2026-09-26T22:27:04.271+00:00",
+      "sha256": "543026cceeb2518cfec81cca6db715e50c27466163800da71dd1b44c5b7a10c6"
+    },
+    {
+      "path": "scripts/test_algorithms.py",
+      "bytes": 1445,
+      "mtime": "2026-09-26T22:26:49.483+00:00",
+      "sha256": "1f830a9926d54cf9595561481ae9fffb107ee2d3fae31e3e63d6aeede52d9c15"
+    },
+    {
+      "path": "scripts/tools.py",
+      "bytes": 7149,
+      "mtime": "2026-09-24T12:48:13.000+00:00",
+      "sha256": "edb9285af5f7e1c5db68f899b8786bbcd487b0b2a289dce9e6a34ca534ad296d"
+    }
+  ],
+  "gateway": {
+    "exit": 0,
+    "stdout": "MainPID=2702395\nActiveState=active\nSubState=running\nActiveEnterTimestamp=Sun 2026-09-27 01:45:07 CST"
+  },
+  "panel_http": 200,
+  "openclaw_version": {
+    "error": "FileNotFoundError"
+  },
+  "default_model": {
+    "error": "FileNotFoundError"
+  },
+  "directory_evidence": {
+    "exists": false
+  },
+  "directory_panel": {
+    "exists": true
+  },
+  "directory_evals": {
+    "exists": true
+  }
+}

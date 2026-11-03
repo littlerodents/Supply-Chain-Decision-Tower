@@ -1,0 +1,416 @@
+{
+  "updated_at": "2026-11-02T06:45:27.064Z",
+  "deadline": "2026-09-27T09:39:00.000Z",
+  "started_at": "2026-09-26T22:36:26.916Z",
+  "last_scan": "2026-09-27T09:34:39.545Z",
+  "samples": 133,
+  "remote_samples": 21,
+  "change_count": 9,
+  "remote_change_count": 9,
+  "gap_count": 0,
+  "recent_changes": [
+    {
+      "at": "2026-09-26T22:43:17.997Z",
+      "path": "ISA.md",
+      "before": "63ba26f40982",
+      "after": "4c549ba8144e"
+    },
+    {
+      "at": "2026-09-26T22:43:17.997Z",
+      "path": "STATUS.md",
+      "before": "5050b0bc4547",
+      "after": "a99b170ee306"
+    },
+    {
+      "at": "2026-09-27T07:03:52.692Z",
+      "path": "STATUS.md",
+      "before": "a99b170ee306",
+      "after": "84af854879cd"
+    },
+    {
+      "at": "2026-09-27T07:08:52.977Z",
+      "path": "ISA.md",
+      "before": "4c549ba8144e",
+      "after": "9890c2758e63"
+    },
+    {
+      "at": "2026-09-27T07:43:56.700Z",
+      "path": "DGX/panel/app.py",
+      "before": "6f932197d697",
+      "after": "8e480f310384"
+    },
+    {
+      "at": "2026-09-27T08:04:08.859Z",
+      "path": "STATUS.md",
+      "before": "84af854879cd",
+      "after": "0ee6fbe2d566"
+    },
+    {
+      "at": "2026-09-27T08:09:14.030Z",
+      "path": "ISA.md",
+      "before": "9890c2758e63",
+      "after": "f42bfab5cccf"
+    },
+    {
+      "at": "2026-09-27T08:29:24.295Z",
+      "path": "DGX/panel/app.py",
+      "before": "8e480f310384",
+      "after": "187d1d4d3b7f"
+    },
+    {
+      "at": "2026-09-27T08:34:25.702Z",
+      "path": "DGX/data/inventory.csv",
+      "before": "3da1d077c38a",
+      "after": "e63aed1dd691"
+    },
+    {
+      "at": "2026-09-27T08:34:25.702Z",
+      "path": "DGX/data/suppliers.csv",
+      "before": "47a10fa7bf26",
+      "after": "d2acaa3e53f8"
+    },
+    {
+      "at": "2026-09-27T08:39:26.979Z",
+      "path": "DGX/panel/app.py",
+      "before": "187d1d4d3b7f",
+      "after": "c4feead2303e"
+    },
+    {
+      "at": "2026-09-27T08:44:28.129Z",
+      "path": "DGX/panel/app.py",
+      "before": "c4feead2303e",
+      "after": "b2f97807afa9"
+    },
+    {
+      "at": "2026-09-27T08:49:29.523Z",
+      "path": "DGX/panel/app.py",
+      "before": "b2f97807afa9",
+      "after": "2bf80c54a9f0"
+    },
+    {
+      "at": "2026-09-27T08:54:30.907Z",
+      "path": "DGX/panel/app.py",
+      "before": "2bf80c54a9f0",
+      "after": "d13f8c2d72aa"
+    },
+    {
+      "at": "2026-09-27T09:09:37.325Z",
+      "path": "DGX/panel/app.py",
+      "before": "d13f8c2d72aa",
+      "after": "4fa8578be381"
+    },
+    {
+      "at": "2026-09-27T09:29:39.143Z",
+      "path": "ISA.md",
+      "before": "f42bfab5cccf",
+      "after": "da8d16172835"
+    },
+    {
+      "at": "2026-09-27T09:29:39.143Z",
+      "path": "STATUS.md",
+      "before": "0ee6fbe2d566",
+      "after": "ab0e040a39fb"
+    },
+    {
+      "at": "2026-09-27T09:34:39.545Z",
+      "path": "ISA.md",
+      "before": "da8d16172835",
+      "after": "6bfe70015763"
+    }
+  ],
+  "files": {
+    "ISA.md": {
+      "status": "OK",
+      "sha256": "6bfe700157636dd349f04de783cb412e30b5d0869614e073a692b7e5b2919ad6",
+      "bytes": 63877,
+      "mtime_ns": 1790501548683196618
+    },
+    "STATUS.md": {
+      "status": "OK",
+      "sha256": "ab0e040a39fb6c1aa3be918f3872546c9b4eed92d122b983d92619f79e9f75ae",
+      "bytes": 9421,
+      "mtime_ns": 1790501288358372370
+    },
+    "SPEC.md": {
+      "status": "OK",
+      "sha256": "2826e32c6abb974543a7ee4be48a7bef6ab6ccfe96ddd762edbf19e38b10900e",
+      "bytes": 6517,
+      "mtime_ns": 1790252962363262289
+    },
+    "README.md": {
+      "status": "OK",
+      "sha256": "83120744ad8e5ed63b1daaa96fc6a00d6c349758b2bee02f0e3f006f37c82ea8",
+      "bytes": 6380,
+      "mtime_ns": 1790407191571813104
+    },
+    "CONTEXT.md": {
+      "status": "OK",
+      "sha256": "771ac6f2df87eee853c75e4e5e8a679b0aedea963871efbde843fd0bfff9e220",
+      "bytes": 1835,
+      "mtime_ns": 1790253910093019320
+    },
+    "docs/FRONTEND-PRD.md": {
+      "status": "OK",
+      "sha256": "df5a51e1dee3295a6fece6bd9925317abbd61665ef57108ae3f022f7674f25e0",
+      "bytes": 19099,
+      "mtime_ns": 1790460895739457454
+    },
+    "docs/REVIEW-COMPLETENESS-SPEC.md": {
+      "status": "OK",
+      "sha256": "9acd468f8ed6286679d4ef4e3dade0544bab05d09c3b7ec251cb2fd630c4f1c6",
+      "bytes": 12417,
+      "mtime_ns": 1790460727828922396
+    },
+    "docs/VIDEO-SCRIPT.md": {
+      "status": "OK",
+      "sha256": "eabfd071e90559bdd8edce90b164c9a65163a80de407ba4d9f25730fd8840858",
+      "bytes": 3170,
+      "mtime_ns": 1790406920427406402
+    },
+    "benchmark/BENCHMARK.md": {
+      "status": "OK",
+      "sha256": "a04cf76de9d6225b78a5b1521025bc3ae2d05c0af67083a08dc6046fb9cbc853",
+      "bytes": 3207,
+      "mtime_ns": 1790406825203777158
+    },
+    "tools/run_evals.py": {
+      "status": "OK",
+      "sha256": "02b87ab711548f60ec6faa6874cdd28622e3962e4908d2bb757c1a592986a1d3",
+      "bytes": 9786,
+      "mtime_ns": 1790330475706928389
+    },
+    "skills/supply-chain-control-tower/SKILL.md": {
+      "status": "OK",
+      "sha256": "a6b4d1b6e4286e39a15f9e5ee008cb8464788b3b0cd59ef3ad028b618f47802c",
+      "bytes": 4513,
+      "mtime_ns": 1790354387606949996
+    },
+    "skills/supply-chain-control-tower/panel/app.py": {
+      "status": "OK",
+      "sha256": "da7de9cf3f443aabb37ac76d8e2a3518f821d74ba354a84c41f61e6c2e41236c",
+      "bytes": 2611,
+      "mtime_ns": 1790322310611135304
+    },
+    "skills/supply-chain-control-tower/scripts/tools.py": {
+      "status": "OK",
+      "sha256": "edb9285af5f7e1c5db68f899b8786bbcd487b0b2a289dce9e6a34ca534ad296d",
+      "bytes": 7149,
+      "mtime_ns": 1790254093033393638
+    },
+    "skills/supply-chain-control-tower/data/inventory.csv": {
+      "status": "OK",
+      "sha256": "8213e8130cddb739168320424ea7b6c46ff9e815246234b7653ec03374d8057e",
+      "bytes": 203,
+      "mtime_ns": 1790253053272666995
+    },
+    "skills/supply-chain-control-tower/data/suppliers.csv": {
+      "status": "OK",
+      "sha256": "edc5a3bb3a97389f8c8b2f22fe89b6a53a62cccb2387c62660223f7128b17e4e",
+      "bytes": 201,
+      "mtime_ns": 1790253053273414497
+    },
+    "skills/supply-chain-control-tower/evals/gold.json": {
+      "status": "OK",
+      "sha256": "703fba8319793a243d85e848b4b29b9e00369b496ea18373c20f094dce8fdf5a",
+      "bytes": 1966,
+      "mtime_ns": 1790254133607378397
+    },
+    "skills/supply-chain-control-tower/evals/evals.json": {
+      "status": "OK",
+      "sha256": "f2082c91839accae1755fa9a0034c381e874594d683cb8c31c794ca0e565c791",
+      "bytes": 3005,
+      "mtime_ns": 1790253139553081484
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/guard.mjs": {
+      "status": "OK",
+      "sha256": "67b7394410fbf3e44f5047af79d27e6da39fad941dd2221dd73a2eed935ad163",
+      "bytes": 1156,
+      "mtime_ns": 1790414134366945707
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/TRIAL-RECORD.md": {
+      "status": "OK",
+      "sha256": "3068b78819f207cf83cd1e6e0a5bdd1dc6a6a10bcb432f466caaa6991fd9c650",
+      "bytes": 6229,
+      "mtime_ns": 1790416982122615197
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/monitor-receipt.json": {
+      "status": "OK",
+      "sha256": "be16824cbb46bfd1b6c8785b12a90e3a22bc73937cfc5eb245d2bff8ea6bb353",
+      "bytes": 398,
+      "mtime_ns": 1790416996527858966
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/runtime-pos.json": {
+      "status": "OK",
+      "sha256": "d52d7626cc044d8f24e5447f5901706728a00f0f52338404cb66027f925911e9",
+      "bytes": 392,
+      "mtime_ns": 1790416996749536598
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/runtime-pos2.json": {
+      "status": "OK",
+      "sha256": "e85ad18afa7c1a5c6c97b988c201e17a2df67c530a33ec45af946621d7f11b8b",
+      "bytes": 359,
+      "mtime_ns": 1790416996968434510
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/runtime-neg.json": {
+      "status": "OK",
+      "sha256": "b75d25ea30de8c7c9e4c2167e6b104404385daa9df1f0e352c96931cd301f95d",
+      "bytes": 570,
+      "mtime_ns": 1790416997185657456
+    },
+    "evidence/2026-09-26-iris-preflight/hook-trial/runtime-rollback.json": {
+      "status": "OK",
+      "sha256": "b3ba9b55e5cfb944d435c8e3f7af8c40cc232356cb042709e6dc1dddcffcd332",
+      "bytes": 440,
+      "mtime_ns": 1790416997408506052
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/AB-COMPARISON.md": {
+      "status": "OK",
+      "sha256": "0cca23f7f2f3e20a74ea61fcce3648966936f52d66673c5adc0a3410a5b16ebb",
+      "bytes": 5011,
+      "mtime_ns": 1790442288198662840
+    },
+    "evidence/2026-09-27-platform/OBSERVATION.md": {
+      "status": "OK",
+      "sha256": "704c98dffbc0dac8d529a6c9ac86d3e1bd0e6f1b046dc4fc8164e9d5e27390c5",
+      "bytes": 2557,
+      "mtime_ns": 1790440306331576164
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/step-pos1.json": {
+      "status": "OK",
+      "sha256": "265cf2fa21727752eb3d84aebdda2bf1c530a9c30fb3e5f78d5711ac97f9b293",
+      "bytes": 29187,
+      "mtime_ns": 1790439750565018038
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/step-pos2.json": {
+      "status": "OK",
+      "sha256": "5392e7eb0492c789a7e27754a4fff4fdc124aeea21e78c7ea0b26dce80f6923d",
+      "bytes": 29570,
+      "mtime_ns": 1790439750568513471
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/step-neg1.json": {
+      "status": "OK",
+      "sha256": "da95bcce1fd49794a97721fff17de2857830adabce31d8decf39831c927273be",
+      "bytes": 27981,
+      "mtime_ns": 1790439750574002621
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/nem-pos1.json": {
+      "status": "OK",
+      "sha256": "564e6f90bdee39c988e172fdc975d74561335849f73def9c484c580cf9588a9e",
+      "bytes": 15018,
+      "mtime_ns": 1790439747240692428
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/nem-pos2.json": {
+      "status": "OK",
+      "sha256": "163629471b127f76de911a20d931d6a66d2a76c7fa5363027194aee7e3252da9",
+      "bytes": 16284,
+      "mtime_ns": 1790439749065685473
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/nem-neg1.json": {
+      "status": "OK",
+      "sha256": "9ed26beb09d540df47071a29d6b552a57209ab519e9e2b581b1c48806d57147a",
+      "bytes": 13554,
+      "mtime_ns": 1790439750550839890
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/qwen-pos1.json": {
+      "status": "OK",
+      "sha256": "181c76a0b1d556500da4e3af50392b949325aade95ec60e3d803ca2b0d565029",
+      "bytes": 13813,
+      "mtime_ns": 1790442266632895462
+    },
+    "evidence/2026-09-26-iris-preflight/ab-comparison/qwen-neg1.json": {
+      "status": "OK",
+      "sha256": "122feb6f739c1250878d3259cb36182c78a1f579a331017dcdb292e3cd47e5de",
+      "bytes": 13671,
+      "mtime_ns": 1790442269981943543
+    }
+  },
+  "cases": [
+    {
+      "case": "step-pos1",
+      "text_check": "TEXT_CHECK_PASS",
+      "duration_ms": 12935
+    },
+    {
+      "case": "step-pos2",
+      "text_check": "TEXT_CHECK_PASS",
+      "duration_ms": 12092
+    },
+    {
+      "case": "step-neg1",
+      "text_check": "TEXT_CHECK_PASS",
+      "duration_ms": 7744
+    },
+    {
+      "case": "nem-pos1",
+      "text_check": "TEXT_CHECK_FAIL",
+      "duration_ms": 69152
+    },
+    {
+      "case": "nem-pos2",
+      "text_check": "TEXT_CHECK_FAIL",
+      "duration_ms": 171124
+    },
+    {
+      "case": "nem-neg1",
+      "text_check": "TEXT_CHECK_PASS",
+      "duration_ms": 44333
+    },
+    {
+      "case": "qwen-pos1",
+      "text_check": "TEXT_CHECK_FAIL",
+      "duration_ms": 32657
+    },
+    {
+      "case": "qwen-neg1",
+      "text_check": "TEXT_CHECK_FAIL",
+      "duration_ms": 98704
+    }
+  ],
+  "last_remote": {
+    "status": "OBSERVED",
+    "arch": "aarch64",
+    "gateway": "active",
+    "pid": 2702395,
+    "panel_http": 200,
+    "files": {
+      "SKILL.md": "ee9f4e681803ebcbc68898115d7052c4b9bc3839863270eac68e4ed8e2259cee",
+      "panel/app.py": "4fa8578be381138d54e5d91e7a875073cc3cf17c6403564060c06c13c033f60f",
+      "scripts/tools.py": "edb9285af5f7e1c5db68f899b8786bbcd487b0b2a289dce9e6a34ca534ad296d",
+      "data/inventory.csv": "e63aed1dd691c5c6c3cb6e563eb8f6e244476b79b174ccd7e407c95c2ddb8095",
+      "data/suppliers.csv": "d2acaa3e53f8a26425652ff9e5dfeeb83fb5148e70c6f768c2969d9d32f67777"
+    }
+  },
+  "remote": {
+    "status": "REMOTE_UNOBSERVED",
+    "reason": "NO_REUSABLE_CHANNEL"
+  },
+  "active": false,
+  "status": "STOPPED_DEADLINE",
+  "issues": [
+    [
+      "P0",
+      "远端未观测",
+      "没有可复用的已认证SSH通道/有效探针；不能判断Zcode此刻在DGX做了什么，也不能保证服务正常。"
+    ],
+    [
+      "P0",
+      "本地正例仍缺通过证据",
+      "留存本地模型正例未满足合同。StepFun云端成功不能替代本地入口；此为既有样本复核，不是新推理。"
+    ],
+    [
+      "P1",
+      "面板仍是工具证据面，不是聊天闭环",
+      "已知版本图题52周却截取12/26等点；缺库存记录可被当0；Seattle固定参考运费易被误认作实际路线。按FE-01先修，再从浏览器取证。"
+    ],
+    [
+      "P1",
+      "旧评测判定器不足以证明增益",
+      "既有离线反证：错误gap/补货建议可误判PASS；四题审计0工具/0修正。不把不同worker轮次2/4→4/4当协同收益。"
+    ],
+    [
+      "P1",
+      "闭环证据仍要补齐",
+      "固定规则只能核对留存终答；不证明真实工具逐步轨迹、当下UI、稳定性、GPU收益或主人签收。"
+    ]
+  ]
+}

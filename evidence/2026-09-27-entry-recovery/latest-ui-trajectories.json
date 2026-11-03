@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-27T07:48:38.018+00:00",
+  "new_inference": false,
+  "sessions": [
+    {
+      "sessionId": "pi-dgx-panel-93cf58df",
+      "updatedAt": 1790494967427,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "tail_exit": 0,
+      "trajectory_text": "07:42:28 session.started  agent:main:explicit:pi-dgx-pa… session started\n07:42:28 trace.metadata   agent:main:explicit:pi-dgx-pa…\n07:42:28 context.compiled agent:main:explicit:pi-dgx-pa… context compiled (53 tools)\n07:42:28 prompt.submitted agent:main:explicit:pi-dgx-pa… prompt submitted\n07:42:29 tool.call        agent:main:explicit:pi-dgx-pa… read {...redacted...}\n07:42:29 tool.result      agent:main:explicit:pi-dgx-pa… read ok\n07:42:32 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:42:32 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:42:36 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:42:36 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:42:36 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:42:36 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:42:43 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:42:43 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:42:47 model.completed  agent:main:explicit:pi-dgx-pa… stepfun/step-3.7-flash done\n07:42:47 trace.artifacts  agent:main:explicit:pi-dgx-pa…\n07:42:47 session.ended    agent:main:explicit:pi-dgx-pa… success\n"
+    },
+    {
+      "sessionId": "pi-dgx-panel-d67538fb",
+      "updatedAt": 1790493793555,
+      "model": "step-3.7-flash",
+      "modelProvider": "stepfun",
+      "tail_exit": 0,
+      "trajectory_text": "07:22:52 session.started  agent:main:explicit:pi-dgx-pa… session started\n07:22:52 trace.metadata   agent:main:explicit:pi-dgx-pa…\n07:22:52 context.compiled agent:main:explicit:pi-dgx-pa… context compiled (53 tools)\n07:22:52 prompt.submitted agent:main:explicit:pi-dgx-pa… prompt submitted\n07:22:55 tool.call        agent:main:explicit:pi-dgx-pa… read {...redacted...}\n07:22:55 tool.result      agent:main:explicit:pi-dgx-pa… read ok\n07:22:58 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:22:58 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:23:01 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:23:01 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:23:04 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:23:05 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:23:07 tool.call        agent:main:explicit:pi-dgx-pa… exec {...redacted...}\n07:23:07 tool.result      agent:main:explicit:pi-dgx-pa… exec ok\n07:23:13 model.completed  agent:main:explicit:pi-dgx-pa… stepfun/step-3.7-flash done\n07:23:13 trace.artifacts  agent:main:explicit:pi-dgx-pa…\n07:23:13 session.ended    agent:main:explicit:pi-dgx-pa… success\n"
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+[31m──[0m[31m────────────────────────[0m[31m [0m[1;31mTraceback [0m[1;2;31m(most recent call last)[0m[31m [0m[31m─────────────────────────[0m[31m──[0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mexe[0m [31m [0m
+[31m [0m [1;33mc_code.py[0m:[94m136[0m in [92mexec_func_with_error_handling[0m                                       [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mscr[0m [31m [0m
+[31m [0m [1;33mipt_runner.py[0m:[94m909[0m in [92mcode_to_exec[0m                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/tmp/pi-panel-minfix-o4cacj_x/panel/[0m[1;33mapp.py[0m:[94m22[0m in [92m<module>[0m                            [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 19 [0m[94mimport[0m [4;96mtime[0m                                                                    [31m [0m
+[31m [0m   [2m 20 [0m[94mimport[0m [4;96muuid[0m                                                                    [31m [0m
+[31m [0m   [2m 21 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 22 [94mimport[0m [4;96mpandas[0m [94mas[0m [4;96mpd[0m                                                            [31m [0m
+[31m [0m   [2m 23 [0m[94mimport[0m [4;96mstreamlit[0m [94mas[0m [4;96mst[0m                                                         [31m [0m
+[31m [0m   [2m 24 [0m                                                                               [31m [0m
+[31m [0m   [2m 25 [0mBASE = os.path.dirname(os.path.dirname(os.path.abspath([91m__file__[0m)))  [2m# skill 根[0m [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/[0m[1;33m__init__.py[0m:[94m46[0m in [92m<module>[0m                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 43 [0m[2m# let init-time option registration happen[0m                                     [31m [0m
+[31m [0m   [2m 44 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mconfig_init[0m  [2m# pyright: ignore[reportUnusedImport] # noqa: [0m [31m [0m
+[31m [0m   [2m 45 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 46 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mapi[0m [94mimport[0m (                                                  [31m [0m
+[31m [0m   [2m 47 [0m[2m│   [0m[2m# dtype[0m                                                                    [31m [0m
+[31m [0m   [2m 48 [0m[2m│   [0mArrowDtype,                                                                [31m [0m
+[31m [0m   [2m 49 [0m[2m│   [0mInt8Dtype,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/core/[0m[1;33mapi.py[0m:[94m1[0m in [92m<module>[0m                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [31m❱ [0m  1 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m [94mimport[0m (                                                     [31m [0m
+[31m [0m   [2m  2 [0m[2m│   [0mNaT,                                                                       [31m [0m
+[31m [0m   [2m  3 [0m[2m│   [0mPeriod,                                                                    [31m [0m
+[31m [0m   [2m  4 [0m[2m│   [0mTimedelta,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/_libs/[0m[1;33m__init__.py[0m:[94m18[0m in [92m<module>[0m               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m15 [0m[2m# see pandas_datetime_exec in pd_datetime.c[0m                                     [31m [0m
+[31m [0m   [2m16 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_parser[0m  [2m# noqa: E501 # isort: skip # type: ignore[re[0m [31m [0m
+[31m [0m   [2m17 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_datetime[0m  [2m# noqa: F401,E501 # isort: skip # type: ig[0m [31m [0m
+[31m [0m [31m❱ [0m18 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96minterval[0m [94mimport[0m Interval                                      [31m [0m
+[31m [0m   [2m19 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m [94mimport[0m (                                               [31m [0m
+[31m [0m   [2m20 [0m[2m│   [0mNaT,                                                                        [31m [0m
+[31m [0m   [2m21 [0m[2m│   [0mNaTType,                                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.interval[0m:[94m1[0m                                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.hashtable[0m:[94m1[0m                                                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.missing[0m:[94m1[0m                                                       [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/_libs/tslibs/[0m[1;33m__init__.py[0m:[94m39[0m in [92m<module>[0m        [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m36 [0m]                                                                               [31m [0m
+[31m [0m   [2m37 [0m                                                                                [31m [0m
+[31m [0m   [2m38 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m [94mimport[0m dtypes  [2m# pylint: disable=import-self[0m           [31m [0m
+[31m [0m [31m❱ [0m39 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m[4;96m.[0m[4;96mconversion[0m [94mimport[0m localize_pydatetime                  [31m [0m
+[31m [0m   [2m40 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m[4;96m.[0m[4;96mdtypes[0m [94mimport[0m (                                        [31m [0m
+[31m [0m   [2m41 [0m[2m│   [0mResolution,                                                                 [31m [0m
+[31m [0m   [2m42 [0m[2m│   [0mget_supported_reso,                                                         [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.tslibs.conversion[0m:[94m1[0m                                             [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.tslibs.offsets[0m:[94m1[0m                                                [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.tslibs.timestamps[0m:[94m1[0m                                             [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.tslibs.timedeltas[0m:[94m1[0m                                             [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.tslibs.timezones[0m:[94m6[0m                                              [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/compat/[0m[1;33m_optional.py[0m:[94m9[0m in [92m<module>[0m              [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m  6 [0m[94mimport[0m [4;96mwarnings[0m                                                                [31m [0m
+[31m [0m   [2m  7 [0m[94mimport[0m [4;96mplatform[0m                                                                [31m [0m
+[31m [0m   [2m  8 [0m[94mimport[0m [4;96mre[0m                                                                      [31m [0m
+[31m [0m [31m❱ [0m  9 warn_numba_platform = [33m"[0m[33mNon-x86 system detected, Numba may give wrong results o[0m [31m [0m
+[31m [0m   [2m 10 [0m                                                                               [31m [0m
+[31m [0m   [2m 11 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96mutil[0m[4;96m.[0m[4;96m_exceptions[0m [94mimport[0m find_stack_level                           [31m [0m
+[31m [0m   [2m 12 [0m                                                                               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mplatform.py[0m:[94m877[0m in [92m__getitem__[0m                                   [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 874 [0m[2m│   │   [0m[94mreturn[0m result                                                         [31m [0m
+[31m [0m   [2m 875 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 876 [0m[2m│   [0m[94mdef[0m [92m__getitem__[0m([96mself[0m, key):                                               [31m [0m
+[31m [0m [31m❱ [0m 877 [2m│   │   [0m[94mreturn[0m [96mtuple[0m([96mself[0m)[key]                                               [31m [0m
+[31m [0m   [2m 878 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 879 [0m[2m│   [0m[94mdef[0m [92m__len__[0m([96mself[0m):                                                        [31m [0m
+[31m [0m   [2m 880 [0m[2m│   │   [0m[94mreturn[0m [96mlen[0m([96mtuple[0m([96miter[0m([96mself[0m)))                                         [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mplatform.py[0m:[94m863[0m in [92m__iter__[0m                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 860 [0m[2m│   [0m[94mdef[0m [92m__iter__[0m([96mself[0m):                                                       [31m [0m
+[31m [0m   [2m 861 [0m[2m│   │   [0m[94mreturn[0m itertools.chain(                                               [31m [0m
+[31m [0m   [2m 862 [0m[2m│   │   │   [0m[96msuper[0m().[92m__iter__[0m(),                                               [31m [0m
+[31m [0m [31m❱ [0m 863 [2m│   │   │   [0m([96mself[0m.processor,)                                                 [31m [0m
+[31m [0m   [2m 864 [0m[2m│   │   [0m)                                                                     [31m [0m
+[31m [0m   [2m 865 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 866 [0m[2m│   [0m[1;95m@classmethod[0m                                                              [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mfunctools.py[0m:[94m995[0m in [92m__get__[0m                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 992 [0m[2m│   │   │   [0m[94mraise[0m [96mTypeError[0m(msg) [94mfrom[0m [94mNone[0m                                    [31m [0m
+[31m [0m   [2m 993 [0m[2m│   │   [0mval = cache.get([96mself[0m.attrname, _NOT_FOUND)                            [31m [0m
+[31m [0m   [2m 994 [0m[2m│   │   [0m[94mif[0m val [95mis[0m _NOT_FOUND:                                                 [31m [0m
+[31m [0m [31m❱ [0m 995 [2m│   │   │   [0mval = [96mself[0m.func(instance)                                         [31m [0m
+[31m [0m   [2m 996 [0m[2m│   │   │   [0m[94mtry[0m:                                                              [31m [0m
+[31m [0m   [2m 997 [0m[2m│   │   │   │   [0mcache[[96mself[0m.attrname] = val                                    [31m [0m
+[31m [0m   [2m 998 [0m[2m│   │   │   [0m[94mexcept[0m [96mTypeError[0m:                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mplatform.py[0m:[94m858[0m in [92mprocessor[0m                                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 855 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 856 [0m[2m│   [0m[1;95m@functools[0m.cached_property                                                [31m [0m
+[31m [0m   [2m 857 [0m[2m│   [0m[94mdef[0m [92mprocessor[0m([96mself[0m):                                                      [31m [0m
+[31m [0m [31m❱ [0m 858 [2m│   │   [0m[94mreturn[0m _unknown_as_blank(_Processor.get())                            [31m [0m
+[31m [0m   [2m 859 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 860 [0m[2m│   [0m[94mdef[0m [92m__iter__[0m([96mself[0m):                                                       [31m [0m
+[31m [0m   [2m 861 [0m[2m│   │   [0m[94mreturn[0m itertools.chain(                                               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mplatform.py[0m:[94m798[0m in [92mget[0m                                           [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 795 [0m[2m│   [0m[1;95m@classmethod[0m                                                              [31m [0m
+[31m [0m   [2m 796 [0m[2m│   [0m[94mdef[0m [92mget[0m([96mcls[0m):                                                             [31m [0m
+[31m [0m   [2m 797 [0m[2m│   │   [0mfunc = [96mgetattr[0m([96mcls[0m, [33mf[0m[33m'[0m[33mget_[0m[33m{[0msys.platform[33m}[0m[33m'[0m, [96mcls[0m.from_subprocess)       [31m [0m
+[31m [0m [31m❱ [0m 798 [2m│   │   [0m[94mreturn[0m func() [95mor[0m [33m'[0m[33m'[0m                                                   [31m [0m
+[31m [0m   [2m 799 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m   [2m 800 [0m[2m│   [0m[94mdef[0m [92mget_win32[0m():                                                          [31m [0m
+[31m [0m   [2m 801 [0m[2m│   │   [0m[94mtry[0m:                                                                  [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33mplatform.py[0m:[94m826[0m in [92mfrom_subprocess[0m                               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 823 [0m[2m│   │   [0m[94mexcept[0m [96mImportError[0m:                                                   [31m [0m
+[31m [0m   [2m 824 [0m[2m│   │   │   [0m[94mreturn[0m [94mNone[0m                                                       [31m [0m
+[31m [0m   [2m 825 [0m[2m│   │   [0m[94mtry[0m:                                                                  [31m [0m
+[31m [0m [31m❱ [0m 826 [2m│   │   │   [0m[94mreturn[0m subprocess.check_output(                                   [31m [0m
+[31m [0m   [2m 827 [0m[2m│   │   │   │   [0m[[33m'[0m[33muname[0m[33m'[0m, [33m'[0m[33m-p[0m[33m'[0m],                                              [31m [0m
+[31m [0m   [2m 828 [0m[2m│   │   │   │   [0mstderr=subprocess.DEVNULL,                                    [31m [0m
+[31m [0m   [2m 829 [0m[2m│   │   │   │   [0mtext=[94mTrue[0m,                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3.12/[0m[1;33msubprocess.py[0m:[94m466[0m in [92mcheck_output[0m                                [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 463 [0m[2m│   │   │   [0mempty = [33mb[0m[33m'[0m[33m'[0m                                                       [31m [0m
+[31m [0m   [2m 464 [0m[2m│   │   [0mkwargs[[33m'[0m[33minput[0m[33m'[0m] = empty                                               [31m [0m
+[31m [0m   [2m 465 [0m[2m│   [0m                                                                          [31m [0m
+[31m [0m [31m❱ [0m 466 [2m│   [0m[94mreturn[0m run(*popenargs, stdout=PIPE, timeout=timeout, check=[94mTrue[0m,          [31m [0m
+[31m [0m   [2m 467 [0m[2m│   │   │      [0m**kwargs).stdout                                               [31m [0m
+[31m [0m   [2m 468 [0m                                                                              [31m [0m
+[31m [0m   [2m 469 [0m                                                                              [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/tmp/pi-panel-minfix-o4cacj_x/[0m[1;33mreplay_ui.py[0m:[94m45[0m in [92mexternal_fixture[0m                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m42 [0m[2m│   [0mcalls=[]                                                                    [31m [0m
+[31m [0m   [2m43 [0m[2m│   [0m[94mdef[0m [92mexternal_fixture[0m(cmd,*args,**kwargs):                                   [31m [0m
+[31m [0m   [2m44 [0m[2m│   │   [0m[94mif[0m [95mnot[0m ([96misinstance[0m(cmd,[96mlist[0m) [95mand[0m [96mstr[0m(cmd[[94m0[0m]).endswith([33m'[0m[33m/openclaw[0m[33m'[0m) [95mand[0m  [31m [0m
+[31m [0m [31m❱ [0m45 [2m│   │   │   [0m[94mraise[0m [96mAssertionError[0m([33m'[0m[33mUnexpected subprocess; test refuses external [0m [31m [0m
+[31m [0m   [2m46 [0m[2m│   │   [0m[94mif[0m [33m'[0m[33m--agent[0m[33m'[0m [95min[0m cmd:                                                    [31m [0m
+[31m [0m   [2m47 [0m[2m│   │   │   [0m[94mraise[0m [96mAssertionError[0m([33m'[0m[33mUnexpected auditor call in single-agent fixtu[0m [31m [0m
+[31m [0m   [2m48 [0m[2m│   │   [0mcalls.append([33m'[0m[33mMODEL_REPLY_FIXTURE_ONLY[0m[33m'[0m)                                [31m [0m
+[31m────────────────────────────────────────────────────────────────────────────────────────[0m
+[1;91mAssertionError: [0mUnexpected subprocess; test refuses external execution
+[31m──[0m[31m────────────────────────[0m[31m [0m[1;31mTraceback [0m[1;2;31m(most recent call last)[0m[31m [0m[31m─────────────────────────[0m[31m──[0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mexe[0m [31m [0m
+[31m [0m [1;33mc_code.py[0m:[94m136[0m in [92mexec_func_with_error_handling[0m                                       [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mscr[0m [31m [0m
+[31m [0m [1;33mipt_runner.py[0m:[94m909[0m in [92mcode_to_exec[0m                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/tmp/pi-panel-minfix-o4cacj_x/panel/[0m[1;33mapp.py[0m:[94m22[0m in [92m<module>[0m                            [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 19 [0m[94mimport[0m [4;96mtime[0m                                                                    [31m [0m
+[31m [0m   [2m 20 [0m[94mimport[0m [4;96muuid[0m                                                                    [31m [0m
+[31m [0m   [2m 21 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 22 [94mimport[0m [4;96mpandas[0m [94mas[0m [4;96mpd[0m                                                            [31m [0m
+[31m [0m   [2m 23 [0m[94mimport[0m [4;96mstreamlit[0m [94mas[0m [4;96mst[0m                                                         [31m [0m
+[31m [0m   [2m 24 [0m                                                                               [31m [0m
+[31m [0m   [2m 25 [0mBASE = os.path.dirname(os.path.dirname(os.path.abspath([91m__file__[0m)))  [2m# skill 根[0m [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/[0m[1;33m__init__.py[0m:[94m46[0m in [92m<module>[0m                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 43 [0m[2m# let init-time option registration happen[0m                                     [31m [0m
+[31m [0m   [2m 44 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mconfig_init[0m  [2m# pyright: ignore[reportUnusedImport] # noqa: [0m [31m [0m
+[31m [0m   [2m 45 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 46 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mapi[0m [94mimport[0m (                                                  [31m [0m
+[31m [0m   [2m 47 [0m[2m│   [0m[2m# dtype[0m                                                                    [31m [0m
+[31m [0m   [2m 48 [0m[2m│   [0mArrowDtype,                                                                [31m [0m
+[31m [0m   [2m 49 [0m[2m│   [0mInt8Dtype,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/core/[0m[1;33mapi.py[0m:[94m1[0m in [92m<module>[0m                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [31m❱ [0m  1 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m [94mimport[0m (                                                     [31m [0m
+[31m [0m   [2m  2 [0m[2m│   [0mNaT,                                                                       [31m [0m
+[31m [0m   [2m  3 [0m[2m│   [0mPeriod,                                                                    [31m [0m
+[31m [0m   [2m  4 [0m[2m│   [0mTimedelta,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/_libs/[0m[1;33m__init__.py[0m:[94m18[0m in [92m<module>[0m               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m15 [0m[2m# see pandas_datetime_exec in pd_datetime.c[0m                                     [31m [0m
+[31m [0m   [2m16 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_parser[0m  [2m# noqa: E501 # isort: skip # type: ignore[re[0m [31m [0m
+[31m [0m   [2m17 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_datetime[0m  [2m# noqa: F401,E501 # isort: skip # type: ig[0m [31m [0m
+[31m [0m [31m❱ [0m18 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96minterval[0m [94mimport[0m Interval                                      [31m [0m
+[31m [0m   [2m19 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m [94mimport[0m (                                               [31m [0m
+[31m [0m   [2m20 [0m[2m│   [0mNaT,                                                                        [31m [0m
+[31m [0m   [2m21 [0m[2m│   [0mNaTType,                                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.interval[0m:[94m1[0m                                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.hashtable[0m:[94m1[0m                                                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.missing[0m:[94m42[0m                                                      [31m [0m
+[31m────────────────────────────────────────────────────────────────────────────────────────[0m
+[1;91mAttributeError: [0mpartially initialized module [32m'pandas'[0m has no attribute 
+[32m'_pandas_datetime_CAPI'[0m [1m([0mmost likely due to a circular import[1m)[0m
+[31m──[0m[31m────────────────────────[0m[31m [0m[1;31mTraceback [0m[1;2;31m(most recent call last)[0m[31m [0m[31m─────────────────────────[0m[31m──[0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mexe[0m [31m [0m
+[31m [0m [1;33mc_code.py[0m:[94m136[0m in [92mexec_func_with_error_handling[0m                                       [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mscr[0m [31m [0m
+[31m [0m [1;33mipt_runner.py[0m:[94m909[0m in [92mcode_to_exec[0m                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/tmp/pi-panel-minfix-o4cacj_x/panel/[0m[1;33mapp.py[0m:[94m22[0m in [92m<module>[0m                            [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 19 [0m[94mimport[0m [4;96mtime[0m                                                                    [31m [0m
+[31m [0m   [2m 20 [0m[94mimport[0m [4;96muuid[0m                                                                    [31m [0m
+[31m [0m   [2m 21 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 22 [94mimport[0m [4;96mpandas[0m [94mas[0m [4;96mpd[0m                                                            [31m [0m
+[31m [0m   [2m 23 [0m[94mimport[0m [4;96mstreamlit[0m [94mas[0m [4;96mst[0m                                                         [31m [0m
+[31m [0m   [2m 24 [0m                                                                               [31m [0m
+[31m [0m   [2m 25 [0mBASE = os.path.dirname(os.path.dirname(os.path.abspath([91m__file__[0m)))  [2m# skill 根[0m [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/[0m[1;33m__init__.py[0m:[94m46[0m in [92m<module>[0m                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 43 [0m[2m# let init-time option registration happen[0m                                     [31m [0m
+[31m [0m   [2m 44 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mconfig_init[0m  [2m# pyright: ignore[reportUnusedImport] # noqa: [0m [31m [0m
+[31m [0m   [2m 45 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 46 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mapi[0m [94mimport[0m (                                                  [31m [0m
+[31m [0m   [2m 47 [0m[2m│   [0m[2m# dtype[0m                                                                    [31m [0m
+[31m [0m   [2m 48 [0m[2m│   [0mArrowDtype,                                                                [31m [0m
+[31m [0m   [2m 49 [0m[2m│   [0mInt8Dtype,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/core/[0m[1;33mapi.py[0m:[94m1[0m in [92m<module>[0m                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [31m❱ [0m  1 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m [94mimport[0m (                                                     [31m [0m
+[31m [0m   [2m  2 [0m[2m│   [0mNaT,                                                                       [31m [0m
+[31m [0m   [2m  3 [0m[2m│   [0mPeriod,                                                                    [31m [0m
+[31m [0m   [2m  4 [0m[2m│   [0mTimedelta,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/_libs/[0m[1;33m__init__.py[0m:[94m18[0m in [92m<module>[0m               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m15 [0m[2m# see pandas_datetime_exec in pd_datetime.c[0m                                     [31m [0m
+[31m [0m   [2m16 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_parser[0m  [2m# noqa: E501 # isort: skip # type: ignore[re[0m [31m [0m
+[31m [0m   [2m17 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_datetime[0m  [2m# noqa: F401,E501 # isort: skip # type: ig[0m [31m [0m
+[31m [0m [31m❱ [0m18 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96minterval[0m [94mimport[0m Interval                                      [31m [0m
+[31m [0m   [2m19 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m [94mimport[0m (                                               [31m [0m
+[31m [0m   [2m20 [0m[2m│   [0mNaT,                                                                        [31m [0m
+[31m [0m   [2m21 [0m[2m│   [0mNaTType,                                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.interval[0m:[94m1[0m                                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.hashtable[0m:[94m1[0m                                                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.missing[0m:[94m42[0m                                                      [31m [0m
+[31m────────────────────────────────────────────────────────────────────────────────────────[0m
+[1;91mAttributeError: [0mpartially initialized module [32m'pandas'[0m has no attribute 
+[32m'_pandas_datetime_CAPI'[0m [1m([0mmost likely due to a circular import[1m)[0m
+[31m──[0m[31m────────────────────────[0m[31m [0m[1;31mTraceback [0m[1;2;31m(most recent call last)[0m[31m [0m[31m─────────────────────────[0m[31m──[0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mexe[0m [31m [0m
+[31m [0m [1;33mc_code.py[0m:[94m136[0m in [92mexec_func_with_error_handling[0m                                       [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/home/sparker/.local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/[0m[1;33mscr[0m [31m [0m
+[31m [0m [1;33mipt_runner.py[0m:[94m909[0m in [92mcode_to_exec[0m                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/tmp/pi-panel-minfix-o4cacj_x/panel/[0m[1;33mapp.py[0m:[94m22[0m in [92m<module>[0m                            [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 19 [0m[94mimport[0m [4;96mtime[0m                                                                    [31m [0m
+[31m [0m   [2m 20 [0m[94mimport[0m [4;96muuid[0m                                                                    [31m [0m
+[31m [0m   [2m 21 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 22 [94mimport[0m [4;96mpandas[0m [94mas[0m [4;96mpd[0m                                                            [31m [0m
+[31m [0m   [2m 23 [0m[94mimport[0m [4;96mstreamlit[0m [94mas[0m [4;96mst[0m                                                         [31m [0m
+[31m [0m   [2m 24 [0m                                                                               [31m [0m
+[31m [0m   [2m 25 [0mBASE = os.path.dirname(os.path.dirname(os.path.abspath([91m__file__[0m)))  [2m# skill 根[0m [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/[0m[1;33m__init__.py[0m:[94m46[0m in [92m<module>[0m                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m 43 [0m[2m# let init-time option registration happen[0m                                     [31m [0m
+[31m [0m   [2m 44 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mconfig_init[0m  [2m# pyright: ignore[reportUnusedImport] # noqa: [0m [31m [0m
+[31m [0m   [2m 45 [0m                                                                               [31m [0m
+[31m [0m [31m❱ [0m 46 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96mcore[0m[4;96m.[0m[4;96mapi[0m [94mimport[0m (                                                  [31m [0m
+[31m [0m   [2m 47 [0m[2m│   [0m[2m# dtype[0m                                                                    [31m [0m
+[31m [0m   [2m 48 [0m[2m│   [0mArrowDtype,                                                                [31m [0m
+[31m [0m   [2m 49 [0m[2m│   [0mInt8Dtype,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/core/[0m[1;33mapi.py[0m:[94m1[0m in [92m<module>[0m                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [31m❱ [0m  1 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m [94mimport[0m (                                                     [31m [0m
+[31m [0m   [2m  2 [0m[2m│   [0mNaT,                                                                       [31m [0m
+[31m [0m   [2m  3 [0m[2m│   [0mPeriod,                                                                    [31m [0m
+[31m [0m   [2m  4 [0m[2m│   [0mTimedelta,                                                                 [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m [2;33m/usr/lib/python3/dist-packages/pandas/_libs/[0m[1;33m__init__.py[0m:[94m18[0m in [92m<module>[0m               [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m   [2m15 [0m[2m# see pandas_datetime_exec in pd_datetime.c[0m                                     [31m [0m
+[31m [0m   [2m16 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_parser[0m  [2m# noqa: E501 # isort: skip # type: ignore[re[0m [31m [0m
+[31m [0m   [2m17 [0m[94mimport[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mpandas_datetime[0m  [2m# noqa: F401,E501 # isort: skip # type: ig[0m [31m [0m
+[31m [0m [31m❱ [0m18 [94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96minterval[0m [94mimport[0m Interval                                      [31m [0m
+[31m [0m   [2m19 [0m[94mfrom[0m [4;96mpandas[0m[4;96m.[0m[4;96m_libs[0m[4;96m.[0m[4;96mtslibs[0m [94mimport[0m (                                               [31m [0m
+[31m [0m   [2m20 [0m[2m│   [0mNaT,                                                                        [31m [0m
+[31m [0m   [2m21 [0m[2m│   [0mNaTType,                                                                    [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.interval[0m:[94m1[0m                                                      [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.hashtable[0m:[94m1[0m                                                     [31m [0m
+[31m [0m                                                                                      [31m [0m
+[31m [0m in [92minit pandas._libs.missing[0m:[94m42[0m                                                      [31m [0m
+[31m────────────────────────────────────────────────────────────────────────────────────────[0m
+[1;91mAttributeError: [0mpartially initialized module [32m'pandas'[0m has no attribute 
+[32m'_pandas_datetime_CAPI'[0m [1m([0mmost likely due to a circular import[1m)[0m
+{
+  "mode": "ISOLATED_STREAMLIT_UI_REPLY_REPLAY",
+  "new_model_calls": 0,
+  "results": [
+    {
+      "case": "good_positive",
+      "pass": false,
+      "harness_error": "AssertionError: ['Unexpected subprocess; test refuses external execution']"
+    },
+    {
+      "case": "good_negative",
+      "pass": false,
+      "harness_error": "AssertionError: [\"partially initialized module 'pandas' has no attribute '_pandas_datetime_CAPI' (most likely due to a circular import)\"]"
+    },
+    {
+      "case": "wrong_gap",
+      "pass": false,
+      "harness_error": "AssertionError: [\"partially initialized module 'pandas' has no attribute '_pandas_datetime_CAPI' (most likely due to a circular import)\"]"
+    },
+    {
+      "case": "advice",
+      "pass": false,
+      "harness_error": "AssertionError: [\"partially initialized module 'pandas' has no attribute '_pandas_datetime_CAPI' (most likely due to a circular import)\"]"
+    }
+  ]
+}

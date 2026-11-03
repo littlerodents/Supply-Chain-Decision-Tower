@@ -1,0 +1,1 @@
+{"schema_version": "1.0", "has_bug": true, "confidence": 0.9, "source": {"recording": "pos-001.mp4", "duration_sec": 30}, "bug": {"type": "ui-rendering", "location": "\u8bbe\u7f6e\u9875\u4fdd\u5b58\u6309\u94ae", "error_text": "", "timestamps": [12.5], "repro_steps": ["\u6253\u5f00\u8bbe\u7f6e\u9875", "\u70b9\u51fb\u4fdd\u5b58"], "affected_area": "settings"}}

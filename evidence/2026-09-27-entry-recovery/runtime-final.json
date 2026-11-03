@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-09-27T07:53:12.199+00:00",
+  "files": {
+    "panel/app.py": "8e480f3103846611c419cdadb06ecfbe06902f02b092def4b569e3db2a956490",
+    "scripts/tools.py": "edb9285af5f7e1c5db68f899b8786bbcd487b0b2a289dce9e6a34ca534ad296d",
+    "SKILL.md": "ee9f4e681803ebcbc68898115d7052c4b9bc3839863270eac68e4ed8e2259cee",
+    "data/inventory.csv": "3da1d077c38a151e904810b2b71c16abb90627c229f7ced01898e7c794c39f86",
+    "data/suppliers.csv": "47a10fa7bf26ad107e1ccd7a6889d655b491e89a97cb29915dd64f5a1f5f794b",
+    "data/products.json": "7d0a1a1e9dc43aa1c1f7fb205cc8e6f50b6cb94e40685757096c2c3640e75bab",
+    "evals/evals.json": "f8677f586a2f11b546b598a9a2fbff76dc2bedb537a32864b1d54e1952f8a39d",
+    "evals/gold.json": "9b11aea376b626bad3a01e0b8b5e8e6e23d1cbc9cf7b7c566c7faa83bd592cfa"
+  },
+  "gateway": "MainPID=2702395\nActiveState=active"
+}

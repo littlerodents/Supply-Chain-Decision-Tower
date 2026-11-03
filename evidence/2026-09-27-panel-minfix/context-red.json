@@ -1,0 +1,26 @@
+{
+  "mode": "ISOLATED_STREAMLIT_UI_REPLY_REPLAY",
+  "new_model_calls": 0,
+  "results": [
+    {
+      "case": "wrong_context_positive",
+      "expected_success": false,
+      "actual_success": true,
+      "pass": false,
+      "cards": [
+        "<div class='card'><h4><span class='good'>✅ 独立核算：通过</span></h4><div class='muted'><div>✅ 订量=短缺量 <span class='muted'>模型答 3268 / 工具算 3268</span></div><div>✅ 供应商=总单价最低 <span class='muted'>模型答 Nature Source Coffee / 工具算 Nature Source Coffee</span></div><div>✅ 单价一致 <span class='muted'></span></div><div>✅ 运费一致 <span class='muted'></span></div><div>✅ 总价=订量×总单价(±0.01) <span class='muted'>模型答 119282.0 / 实算 119282.0</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    },
+    {
+      "case": "eight_field_positive",
+      "expected_success": true,
+      "actual_success": false,
+      "pass": false,
+      "cards": [
+        "<div class='card'><h4><span class='bad'>❌ 独立核算：未通过</span></h4><div class='muted'><div>❌ 输入参数 <span class='muted'>sku/location/weeks 不完整</span></div></div></div>"
+      ],
+      "fixture_calls": 1
+    }
+  ]
+}

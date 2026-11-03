@@ -1,0 +1,17 @@
+{
+  "outcome_id": "dgx-panel-minimal-repair-20260927",
+  "valid": true,
+  "invalid_reason": null,
+  "stage": "PARTIAL",
+  "verified_layers": [
+    "SOURCE",
+    "BUILD"
+  ],
+  "missing_layers": [
+    "RUNTIME",
+    "OWNER_ENTRYPOINT"
+  ],
+  "failed_layers": [],
+  "unfit_evidence": [],
+  "owner_notes": []
+}

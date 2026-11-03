@@ -1,0 +1,69 @@
+{
+  "outcome_id": "repro-pack-d1-spike",
+  "claimed_stage": "DONE",
+  "owner_failure": false,
+  "completion_scope": "INTERNAL",
+  "internal_justification": "D1 spike 里程碑：机制定案+主脑 provisional 定案+正负例 E2E 契约验证；最终 owner 入口验收为 9/29 赛事表单（ISC-11）",
+  "required_layers": [
+    "SOURCE",
+    "BUILD",
+    "RUNTIME"
+  ],
+  "claim": {
+    "facets": [],
+    "member_scope": "SINGLE",
+    "required_member_types": [
+      "OUTCOME"
+    ]
+  },
+  "evidence": [
+    {
+      "layer": "SOURCE",
+      "outcome_id": "repro-pack-d1-spike",
+      "observation_id": "rp-d1-src-01",
+      "passed": true,
+      "evidence_ref": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/evidence/spike/dual-model.md",
+      "modality": "SOURCE_INSPECTION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-22T19:05:59.000Z",
+      "authority": "PRIMARY_SOURCE",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "BUILD",
+      "outcome_id": "repro-pack-d1-spike",
+      "observation_id": "rp-d1-build-01",
+      "passed": true,
+      "evidence_ref": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/evidence/d1/build.txt",
+      "modality": "EXECUTABLE_CHECK",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-22T19:05:59.000Z",
+      "authority": "EXECUTABLE_CHECK",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    },
+    {
+      "layer": "RUNTIME",
+      "outcome_id": "repro-pack-d1-spike",
+      "observation_id": "rp-d1-rt-01",
+      "passed": true,
+      "evidence_ref": "/Users/evander/Desktop/2026-Evander-工作台/dgx-hackathon/repro-pack/evidence/spike/e2e.txt",
+      "modality": "RUNTIME_OBSERVATION",
+      "coverage": [
+        "OUTCOME"
+      ],
+      "phase": "CURRENT",
+      "observed_at": "2026-09-22T19:05:59.000Z",
+      "authority": "DIRECT_RUNTIME",
+      "baseline_parity": "NOT_APPLICABLE",
+      "baseline_ref": null
+    }
+  ]
+}

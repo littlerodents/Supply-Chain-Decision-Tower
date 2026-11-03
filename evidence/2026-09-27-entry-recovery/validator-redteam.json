@@ -1,0 +1,240 @@
+{
+  "observed_at": "2026-09-27T07:49:27.627+00:00",
+  "method": "AST-selected deployed validator functions and negative-success condition; isolated local snapshot, no UI response injection and no model calls",
+  "first_harness_attempt": "JSON serialization failed on numpy.bool_; fixed only evidence serialization and reran. No product changes.",
+  "panel_sha256": "8e480f3103846611c419cdadb06ecfbe06902f02b092def4b569e3db2a956490",
+  "same_validators_in_both_remote_revisions": true,
+  "facts": {
+    "positive": {
+      "sku": 13001,
+      "location": "San Francisco",
+      "weeks": 12,
+      "current_stock": 30,
+      "forecast_demand": 3298,
+      "gap_stock_minus_demand": -3268,
+      "note": "gap<0=短缺需补货；gap>=0=充足无需补货"
+    },
+    "negative": {
+      "sku": 13001,
+      "location": "Seattle",
+      "weeks": 1,
+      "current_stock": 300,
+      "forecast_demand": 200,
+      "gap_stock_minus_demand": 100,
+      "note": "gap<0=短缺需补货；gap>=0=充足无需补货"
+    },
+    "missing_record_exists": false,
+    "forecast_counts": {
+      "1": 1,
+      "12": 12,
+      "26": 26
+    },
+    "inventory_rows": 8,
+    "supplier_rows": 9
+  },
+  "cases": [
+    {
+      "name": "valid_positive_control",
+      "expected": "PASS",
+      "actual": "PASS",
+      "checks": [
+        [
+          "订量=短缺量",
+          true,
+          "claimed 3268 / 工具 3268"
+        ],
+        [
+          "供应商=总单价最低",
+          true,
+          "claimed Nature Source Coffee / 工具 Nature Source Coffee"
+        ],
+        [
+          "单价一致",
+          true,
+          ""
+        ],
+        [
+          "运费一致",
+          true,
+          ""
+        ],
+        [
+          "总价=订量×总单价(±0.01)",
+          true,
+          "claimed 119282.0 / 实算 119282.0"
+        ]
+      ],
+      "input": {
+        "decision": "REORDER",
+        "sku": 13001,
+        "location": "San Francisco",
+        "weeks": 12,
+        "order_qty": 3268,
+        "supplier": "Nature Source Coffee",
+        "unit_cost": 34.5,
+        "shipping_cost": 2.0,
+        "total_cost": 119282.0,
+        "rationale": "工具核算夹具",
+        "tool_trace": [
+          "gap",
+          "suppliers",
+          "shipping"
+        ]
+      }
+    },
+    {
+      "name": "wrong_total_control",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "checks": [
+        [
+          "订量=短缺量",
+          true,
+          "claimed 3268 / 工具 3268"
+        ],
+        [
+          "供应商=总单价最低",
+          true,
+          "claimed Nature Source Coffee / 工具 Nature Source Coffee"
+        ],
+        [
+          "单价一致",
+          true,
+          ""
+        ],
+        [
+          "运费一致",
+          true,
+          ""
+        ],
+        [
+          "总价=订量×总单价(±0.01)",
+          false,
+          "claimed 119284 / 实算 119282.0"
+        ]
+      ],
+      "input": {
+        "decision": "REORDER",
+        "sku": 13001,
+        "location": "San Francisco",
+        "weeks": 12,
+        "order_qty": 3268,
+        "supplier": "Nature Source Coffee",
+        "unit_cost": 34.5,
+        "shipping_cost": 2.0,
+        "total_cost": 119284,
+        "rationale": "工具核算夹具",
+        "tool_trace": [
+          "gap",
+          "suppliers",
+          "shipping"
+        ]
+      }
+    },
+    {
+      "name": "missing_required_rationale_and_trace",
+      "expected": "FAIL",
+      "actual": "PASS",
+      "checks": [
+        [
+          "订量=短缺量",
+          true,
+          "claimed 3268 / 工具 3268"
+        ],
+        [
+          "供应商=总单价最低",
+          true,
+          "claimed Nature Source Coffee / 工具 Nature Source Coffee"
+        ],
+        [
+          "单价一致",
+          true,
+          ""
+        ],
+        [
+          "运费一致",
+          true,
+          ""
+        ],
+        [
+          "总价=订量×总单价(±0.01)",
+          true,
+          "claimed 119282.0 / 实算 119282.0"
+        ]
+      ],
+      "input": {
+        "decision": "REORDER",
+        "sku": 13001,
+        "location": "San Francisco",
+        "weeks": 12,
+        "order_qty": 3268,
+        "supplier": "Nature Source Coffee",
+        "unit_cost": 34.5,
+        "shipping_cost": 2.0,
+        "total_cost": 119282.0
+      }
+    },
+    {
+      "name": "negative_order_quantity_accepted",
+      "expected": "FAIL",
+      "actual": "PASS",
+      "checks": [
+        [
+          "订量=短缺量",
+          true,
+          "claimed -100 / 工具 -100"
+        ],
+        [
+          "供应商=总单价最低",
+          true,
+          "claimed Nature Source Coffee / 工具 Nature Source Coffee"
+        ],
+        [
+          "单价一致",
+          true,
+          ""
+        ],
+        [
+          "运费一致",
+          true,
+          ""
+        ],
+        [
+          "总价=订量×总单价(±0.01)",
+          true,
+          "claimed -3650.0 / 实算 -3650.0"
+        ]
+      ],
+      "input": {
+        "decision": "REORDER",
+        "sku": 13001,
+        "location": "Seattle",
+        "weeks": 1,
+        "order_qty": -100,
+        "supplier": "Nature Source Coffee",
+        "unit_cost": 34.5,
+        "shipping_cost": 2.0,
+        "total_cost": -3650.0
+      }
+    },
+    {
+      "name": "correct_negative_control",
+      "expected": "PASS",
+      "actual": "PASS",
+      "input": "库存300，需求200。\nNO_REORDER:100"
+    },
+    {
+      "name": "wrong_negative_gap",
+      "expected": "FAIL",
+      "actual": "PASS",
+      "input": "NO_REORDER:999"
+    },
+    {
+      "name": "negative_with_reorder_advice",
+      "expected": "FAIL",
+      "actual": "PASS",
+      "input": "建议补货20件。\nNO_REORDER:100"
+    }
+  ],
+  "false_passes": 4
+}

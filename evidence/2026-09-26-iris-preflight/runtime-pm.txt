@@ -1,0 +1,5 @@
+2026-09-26 下午 DGX read-only runtime 复核（复用 owner Terminal 的既有 SSH，会话窗口仍显示 spark-5c72）
+- `openclaw config get agents.defaults.workspace` → `/home/sparker/.openclaw/workspace`，OpenClaw gateway 进程用户 `sparker`；不存在 `/home/parker` 目录。
+- `openclaw skills info supply-chain-control-tower --json` → filePath 匹配 `/home/sparker/.openclaw/workspace/skills/supply-chain-control-tower/SKILL.md`，eligible/modelVisible/userInvocable 均 true。
+- 同机 `tools.py gap --sku 13001 --location Seattle --weeks 1` → 当前库存 300、预测 200、缺口 +100。
+- 当前有证据表明 Skill 可被列出和引用，但旧自然入口不能按决策契约出单；参照 gateway-verdict.txt 与 explicit-skill-probe.md 的两组新会话。该证据为代理读取机器状态，非 owner 人工验收。

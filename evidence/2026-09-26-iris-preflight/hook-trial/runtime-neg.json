@@ -1,0 +1,6 @@
+{
+  "session_id": "pi-dgx-hooktest-neg1",
+  "final_text": "根据 Seattle 仓库 SKU 13001 的数据：\n- 当前库存：300 件\n- 未来 1 周预测需求：200 件\n- 库存缺口（库存 - 需求）：+100（正值表示充足）\n\n由于缺口 ≥ 0，本周库存足够满足需求，无需补货。\n结论：NO_REORDER:100（库存充足，可支持本周销售）。",
+  "observed_tools": ["tool_search", "tool_choose", "ls", "read", "exec"],
+  "verdict": "PASS: last line NO_REORDER:100, no reorder advice, numbers match tool ground truth (300/200/+100)"
+}

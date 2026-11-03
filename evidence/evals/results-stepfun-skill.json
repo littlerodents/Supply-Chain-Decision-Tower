@@ -1,0 +1,54 @@
+[
+  {
+    "task": "pos-dec-001",
+    "pass": true,
+    "expect": "REORDER 3268×Nature Source Coffee ≈119282.0",
+    "rounds": 4,
+    "tool_calls": 3,
+    "latency_s": 25.9,
+    "tokens": 13376,
+    "verifier": "stepfun",
+    "verdict": "PASS/kept",
+    "verifier_tools": 0,
+    "verifier_latency_s": 5.2
+  },
+  {
+    "task": "pos-dec-002",
+    "pass": true,
+    "expect": "REORDER 2587×Coffee Wholesale USA ≈64416.3",
+    "rounds": 3,
+    "tool_calls": 3,
+    "latency_s": 13.4,
+    "tokens": 9343,
+    "verifier": "stepfun",
+    "verdict": "PASS/kept",
+    "verifier_tools": 0,
+    "verifier_latency_s": 8.8
+  },
+  {
+    "task": "pos-dec-003",
+    "pass": true,
+    "expect": "REORDER 1790×Coffee Wholesale USA ≈46361.0",
+    "rounds": 4,
+    "tool_calls": 3,
+    "latency_s": 15.6,
+    "tokens": 12190,
+    "verifier": "stepfun",
+    "verdict": "PASS/kept",
+    "verifier_tools": 0,
+    "verifier_latency_s": 6.5
+  },
+  {
+    "task": "neg-stk-001",
+    "pass": true,
+    "expect": "NO_REORDER+100",
+    "rounds": 2,
+    "tool_calls": 1,
+    "latency_s": 7.1,
+    "tokens": 5468,
+    "verifier": "stepfun",
+    "verdict": "PASS/kept",
+    "verifier_tools": 0,
+    "verifier_latency_s": 48.6
+  }
+]

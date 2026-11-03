@@ -1,0 +1,156 @@
+--- a/panel/app.py
++++ b/panel/app.py
+@@ -13,6 +13,7 @@
+ import html
+ import importlib.util
+ import json
++import math
+ import os
+ import re
+ import subprocess
+@@ -225,18 +226,94 @@
+         return 0.0
+ 
+ 
+-def verify_decision(dj: dict) -> dict:
++def question_scope(question: str):
++    """只接受原问句中唯一、可确定的样本参数；不借用工具Tab默认值或模型参数。"""
++    q = re.sub(r"\s+", "", question).casefold()
++    skus = {int(s) for s in re.findall(r"(?<!\d)(?:sku)?(\d{5})(?!\d)", q)}
++    skus.update(s for s, brand in _products.items()
++                if re.sub(r"\s+", "", brand).casefold() in q or _BRAND_CN.get(s, "\0") in q)
++    city_aliases = {"Seattle": "西雅图", "San Francisco": "旧金山", "Portland": "波特兰"}
++    locations = {str(c) for c in _inv.location.unique()
++                 if re.sub(r"\s+", "", str(c)).casefold() in q or city_aliases.get(c, "\0") in q}
++    periods = {float(w) for w in re.findall(r"(?<![\d.])([+-]?\d+(?:\.\d+)?)(?:周|weeks?)", q)}
++    if "本周" in q or "这周" in q:
++        periods.add(1.0)
++    if len(skus) != 1 or len(locations) != 1 or len(periods) != 1:
++        return None
++    w = next(iter(periods))
++    if not w.is_integer() or not 1 <= w <= 26:
++        return None
++    return next(iter(skus)), next(iter(locations)), int(w)
++
++
++def verify_no_reorder(text: str, question: str) -> dict:
++    """末行协议、原问句独立余量、解释内容三项都能证实时才给绿灯。"""
++    def result(verdict, detail):
++        return {"verdict": verdict, "checks": [("负例独立核验", verdict == "PASS", detail)]}
++    lines = [line.strip() for line in text.splitlines() if line.strip()]
++    if not lines or not re.fullmatch(r"NO_REORDER:\d+", lines[-1]):
++        return result("FAIL", "末行不是纯文本 NO_REORDER:<非负整数>")
++    if text.count("NO_REORDER:") != 1 or "```" in text:
++        return result("FAIL", "负例含重复协议标记或代码块，不能只取最后一个")
++    scope = question_scope(question)
++    if scope is None:
++        return result("UNPROVEN", "原问句的SKU/仓库/1–26周周期不能唯一确认；不猜参数、不判通过")
++    sku, loc, weeks = scope
++    if not has_inventory(sku, loc):
++        return result("UNPROVEN", "原问句对应库存记录缺失，不把未知库存当零库存")
++    g = tools.stock_demand_difference(sku, loc, weeks)
++    gap = g["gap_stock_minus_demand"]
++    if gap < 0 or int(lines[-1].split(":")[1]) != gap:
++        return result("FAIL", f"模型余量与原问句工具核算不符；独立余量 {gap} 件")
++    # 不能靠“没搜到建议关键词”证明零建议。只放行可核实的简单事实/无需补货句；
++    # 自由解释或未知措辞留原文，但降为UNPROVEN，禁止尾标把它们洗成PASS。
++    prefix = re.sub(r"(?m)^\s*[-*]\s+", "", "\n".join(lines[:-1]))
++    prefix = re.sub(r"[\s*#]", "", prefix)
++    scope_tokens = [re.escape(re.sub(r"\s+", "", loc)) + r"(?:仓库|仓)?",
++                    rf"SKU{sku}", rf"(?:未来)?{weeks}周"]
++    facts = [rf"(?:当前|现有)?库存(?:为|是|[:：=])?{g['current_stock']}(?:件)?",
++             rf"(?:预测)?需求(?:为|是|[:：=])?{g['forecast_demand']}(?:件)?",
++             rf"(?:库存)?(?:盈余|余量|剩余|缺口)(?:为|是|[:：=])?\+?{gap}(?:件)?",
++             r"库存充足|库存足够|库存够卖|够卖|盈余|无需补货|无须补货|不需要补货|不用补货|不必补货|不补货",
++             r"[，,。.;；:：()（）]"]
++    # 单字符标点：外层已是*，不能再套+，否则长标点后接错答会指数回溯。
++    if prefix and not re.fullmatch("(?:" + "|".join(scope_tokens + facts) + ")*", prefix, re.I):
++        return result("UNPROVEN", "余量吻合，但解释含无法独立认证的内容/建议；不声明零补货建议，不判通过")
++    return result("PASS", f"原问句 SKU {sku} / {loc} / {weeks}周；库存 {g['current_stock']} − 需求 {g['forecast_demand']} = {gap}；解释仅含已核实事实或无需补货")
++
++
++def verify_decision(dj: dict, question: str) -> dict:
+     """确定性独立核算（零 LLM）：决策单字段 vs 工具直算。"""
+     if not isinstance(dj, dict) or dj.get("decision") != "REORDER":
+         return {"verdict": "FAIL", "checks": [("决策类型", False, "非 REORDER 决策单")]}
+-    try:
+-        sku, loc, weeks = int(dj.get("sku")), dj.get("location"), int(dj.get("weeks"))
+-    except (TypeError, ValueError):
+-        return {"verdict": "FAIL", "checks": [("输入参数", False, "sku/location/weeks 不完整")]}
++    required = {"decision", "order_qty", "supplier", "unit_cost", "shipping_cost",
++                "total_cost", "rationale", "tool_trace"}
++    missing = required - dj.keys()
++    if missing:
++        return {"verdict": "FAIL", "checks": [("必填字段", False, "缺少 " + ", ".join(sorted(missing)))]}
++    if (not isinstance(dj["rationale"], str) or not dj["rationale"].strip()
++            or not isinstance(dj["tool_trace"], list) or not dj["tool_trace"]
++            or not all(isinstance(t, str) and t.strip() for t in dj["tool_trace"])):
++        return {"verdict": "FAIL", "checks": [("必填字段", False, "rationale须为非空文本，tool_trace须为非空文本列表（字段有效不等于真实工具调用已证明）")]}
++    qty = dj["order_qty"]
++    if type(qty) not in (int, float) or not math.isfinite(qty) or qty <= 0 or int(qty) != qty:
++        return {"verdict": "FAIL", "checks": [("订量", False, "REORDER订量必须为有限正整数件数，不能是负数、零、布尔值或小数")]}
++    if any(type(dj[k]) not in (int, float) or not math.isfinite(dj[k]) or dj[k] < 0
++           for k in ("unit_cost", "shipping_cost", "total_cost")):
++        return {"verdict": "FAIL", "checks": [("金额", False, "单价、运费和总价必须为有限非负数")]}
++    scope = question_scope(question)
++    if scope is None:
++        return {"verdict": "UNPROVEN", "checks": [("原问句参数", False, "SKU/仓库/1–26周周期不能唯一确认，不借用模型自行申报的参数")]}
++    sku, loc, weeks = scope
++    for key, expected in (("sku", sku), ("location", loc), ("weeks", weeks)):
++        if key in dj and (dj[key] != expected or isinstance(dj[key], bool)):
++            return {"verdict": "FAIL", "checks": [("原问句绑定", False, f"模型{key}与原问句不一致")]}
+     if not has_inventory(sku, loc):
+         return {"verdict": "FAIL", "checks": [("库存记录", False, f"{loc} 无 SKU {sku} 库存记录")]}
+     g = tools.stock_demand_difference(sku, loc, weeks)
+     gap = g["gap_stock_minus_demand"]
++    if gap >= 0:
++        return {"verdict": "FAIL", "checks": [("补货前提", False, f"库存没有短缺（余量 {gap}），不能给REORDER决策")]}
+     board = supplier_board(sku, loc)
+     if board.empty:
+         return {"verdict": "FAIL", "checks": [("供应商", False, f"SKU {sku} 无供应商记录")]}
+@@ -296,7 +373,7 @@
+     if b3.button("填入：运费翻转陷阱"):
+         st.session_state["q"] = "San Francisco 的 Breakfast Blend 未来 12 周库存够不够？要补的话找哪家供应商、总价多少？"
+     q = st.text_area("问句", key="q", height=90)
+-    with_audit = st.checkbox("串审计智能体（第二个真实 LLM 智能体独立复算）", value=True)
++    with_audit = st.checkbox("串审计智能体（第二个真实 LLM 智能体独立复算）", value=False)
+ 
+     if st.button("▶ 提交（单次）", type="primary", disabled=bool(st.session_state.get("running"))):
+         st.session_state["running"] = True
+@@ -315,24 +392,29 @@
+             st.markdown(f"<div class='ansbox'>{html.escape(r['text'])}</div>", unsafe_allow_html=True)
+             dj = last_json_block(r["text"])
+             lines = [l.strip() for l in r["text"].splitlines() if l.strip()]
+-            if dj and dj.get("decision") == "REORDER":
+-                v = verify_decision(dj)
++            if (isinstance(dj, dict) and dj.get("decision") == "REORDER"
++                    and re.search(r"(?m)^\s*NO_REORDER\s*:", r["text"])):
++                st.markdown(verdict_card(False, "未通过：补货JSON与NO_REORDER并存，正负决策冲突"),
++                            unsafe_allow_html=True)
++            elif isinstance(dj, dict) and dj.get("decision") == "REORDER":
++                v = verify_decision(dj, q)
+                 rows = "".join(
+                     f"<div>{('✅' if ok else '❌')} {html.escape(name)} "
+                     f"<span class='muted'>{html.escape(detail)}</span></div>"
+                     for name, ok, detail in v["checks"])
+-                ok_cn = "通过" if v["verdict"] == "PASS" else "未通过"
++                ok_cn = {"PASS": "通过", "FAIL": "未通过", "UNPROVEN": "未验证 · 需复核"}[v["verdict"]]
+                 st.markdown(verdict_card(v["verdict"] == "PASS", f"独立核算：{ok_cn}", rows),
+                             unsafe_allow_html=True)
+             elif lines and re.fullmatch(r"NO_REORDER:\d+", lines[-1]):
+-                surplus = re.fullmatch(r"NO_REORDER:(\d+)", lines[-1]).group(1)
+-                st.markdown(verdict_card(True, f"负例合规：无需补货 · 盈余 {surplus} 件",
+-                                         f"模型末行为纯文本 {lines[-1]}（协议原样保留）· 零补货建议"),
++                v = verify_no_reorder(r["text"], q)
++                rows = "".join(f"<div>{html.escape(detail)}</div>" for _, _, detail in v["checks"])
++                label = {"PASS": "通过 · 无需补货", "FAIL": "未通过", "UNPROVEN": "未验证 · 需复核"}[v["verdict"]]
++                st.markdown(verdict_card(v["verdict"] == "PASS", f"负例核验：{label}", rows),
+                             unsafe_allow_html=True)
+             else:
+                 st.markdown(verdict_card(False, "未通过：没有合格的决策单，末行也不是 NO_REORDER 纯文本"),
+                             unsafe_allow_html=True)
+-            if with_audit and dj and dj.get("decision") == "REORDER":
++            if with_audit and isinstance(dj, dict) and dj.get("decision") == "REORDER":
+                 st.markdown("**审计智能体（auditor）独立复算判定**")
+                 msg = (f"审计以下补货决策单。原问句：{q}\n\n待审决策单：\n{json.dumps(dj, ensure_ascii=False)}\n\n"
+                        f"来源会话：{r['sid']}。按 supply-chain-audit SOP 独立复算并输出审计判定 JSON。")

@@ -1,0 +1,2 @@
+key 验活 ✓ 模型总数: 82
+视觉候选(前10): ['meta/llama-3.2-11b-vision-instruct', 'meta/llama-3.2-90b-vision-instruct', 'microsoft/phi-3-vision-128k-instruct', 'nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1', 'nvidia/llama-nemotron-embed-vl-1b-v2']

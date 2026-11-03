@@ -1,0 +1,149 @@
+{
+  "pos-dec-001": {
+    "decision": "REORDER",
+    "order_qty": 3268,
+    "supplier": "Nature Source Coffee",
+    "unit_cost": 34.5,
+    "shipping_cost": 2.0,
+    "total_cost": 119282.0,
+    "gap": -3268
+  },
+  "pos-dec-002": {
+    "decision": "REORDER",
+    "order_qty": 2587,
+    "supplier": "Coffee Wholesale USA",
+    "unit_cost": 23.9,
+    "shipping_cost": 1.0,
+    "total_cost": 64416.3,
+    "gap": -2587
+  },
+  "pos-dec-003": {
+    "decision": "REORDER",
+    "order_qty": 1790,
+    "supplier": "Coffee Wholesale USA",
+    "unit_cost": 23.9,
+    "shipping_cost": 2.0,
+    "total_cost": 46361.0,
+    "gap": -1790
+  },
+  "pos-dec-004": {
+    "decision": "REORDER",
+    "order_qty": 1941,
+    "supplier": "Coffee Wholesale USA",
+    "unit_cost": 21.9,
+    "shipping_cost": 2.0,
+    "total_cost": 46389.9,
+    "gap": -1941
+  },
+  "pos-qry-001": {
+    "type": "table",
+    "rows": [
+      {
+        "sku": 12001,
+        "brand": "Italian Roast",
+        "location": "Seattle",
+        "quantity": 100
+      },
+      {
+        "sku": 13001,
+        "brand": "Colombian Coffee",
+        "location": "Seattle",
+        "quantity": 300
+      },
+      {
+        "sku": 15001,
+        "brand": "Decaf Espresso",
+        "location": "Seattle",
+        "quantity": 260
+      }
+    ]
+  },
+  "pos-qry-002": {
+    "type": "table",
+    "rows": [
+      {
+        "sku": 12001,
+        "supplier": "Coffee Wholesale USA",
+        "location": "Seattle",
+        "unit_cost": 23.9
+      },
+      {
+        "sku": 12001,
+        "supplier": "Nature Source Coffee",
+        "location": "Seattle",
+        "unit_cost": 31.9
+      }
+    ]
+  },
+  "pos-qry-003": {
+    "type": "series",
+    "demand": [
+      200,
+      205,
+      211,
+      216,
+      221,
+      224,
+      227,
+      229
+    ]
+  },
+  "pos-qry-004": {
+    "type": "scalar",
+    "value": 2.0
+  },
+  "neg-stk-001": {
+    "decision": "NO_REORDER",
+    "gap": 100
+  },
+  "neg-stk-002": {
+    "decision": "NO_REORDER",
+    "gap": 140
+  },
+  "neg-stk-003": {
+    "decision": "NO_REORDER",
+    "gap": 50
+  },
+  "neg-irr-001": {
+    "no_tool": true
+  },
+  "pos-dec-005": {
+    "decision": "REORDER",
+    "order_qty": 3518,
+    "supplier": "Golden Gate Roasters",
+    "unit_cost": 19.9,
+    "shipping_cost": 2.0,
+    "total_cost": 77044.2,
+    "gap": -3518
+  },
+  "pos-dec-006": {
+    "decision": "REORDER",
+    "order_qty": 1983,
+    "supplier": "Cascade Coffee Co.",
+    "unit_cost": 24.9,
+    "shipping_cost": 0.0,
+    "total_cost": 49376.7,
+    "gap": -1983
+  },
+  "neg-stk-004": {
+    "decision": "NO_REORDER",
+    "gap": 60
+  },
+  "pos-qry-005": {
+    "type": "table",
+    "rows": [
+      {
+        "sku": 14001,
+        "supplier": "Budget Beans Co.",
+        "location": "Los Angeles",
+        "unit_cost": 15.5
+      },
+      {
+        "sku": 14001,
+        "supplier": "Golden Gate Roasters",
+        "location": "San Francisco",
+        "unit_cost": 19.9
+      }
+    ]
+  }
+}
